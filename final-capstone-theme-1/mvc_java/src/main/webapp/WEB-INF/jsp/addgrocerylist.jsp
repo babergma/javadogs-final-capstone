@@ -16,29 +16,37 @@
 
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
-    <div class="col-lg-12">
-        <div class="container">
-            <div class="row">
-                <section class="panel panel-default">
-                    <div class="panel-body">
+<c:url var="formActionUrl" value="/user/addgrocerylist"/>
+<c:url var="colorURL" value="/user/addgrocerylist" />
+<form action="${colorURL}" method="POST">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="container">
+                <div class="row">
+                    <section class="panel panel-default">
+                        <div class="panel-body">
 
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <h1>Add Ingredient </h1>
-                            </div>
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <h1>Add Ingredient </h1>
+                                </div>
 
-                            <div class="col-lg-9">
-                                <div class="input-group">
+                                <div class="col-lg-9">
+                                    <div class="input-group">
                         <span class="input-group-btn">
                              <div class="col-lg-9">
-                       <button href="#" class="btn btn-success btn-circle btn-sm">
+                       <button type="submit " class="btn btn-success btn-circle btn-sm">
                                         <i class="fas fa-plus"></i>
                        </button>
                              </div>
                         </span>
-                                    <input type="search" id="accordion_search_bar" class="form-control"
-                                           placeholder="Type to add ingredient...">
+                                        <input type="search" name="input" id="accordion_search_bar" class="form-control"
+                                               placeholder="Type to add ingredient...">
+
+
+
+                        </span>
+
 
                                 </div>
                                 <!-- /input-group -->
@@ -106,33 +114,26 @@
             <tr>
                 <th scope="col">Add</th>
                 <th scope="col">Item Name</th>
-                <th scope="col">Quantity</th>
+
 
             </tr>
             </thead>
             <tbody>
             <tbody>
+        <c:forEach items="${ingredients}" var="ingredient">
             <tr>
                 <td scope="row">
                     <a href="#" class="btn btn-success btn-circle btn-sm">
                         <i class="fas fa-plus"></i>
                     </a>
                 </td>
-                <td>Carrot</td>
+
+                  <td>  ${ingredient.ingredientName}</td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+
                 </td>
             </tr>
-
+        </c:forEach>
             </tbody>
         </table>
 

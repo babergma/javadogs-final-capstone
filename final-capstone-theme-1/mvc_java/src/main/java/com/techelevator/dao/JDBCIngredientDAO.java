@@ -34,6 +34,23 @@ public class JDBCIngredientDAO implements IngredientDAO{
 
     }
 
+    @Override
+    public List<Ingredient> getAllIngredients() {
+        String sqlSearchForIngredient = "SELECT * " +
+                "FROM ingredient ";
+        List<Ingredient> ingredientList = new ArrayList<>();
+        SqlRowSet ingredient = jdbcTemplate.queryForRowSet(sqlSearchForIngredient);
+        while (ingredient.next()) {
+            Ingredient thisIngredient = new Ingredient();
+            thisIngredient.setIngredientID(ingredient.getInt("ingredient_id"));
+            thisIngredient.setIngredientName(ingredient.getString("ingredientname"));
+            ingredientList.add(thisIngredient);
+        }
+        return ingredientList;
+    }
+
+
+
 
     @Override
     public List<Ingredient> searchForIngredient(String ingredientName) {
@@ -57,7 +74,8 @@ public class JDBCIngredientDAO implements IngredientDAO{
     public List<Ingredient> searchForIngredientByUserID(int user_id) {
         String sqlSearchForIngredient = "SELECT * " +
                 "FROM grocerylist " +
-                "WHERE user_id = ? ";
+                " JOIN ingredient ON grocerylist.ingredient_id = ingredient.ingredient_id " +
+                " WHERE user_id = ? ";
         List<Ingredient> ingredientList = new ArrayList<>();
         SqlRowSet ingredient = jdbcTemplate.queryForRowSet(sqlSearchForIngredient, user_id);
         if (ingredient.next()) {

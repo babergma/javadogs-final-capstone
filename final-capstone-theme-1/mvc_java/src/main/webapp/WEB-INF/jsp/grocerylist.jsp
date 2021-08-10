@@ -117,6 +117,7 @@
                     </a>
                 </td>
                 <td>Carrot</td>
+                <td>${LOGGED_USER.birthday}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

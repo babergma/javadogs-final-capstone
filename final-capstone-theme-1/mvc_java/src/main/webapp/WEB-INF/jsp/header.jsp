@@ -44,7 +44,7 @@
 		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="${baseUrl}">
 			<div class="sidebar-brand-icon">
 				<c:url var="logoImageUrl" value="/img/logo.png" />
-				<img src="${logoImageUrl}" />
+				<img src="${logoImageUrl}" width="50px"/>
 			</div>
 			<div class="sidebar-brand-text mx-3">Tech Connect <sup>2020</sup></div>
 		</a>

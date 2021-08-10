@@ -1,5 +1,7 @@
 package com.techelevator.entity;
 
+import java.util.List;
+
 public class Recipe {
     private int recipeId;
     private int authorID;
@@ -10,6 +12,7 @@ public class Recipe {
     private String pictureUrl;
     private String cookingInstruction;
     private boolean visible;
+    private List<Ingredient> ingredientList;
 
 
     public int getRecipeId() {

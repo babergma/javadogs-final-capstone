@@ -1,36 +1,63 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.IngredientDAO;
+import com.techelevator.dao.UserDAO;
 import com.techelevator.entity.Employee;
+import com.techelevator.entity.Ingredient;
 import com.techelevator.entity.User;
 import com.techelevator.util.EmployeeDataTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+
 
 @Controller
 @RequestMapping(path="/user")
 public class ContentController {
 
+	private IngredientDAO ingredientDAO;
+
+	@Autowired
+	public ContentController(IngredientDAO ingredientDAO) {
+
+		this.ingredientDAO = ingredientDAO;
+	}
+
 	public ContentController(){
 	}
 
 	@RequestMapping(path="/grocerylist", method=RequestMethod.GET)
-	public String displayGroceryList() {
-
+	public String displayGroceryList(HttpSession session) {
+////		List<Ingredient> ingredientList = ingredientDAO.searchForIngredientByUserID();
+//		session.setAttribute("ingredients", ingredientList);
 		return "grocerylist";
 	}
-	@RequestMapping(path="/addgrocerylist", method=RequestMethod.GET)
-	public String displayAddGroceryList() {
 
+	@RequestMapping(path="/addgrocerylist", method=RequestMethod.GET)
+	public String displayAddGroceryList(HttpSession session) {
+		List<Ingredient> ingredientList = ingredientDAO.getAllIngredients();
+		session.setAttribute("ingredients", ingredientList);
 		return "addgrocerylist";
 	}
+
+
+	@RequestMapping(path="/addgrocerylist", method=RequestMethod.POST)
+	public String processAddGroceryList(@RequestParam String input) {
+
+		Ingredient ingredient = new Ingredient();
+		ingredient.setIngredientName(input);
+		ingredientDAO.saveIngredient(ingredient);
+
+		return "redirect:addgrocerylist";
+	}
+
 
 	@RequestMapping(path="/dashboard", method=RequestMethod.GET)
 	public String displayDashboard() {
