@@ -101,6 +101,18 @@
 
 		<!-- Nav Item - Tables -->
 		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/grocerylist">
+				<i class="fas fa-fw fa-bullseye"></i>
+				<span>user Grocery List</span></a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/addgrocerylist">
+				<i class="fas fa-fw fa-bullseye"></i>
+				<span>User Add Grocery List</span></a>
+		</li>
+
+		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/basic/table">
 				<i class="fas fa-fw fa-table"></i>
 				<span>Basic Table</span></a>

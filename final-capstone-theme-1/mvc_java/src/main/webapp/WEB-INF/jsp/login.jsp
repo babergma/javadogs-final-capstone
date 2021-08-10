@@ -41,19 +41,19 @@
                       Login
                     </button>
                     <hr>
-                    <a href="#" class="btn btn-google btn-user btn-block">
-                      <c:url var="googleImageUrl" value="/img/googleRed.png" />
-                      <img src="${googleImageUrl}" /> &nbsp;Register with Google
-                    </a>
-                    <a href="#" class="btn btn-facebook btn-user btn-block">
-                      <c:url var="fbImageUrl" value="/img/facebook.png" />
-                      <img src="${fbImageUrl}" /> &nbsp;Register with Facebook
-                    </a>
+<%--                    <a href="#" class="btn btn-google btn-user btn-block">--%>
+<%--                      <c:url var="googleImageUrl" value="/img/googleRed.png" />--%>
+<%--                      <img src="${googleImageUrl}" /> &nbsp;Register with Google--%>
+<%--                    </a>--%>
+<%--                    <a href="#" class="btn btn-facebook btn-user btn-block">--%>
+<%--                      <c:url var="fbImageUrl" value="/img/facebook.png" />--%>
+<%--                      <img src="${fbImageUrl}" /> &nbsp;Register with Facebook--%>
+<%--                    </a>--%>
                   </form>
                   <hr>
-                  <div class="text-center">
-                    <a class="small" href="./forgot-password">Forgot Password?</a>
-                  </div>
+<%--                  <div class="text-center">--%>
+<%--                    <a class="small" href="./forgot-password">Forgot Password?</a>--%>
+<%--                  </div>--%>
                   <div class="text-center">
                     <a class="small" href="./register">Create an Account!</a>
                   </div>
