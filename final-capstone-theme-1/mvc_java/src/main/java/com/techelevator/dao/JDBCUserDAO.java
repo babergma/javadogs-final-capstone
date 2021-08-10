@@ -1,15 +1,14 @@
 package com.techelevator.dao;
 
-import javax.sql.DataSource;
-
+import com.techelevator.entity.User;
+import com.techelevator.security.PasswordHasher;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import com.techelevator.entity.User;
-import com.techelevator.security.PasswordHasher;
+import javax.sql.DataSource;
 
 /**
  33    * This class does a pile of cool stuff!
@@ -42,33 +41,33 @@ public class JDBCUserDAO implements UserDAO {
 		this.hashMaster = hashMaster;
 	}
 
-    /**
-      * @param user <i>The new user to be inserted into the database.</i>
-      * @throws ClassCastException if the list contains elements that are not
-      *         <i>mutually comparable</i> (for example, strings and integers).
-      */
+	/**
+	 * @param user <i>The new user to be inserted into the database.</i>
+	 * @throws ClassCastException if the list contains elements that are not
+	 *         <i>mutually comparable</i> (for example, strings and integers).
+	 */
 	@Override
 	public void saveUser(User user) {
 		byte[] salt = hashMaster.generateRandomSalt();
 		String hashedPassword = hashMaster.computeHash(user.getPassword(), salt);
 		String saltString = new String(Base64.encode(salt));
-		
-		jdbcTemplate.update("INSERT INTO app_user(user_name, password, first_name, last_name, role, salt) " +
-						"VALUES (?, ?, ?, ?, ?, ?)",
+
+		jdbcTemplate.update("INSERT INTO person(username, pword, firstname, lastname, role, salt, birthday, height, weight) " +
+						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				user.getUserName(), hashedPassword, user.getFirstName(),
-				user.getLastName(), user.getRole(), saltString);
+				user.getLastName(), user.getRole(), saltString, user.getBirthday(), user.getHeight(), user.getWeight());
 	}
 
 	@Override
 	public boolean searchForUsernameAndPassword(String userName, String password) {
 		String sqlSearchForUser = "SELECT * "+
-							      "FROM app_user "+
-							      "WHERE UPPER(user_name) = ? ";
-		
+				"FROM person "+
+				"WHERE UPPER(username) = ? ";
+
 		SqlRowSet user = jdbcTemplate.queryForRowSet(sqlSearchForUser, userName.toUpperCase());
 		if(user.next()) {
 			String dbSalt = user.getString("salt");
-			String dbHashedPassword = user.getString("password");
+			String dbHashedPassword = user.getString("pword");
 			String givenPassword = hashMaster.computeHash(password, Base64.decode(dbSalt));
 			return dbHashedPassword.equals(givenPassword);
 		} else {
@@ -81,24 +80,24 @@ public class JDBCUserDAO implements UserDAO {
 		/* TODO:
 		 * The password needs to be hashed before being inserted in the database!
 		 */
-		jdbcTemplate.update("UPDATE app_user SET password = ? WHERE user_name = ?", password, userName);
+		jdbcTemplate.update("UPDATE person SET pword = ? WHERE username = ?", password, userName);
 	}
 
 	@Override
 	public User getUserByUserName(String userName) {
 		String sqlSearchForUsername ="SELECT * "+
-		"FROM app_user "+
-		"WHERE UPPER(user_name) = ? ";
+				"FROM person "+
+				"WHERE UPPER(username) = ? ";
 
-		SqlRowSet user = jdbcTemplate.queryForRowSet(sqlSearchForUsername, userName.toUpperCase()); 
+		SqlRowSet user = jdbcTemplate.queryForRowSet(sqlSearchForUsername, userName.toUpperCase());
 		User thisUser = null;
 		if(user.next()) {
 			thisUser = new User();
-			thisUser.setId(user.getLong("id"));
-			thisUser.setUserName(user.getString("user_name"));
-			thisUser.setPassword(user.getString("password"));
-			thisUser.setFirstName(user.getString("first_name"));
-			thisUser.setLastName(user.getString("last_name"));
+			thisUser.setId(user.getLong("user_id"));
+			thisUser.setUserName(user.getString("username"));
+			thisUser.setPassword(user.getString("pword"));
+			thisUser.setFirstName(user.getString("firstname"));
+			thisUser.setLastName(user.getString("lastname"));
 			thisUser.setRole(user.getString("role"));
 		}
 

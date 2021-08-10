@@ -1,11 +1,11 @@
 package com.techelevator.entity;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.NotBlank;
+import java.util.List;
 
 public class User {
 
@@ -34,6 +34,52 @@ public class User {
 
     @NotBlank(message = "Last Name is required")
     private String lastName;
+
+    private String height;
+    private String weight;
+    private String birthday;
+    private String goal;
+    private List<Ingredient> groceryList;
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
+    }
+
+    public List<Ingredient> getGroceryList() {
+        return groceryList;
+    }
+
+    public void setGroceryList(List<Ingredient> groceryList) {
+        this.groceryList = groceryList;
+    }
 
     public User(){
     	this.role = CUSTOMER_ROLE;
@@ -107,5 +153,11 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+
+    @Override
+    public String toString() {
+        return firstName+ " " + lastName;
     }
 }

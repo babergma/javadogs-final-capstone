@@ -21,6 +21,17 @@ public class ContentController {
 	public ContentController(){
 	}
 
+	@RequestMapping(path="/grocerylist", method=RequestMethod.GET)
+	public String displayGroceryList() {
+
+		return "grocerylist";
+	}
+	@RequestMapping(path="/addgrocerylist", method=RequestMethod.GET)
+	public String displayAddGroceryList() {
+
+		return "addgrocerylist";
+	}
+
 	@RequestMapping(path="/dashboard", method=RequestMethod.GET)
 	public String displayDashboard() {
 		return "dashboard";

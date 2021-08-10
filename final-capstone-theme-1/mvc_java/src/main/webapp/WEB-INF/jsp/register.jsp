@@ -47,24 +47,39 @@
                                 path="confirmPassword" name="confirmPassword" id="confirmPassword" placeholder="Repeat Password"/>
                     <form:errors path="confirmPassword" cssClass="error"/>
                   </div>
+                  <div class="col-sm-6">
+                    <form:input type="date" class="form-control form-control-user" required="true"
+                                path="birthday" name="birthday" id="birthday" placeholder="birthday"/>
+                    <form:errors path="birthday" cssClass="error"/>
+                  </div>
+                  <div class="col-sm-6">
+                    <form:input type="text" class="form-control form-control-user" required="true"
+                                path="height" name="height" id="height" placeholder="height"/>
+                    <form:errors path="height" cssClass="error"/>
+                  </div>
+                  <div class="col-sm-6">
+                    <form:input type="text" class="form-control form-control-user" required="true"
+                                path="weight" name="weight" id="weight" placeholder="weight"/>
+                    <form:errors path="weight" cssClass="error"/>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">
                   Register Account
                 </button>
                 <hr>
-<%--                <a href="#" class="btn btn-google btn-user btn-block">--%>
-<%--                  <c:url var="googleImageUrl" value="/img/googleRed.png" />--%>
-<%--                  <img src="${googleImageUrl}" /> &nbsp;Register with Google--%>
-<%--                </a>--%>
-<%--                <a href="#" class="btn btn-facebook btn-user btn-block">--%>
-<%--                  <c:url var="fbImageUrl" value="/img/facebook.png" />--%>
-<%--                  <img src="${fbImageUrl}" /> &nbsp;Register with Facebook--%>
-<%--                </a>--%>
+                <a href="#" class="btn btn-google btn-user btn-block">
+                  <c:url var="googleImageUrl" value="/img/googleRed.png" />
+                  <img src="${googleImageUrl}" /> &nbsp;Register with Google
+                </a>
+                <a href="#" class="btn btn-facebook btn-user btn-block">
+                  <c:url var="fbImageUrl" value="/img/facebook.png" />
+                  <img src="${fbImageUrl}" /> &nbsp;Register with Facebook
+                </a>
               </form:form>
               <hr>
-<%--              <div class="text-center">--%>
-<%--                <a class="small" href="${baseUrl}forgot-password">Forgot Password?</a>--%>
-<%--              </div>--%>
+              <div class="text-center">
+                <a class="small" href="${baseUrl}forgot-password">Forgot Password?</a>
+              </div>
               <div class="text-center">
                 <a class="small" href="${baseUrl}login">Already have an account? Login!</a>
               </div>
