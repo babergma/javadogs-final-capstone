@@ -16,6 +16,7 @@ CREATE TABLE person
         --gender_id int, 
         height varchar(10),
         weight varchar(10),
+        role varchar(32) NOT NULL, 
        
         
         constraint pk_user_id primary key (user_id)
