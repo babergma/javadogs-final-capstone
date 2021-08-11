@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.entity.Ingredient;
+import com.techelevator.entity.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JDBCIngredientDAO implements IngredientDAO{
+public class JDBCIngredientDAO implements IngredientDAO {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -23,13 +24,13 @@ public class JDBCIngredientDAO implements IngredientDAO{
     /**
      * @param ingredient <i>The ingredient  to be inserted into the database.</i>
      * @throws ClassCastException if the list contains elements that are not
-     *         <i>mutually comparable</i> (for example, strings and integers).
+     *                            <i>mutually comparable</i> (for example, strings and integers).
      */
 
     @Override
     public void saveIngredient(Ingredient ingredient) {
         jdbcTemplate.update("INSERT INTO ingredient(ingredientname) " +
-                "VALUES (?)",
+                        "VALUES (?)",
                 ingredient.getIngredientName());
 
     }
@@ -50,27 +51,22 @@ public class JDBCIngredientDAO implements IngredientDAO{
     }
 
 
-
-
     @Override
-    public List<Ingredient> searchForIngredient(String ingredientName) {
-        String sqlSearchForIngredient = "SELECT * " +
+    public Ingredient searchForIngredient(String ingredientName) {
+        String sql = "SELECT * " +
                 "FROM ingredient " +
-                "WHERE UPPER(ingredientname) = ? ";
-        List<Ingredient> ingredientList = new ArrayList<>();
-        SqlRowSet ingredient = jdbcTemplate.queryForRowSet(sqlSearchForIngredient, ingredientName.toUpperCase());
+                "WHERE ingredientname ILIKE ? ";
+        SqlRowSet ingredient = jdbcTemplate.queryForRowSet(sql, ingredientName);
+        Ingredient thisIngredient = new Ingredient();
         if (ingredient.next()) {
-            Ingredient thisIngredient = new Ingredient();
+
             thisIngredient.setIngredientID(ingredient.getInt("ingredient_id"));
             thisIngredient.setIngredientName(ingredient.getString("ingredientname"));
-            ingredientList.add(thisIngredient);
         }
-        return ingredientList;
+
+        return thisIngredient;
     }
 
-    /*
-    Still need to connect this to the ingredient table so we can create ingredient object
-     */
     public List<Ingredient> searchForIngredientByUserID(int user_id) {
         String sqlSearchForIngredient = "SELECT * " +
                 "FROM grocerylist " +
@@ -87,8 +83,13 @@ public class JDBCIngredientDAO implements IngredientDAO{
         return ingredientList;
     }
 
-
-
+    @Override
+    public void updateIngredientByIngredientId(Ingredient ingredient) {
+        String sqlUpdateIngredient = "UPDATE ingredient " +
+                " SET ingredientname = ?" +
+                " WHERE ingredient_id = ?";
+        jdbcTemplate.update(sqlUpdateIngredient, ingredient.getIngredientName());
+    }
 
     public boolean searchForIngredientByID(int ingredientID) {
         return false;
@@ -98,24 +99,4 @@ public class JDBCIngredientDAO implements IngredientDAO{
 
     }
 
-//    @Override
-//    public User getUserByUserName(String userName) {
-//        String sqlSearchForUsername ="SELECT * "+
-//                "FROM person "+
-//                "WHERE UPPER(username) = ? ";
-//
-//        SqlRowSet user = jdbcTemplate.queryForRowSet(sqlSearchForUsername, userName.toUpperCase());
-//        User thisUser = null;
-//        if(user.next()) {
-//            thisUser = new User();
-//            thisUser.setId(user.getLong("user_id"));
-//            thisUser.setUserName(user.getString("username"));
-//            thisUser.setPassword(user.getString("pword"));
-//            thisUser.setFirstName(user.getString("firstname"));
-//            thisUser.setLastName(user.getString("lastname"));
-//            thisUser.setRole(user.getString("role"));
-//        }
-//
-//        return thisUser;
-//    }
 }

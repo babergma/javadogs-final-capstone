@@ -1,34 +1,38 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.IngredientDAO;
+import com.techelevator.dao.RecipeDao;
 import com.techelevator.dao.UserDAO;
-import com.techelevator.entity.Employee;
-import com.techelevator.entity.Ingredient;
-import com.techelevator.entity.User;
+import com.techelevator.entity.*;
 import com.techelevator.util.EmployeeDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Controller
+@SessionAttributes({"ingredientList", "recipe", "ingredient"})
 @RequestMapping(path="/user")
 public class ContentController {
 
 	private IngredientDAO ingredientDAO;
+	private RecipeDao recipeDao;
 
 	@Autowired
-	public ContentController(IngredientDAO ingredientDAO) {
-
+	public ContentController(IngredientDAO ingredientDAO, RecipeDao recipeDao) {
+		this.recipeDao = recipeDao;
 		this.ingredientDAO = ingredientDAO;
 	}
+
 
 	public ContentController(){
 	}
@@ -51,11 +55,6 @@ public class ContentController {
 		return "viewrecipe";
 	}
 
-	@RequestMapping(path="/addrecipe", method=RequestMethod.GET)
-	public String displayAddRecipe(HttpSession session) {
-
-		return "addrecipe";
-	}
 
 	@RequestMapping(path="/grocerylist", method=RequestMethod.GET)
 	public String displayGroceryList(HttpSession session) {
@@ -80,6 +79,57 @@ public class ContentController {
 		ingredientDAO.saveIngredient(ingredient);
 
 		return "redirect:addgrocerylist";
+	}
+
+	@RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
+	public String displayAddRecipe(ModelMap modelHolder,
+								   HttpSession session) {
+		if (!modelHolder.containsKey("recipe")) {
+			modelHolder.put("recipe", new Recipe());
+		}
+		modelHolder.put("ingredient", new Ingredient());
+
+		if (!modelHolder.containsKey("ingredientList")) {
+			List<Ingredient> ingredientList = new ArrayList<>();
+			modelHolder.addAttribute("ingredientList", ingredientList);
+		}
+		modelHolder.put("measurements", Measurement.getAllMeasurements());
+		modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
+		return "addrecipe";
+	}
+
+	@RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
+	public String addIngredientToIngredientList(@Valid @ModelAttribute("ingredient") Ingredient ingredient,
+												BindingResult result,
+												ModelMap modelHolder,
+												HttpSession session
+	) {
+		if (result.hasErrors()) {
+			return "addrecipe";
+		}
+		List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+		modelHolder.put("measurements", Measurement.getAllMeasurements());
+		modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
+		User user = (User) session.getAttribute("LOGGED_USER");
+		ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
+
+		ingredientList.add(ingredient);
+		return "redirect:addrecipe";
+	}
+
+	@RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
+	public String submitRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
+							   BindingResult result,
+							   ModelMap modelHolder,
+							   HttpSession session, SessionStatus status) {
+		if (result.hasErrors()) {
+			return "testRecipes";
+		}
+		User user = (User) session.getAttribute("LOGGED_USER");
+		recipe.setAuthorID(user.getId());
+		List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+		recipeDao.addIngredientListToRecipe(recipe, ingredientList);
+		return "dashboard";
 	}
 
 

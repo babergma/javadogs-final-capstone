@@ -3,23 +3,23 @@ package com.techelevator.entity;
 import java.util.List;
 
 public class Recipe {
-    private int recipeId;
-    private int authorID;
+    private Long recipeId;
+    private Long authorID;
     private String recipeName;
     private int cookTime;
     private int servingSize;
     private int calories;
-    private String pictureUrl;
+    private String pictureUrl = "";
     private String cookingInstruction;
     private boolean visible;
     private List<Ingredient> ingredientList;
 
 
-    public int getRecipeId() {
+    public Long getRecipeId() {
         return recipeId;
     }
 
-    public int getAuthorID() {
+    public Long getAuthorID() {
         return authorID;
     }
 
@@ -33,6 +33,10 @@ public class Recipe {
 
     public int getServingSize() {
         return servingSize;
+    }
+
+    public void setIngredientList(List<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
     }
 
     public int getCalories() {
@@ -51,11 +55,11 @@ public class Recipe {
         return visible;
     }
 
-    public void setRecipeId(int recipeId) {
+    public void setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
     }
 
-    public void setAuthorID(int authorID) {
+    public void setAuthorID(Long authorID) {
         this.authorID = authorID;
     }
 
