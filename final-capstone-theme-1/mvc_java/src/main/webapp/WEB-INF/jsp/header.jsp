@@ -101,6 +101,29 @@
 
 		<!-- Nav Item - Tables -->
 		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/editrecipe">
+				<i class="fas fa-fw fa-bullseye"></i>
+				<span>Edit Recipe</span></a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/recipedetails">
+				<i class="fas fa-fw fa-bullseye"></i>
+				<span>Recipe Details</span></a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/viewrecipe">
+				<i class="fas fa-fw fa-bullseye"></i>
+				<span>View Recipe</span></a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/addrecipe">
+				<i class="fas fa-fw fa-bullseye"></i>
+				<span>Add Recipe</span></a>
+		</li>
+		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/grocerylist">
 				<i class="fas fa-fw fa-bullseye"></i>
 				<span>user Grocery List</span></a>
@@ -118,11 +141,11 @@
 				<span>Basic Table</span></a>
 		</li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="${baseUrl}user/rest/table">
-                <i class="fas fa-fw fa-table"></i>
-                <span>REST Table</span></a>
-        </li>
+		<li class="nav-item">
+			<a class="nav-link" href="${baseUrl}user/rest/table">
+				<i class="fas fa-fw fa-table"></i>
+				<span>REST Table</span></a>
+		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/cards">

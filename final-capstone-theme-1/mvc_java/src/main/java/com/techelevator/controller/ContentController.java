@@ -33,6 +33,30 @@ public class ContentController {
 	public ContentController(){
 	}
 
+	@RequestMapping(path="/editrecipe", method=RequestMethod.GET)
+	public String displayEditRecipeDetails(HttpSession session) {
+
+		return "editrecipe";
+	}
+
+	@RequestMapping(path="/recipedetails", method=RequestMethod.GET)
+	public String displayRecipeDetails(HttpSession session) {
+
+		return "recipedetails";
+	}
+
+	@RequestMapping(path="/viewrecipe", method=RequestMethod.GET)
+	public String displayViewRecipe(HttpSession session) {
+
+		return "viewrecipe";
+	}
+
+	@RequestMapping(path="/addrecipe", method=RequestMethod.GET)
+	public String displayAddRecipe(HttpSession session) {
+
+		return "addrecipe";
+	}
+
 	@RequestMapping(path="/grocerylist", method=RequestMethod.GET)
 	public String displayGroceryList(HttpSession session) {
 ////		List<Ingredient> ingredientList = ingredientDAO.searchForIngredientByUserID();
