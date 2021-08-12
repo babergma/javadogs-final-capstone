@@ -19,6 +19,8 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="position-relative overflow-hidden p-3 p-xs-5 m-xs-3 text-center bg-light">
+                        <c:url var="placeholderImageUrl" value="/img/kibble.jpg" />
+                        <img src="${placeholderImageUrl}" />
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
                             <h3 class="m-0 font-weight-bold text-primary ">${recipe.recipeName}</h3>
                             <p class="lead fw-normal">Summary of recipe story or whatever</p>
@@ -34,9 +36,8 @@
         <c:url var = "editURL" value="/user/editrecipe">
             <c:param name="id" value="${recipe.recipeId}"/>
         </c:url>
-        <a href="${editURL}">
-        Edit <i
-            class="fas fa-edit"></i></a></button>
+        <a href="${editURL}" style="color: white;">
+        Edit <i class="fas fa-edit" style="color: white;"></i></a></button>
 </div>
                         <h4>Ingredients</h4>
 
@@ -75,7 +76,7 @@
 
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-success btn-block" id="add">Add to Meal Plan <i
+                                <button type="button" class="btn btn-success btn-block" id="add" style="background: #a5cfab; color:white;">Add to Meal Plan <i
                                         class="fas fa-plus"></i></button>
                             </div>
                         </div>

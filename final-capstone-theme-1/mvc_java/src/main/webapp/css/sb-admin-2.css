@@ -20,6 +20,7 @@
   --yellow: #f6c23e;
   --green: #1cc88a;
   --teal: #20c9a6;
+  --lightGreen: #a5cfab;
   --cyan: #36b9cc;
   --white: #fff;
   --gray: #858796;
@@ -9798,6 +9799,10 @@ a:focus {
   color: #3a3b45 !important;
 }
 
+.text-lightGreen{
+  color: #a5cfab !important;
+}
+
 .icon-circle {
   height: 2.5rem;
   width: 2.5rem;
@@ -10584,7 +10589,7 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  /*background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");*/
   background-position: center;
   background-size: cover;
 }

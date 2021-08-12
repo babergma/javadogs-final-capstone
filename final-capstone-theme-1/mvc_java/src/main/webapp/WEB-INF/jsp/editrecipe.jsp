@@ -87,7 +87,7 @@
 
                     <div class="form-group col-lg-3">
                         <label for="add"><p> </p></label>
-                        <button type="submit" class="btn btn-success btn-block" id="add">Add to Recipe <i
+                        <button type="submit" class="btn btn-block" style="background-color: #a5cfab; color:white" id="add">Add to Recipe <i
                                 class="fas fa-plus"></i></button>
                     </div>
 
@@ -167,7 +167,7 @@
             </div>
 
             <div class="form-group col-md-12">
-                <button type="submit" class="btn btn-success btn-lg">Add Recipe</button>
+                <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white">Add Recipe</button>
             </div>
         </div>
 

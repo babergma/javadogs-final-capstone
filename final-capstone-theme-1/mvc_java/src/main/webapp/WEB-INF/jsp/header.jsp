@@ -32,13 +32,13 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="bg-dark">
 
 <!-- Page Wrapper -->
 <div id="wrapper">
 
 	<!-- Sidebar -->
-	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+	<ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
 		<!-- Sidebar - Brand -->
 		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="${baseUrl}">
@@ -46,7 +46,7 @@
 				<c:url var="logoImageUrl" value="/img/logo.png" />
 				<img src="${logoImageUrl}" width="50px"/>
 			</div>
-			<div class="sidebar-brand-text mx-3">Tech Connect <sup>2020</sup></div>
+			<div class="sidebar-brand-text mx-3 " style="color: #a5cfab; font-size: 120%">Prep Thyme</div>
 		</a>
 
 		<!-- Divider -->
@@ -58,7 +58,7 @@
 				<c:url var="dashboardImageUrl" value="/img/dashboard.png" />
 				<img src="${dashboardImageUrl}" />
 			</div>
-			<div class="sidebar-brand-text mx-3">Dashboard</div>
+			<div class="sidebar-brand-text mx-3" style="font-size: 80%">Your Goals</div>
 		</a>
 
 		<!-- Divider -->
@@ -131,13 +131,13 @@
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/grocerylist">
 				<i class="fas fa-fw fa-bullseye"></i>
-				<span>user Grocery List</span></a>
+				<span>Grocery List</span></a>
 		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/addgrocerylist">
 				<i class="fas fa-fw fa-bullseye"></i>
-				<span>User Add Grocery List</span></a>
+				<span>Add Ingredient</span></a>
 		</li>
 
 		</c:if>
@@ -182,11 +182,11 @@
 			<a class="nav-link" href="${baseUrl}user/charts">
 				<i class="fas fa-fw fa-chart-area"></i>
 				<span>Charts</span></a>
-		</li>--%>
+		</li>
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">
-
+--%>
 		<!-- Sidebar Toggler (Sidebar) -->
 		<div class="text-center d-none d-md-inline">
 			<button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -214,9 +214,8 @@
 					<div class="input-group">
 						<input type="text" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
-							<button class="btn btn-primary"  type="submit">
-								<c:url var="searchImageUrl" value="/img/searchIcon.png" />
-								<img src="${searchImageUrl}" />
+							<button class="btn" style="background-color: #a5cfab; color: white;" type="submit">
+								<i class="fa fa-search"></i>
 							</button>
 						</div>
 					</div>

@@ -8,14 +8,14 @@
   <div class="container">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
+      <div class="card-body bg-dark p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
           <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                <h1 class="h4 text-lightGreen mb-4" style="color: #a5cfab" >Create an Account!</h1>
               </div>
               <form:form class="user" method="POST" action="${baseUrl}register" modelAttribute="user">
                 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
@@ -63,7 +63,7 @@
                     <form:errors path="weight" cssClass="error"/>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-user btn-block">
+                <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: #5386e4">
                   Register Account
                 </button>
                 <hr>
@@ -78,10 +78,10 @@
               </form:form>
               <hr>
               <div class="text-center">
-                <a class="small" href="${baseUrl}forgot-password">Forgot Password?</a>
+                <a class="small" href="${baseUrl}forgot-password" style="color: #a5cfab">Forgot Password?</a>
               </div>
               <div class="text-center">
-                <a class="small" href="${baseUrl}login">Already have an account? Login!</a>
+                <a class="small" href="${baseUrl}login" style="color: #a5cfab">Already have an account? Login!</a>
               </div>
             </div>
           </div>

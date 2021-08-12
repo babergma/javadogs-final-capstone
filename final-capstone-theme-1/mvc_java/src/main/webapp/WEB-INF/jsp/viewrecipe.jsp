@@ -25,7 +25,7 @@
         <c:forEach items="${recipeList}" var="currentRecipe">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <c:url var="placeholderImageUrl" value="/img/placeholder.png" />
+            <c:url var="placeholderImageUrl" value="/img/kibble.jpg" />
             <img src="${placeholderImageUrl}" />
             <div class="card-body">
               <h3 class="card-text">${currentRecipe.recipeName}</h3>
