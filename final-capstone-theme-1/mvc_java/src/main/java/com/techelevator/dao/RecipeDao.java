@@ -19,4 +19,7 @@ public interface RecipeDao {
     public void deleteRecipeByRecipeID(Long recipe_id);
 
     public void updateRecipeByRecipeId(Recipe recipe, List<Ingredient> ingredients);
+    public void updateRecipeByRecipeId(Recipe recipe, Ingredient ingredient);
+
+    void updateRecipe(Recipe recipe);
 }

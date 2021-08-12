@@ -35,7 +35,7 @@
         </div>
 
         <div class="card-body">
-<c:url var="formActionUrl" value="/user/editrecipeingredients"/>
+<c:url var="formActionUrl" value="/user/editRecipeIngredients"/>
             <form:form modelAttribute="ingredient" action="${formActionUrl}" method="POST">
                 <h4>Ingredients</h4>
                 <div class="form-row">
@@ -162,7 +162,7 @@
                 <div class="form-check">
 
                     <form:radiobutton path="visible" cssClass="form-check-input" value="false"/>
-                    <label for="false" id="false" class="form-check-label" name="private">Private</label
+                    <label for="false" id="false" class="form-check-label" name="private">Private</label>
                 </div>
             </div>
 

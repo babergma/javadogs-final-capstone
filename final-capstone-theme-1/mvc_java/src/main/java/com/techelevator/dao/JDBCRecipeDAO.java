@@ -68,6 +68,19 @@ public class JDBCRecipeDAO implements RecipeDao {
         return newRecipe;
     }
 
+    public void updateRecipe(Recipe recipe){
+        String sqlUpdateRecipe = "UPDATE recipe " +
+                " SET recipename = ?," +
+                " cooktime = ?," +
+                " servingsize = ?," +
+                " calories = ?," +
+                " cookinginstruction = ?," +
+                " visible = ?" +
+                " WHERE recipe_id = ?";
+        jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
+                recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
+    }
+
     @Override
     @Transactional
     public void updateRecipeByRecipeId(Recipe recipe, List<Ingredient> ingredients) {
@@ -81,6 +94,29 @@ public class JDBCRecipeDAO implements RecipeDao {
                 " WHERE recipe_id = ?";
         jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
                 recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
+        for (Ingredient ingredient : ingredients) {
+            String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
+                    " VALUES (?, ?, ?, ?)";
+            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientID(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementid());
+        }
+    }
+
+    @Override
+    @Transactional
+    public void updateRecipeByRecipeId(Recipe recipe, Ingredient ingredient) {
+        String sqlUpdateRecipe = "UPDATE recipe " +
+                " SET recipename = ?," +
+                " cooktime = ?," +
+                " servingsize = ?," +
+                " calories = ?," +
+                " cookinginstruction = ?," +
+                " visible = ?" +
+                " WHERE recipe_id = ?";
+        jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
+                recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
+            String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
+                    " VALUES (?, ?, ?, ?)";
+            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientID(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementid());
     }
 
     @Override

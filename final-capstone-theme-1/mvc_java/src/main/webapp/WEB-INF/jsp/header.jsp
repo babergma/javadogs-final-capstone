@@ -102,11 +102,6 @@
 
 		<!-- Nav Item - Tables -->
 		<c:if test="${LOGGED_USER != null}">
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/editrecipe">
-				<i class="fas fa-fw fa-bullseye"></i>
-				<span>Edit Recipe</span></a>
-		</li>
 
 
 		<%--<li class="nav-item">
