@@ -253,4 +253,11 @@ public class ContentController {
         return "accordionExample";
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public String catchNull(){
+        return "error";
+    }
+
+
+
 }
