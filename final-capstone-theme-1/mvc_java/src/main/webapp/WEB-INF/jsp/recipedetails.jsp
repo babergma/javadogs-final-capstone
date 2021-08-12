@@ -24,6 +24,7 @@
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
                             <h3 class="m-0 font-weight-bold text-primary ">${recipe.recipeName}</h3>
                             <p class="lead fw-normal">Summary of recipe story or whatever</p>
+                            <a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print<i class="fas fa-edit" style="color: white;"></i></button></a>
                         </div>
                         <div class="product-device shadow-sm d-none d-md-block"></div>
                         <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
