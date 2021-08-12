@@ -97,7 +97,7 @@
                                         </thead>
                                         <tbody>
                                             <%--                                            <c:forEach items="${ingredients}" var="ingredient">--%>
-                                        <c:forEach items="${ingredientList}" var="currentIngredient">
+                                        <c:forEach items="${newIngredientList}" var="currentIngredient">
                                             <tr>
                                                 <td>${currentIngredient.ingredientName}</td>
                                                 <td>${currentIngredient.measurementAmount}</td>

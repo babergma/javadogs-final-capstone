@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Controller
-@SessionAttributes({"ingredientList", "recipe", "ingredient"})
+@SessionAttributes({"ingredientList", "recipe", "ingredient", "newIngredientList"})
 @RequestMapping(path = "/user")
 public class ContentController {
 
@@ -76,19 +76,37 @@ public class ContentController {
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
     public String displayAddRecipe(ModelMap modelHolder,
                                    HttpSession session) {
-        if (!modelHolder.containsKey("recipe")) {
             modelHolder.put("recipe", new Recipe());
-        }
         modelHolder.put("ingredient", new Ingredient());
-
-        if (!modelHolder.containsKey("ingredientList")) {
+        if (!modelHolder.containsKey("newIngredientList")) {
             List<Ingredient> ingredientList = new ArrayList<>();
-            modelHolder.addAttribute("ingredientList", ingredientList);
+            modelHolder.addAttribute("newIngredientList", ingredientList);
         }
         modelHolder.put("measurements", Measurement.getAllMeasurements());
         modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
         return "addrecipe";
     }
+
+
+    @RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
+    public String addIngredientToIngredientList(@Valid @ModelAttribute("ingredient") Ingredient ingredient,
+                                                BindingResult result,
+                                                ModelMap modelHolder,
+                                                HttpSession session
+    ) {
+        if (result.hasErrors()) {
+            return "addrecipe";
+        }
+        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("newIngredientList");
+        modelHolder.put("measurements", Measurement.getAllMeasurements());
+        modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
+        User user = (User) session.getAttribute("LOGGED_USER");
+        ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
+
+        ingredientList.add(ingredient);
+        return "redirect:addrecipe";
+    }
+
 
     @RequestMapping(path = "/editrecipe", method = RequestMethod.GET)
     public String displayEditRecipeDetails(ModelMap modelHolder,
@@ -111,25 +129,6 @@ public class ContentController {
         return "editrecipe";
     }
 
-
-    @RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
-    public String addIngredientToIngredientList(@Valid @ModelAttribute("ingredient") Ingredient ingredient,
-                                                BindingResult result,
-                                                ModelMap modelHolder,
-                                                HttpSession session
-    ) {
-        if (result.hasErrors()) {
-            return "addrecipe";
-        }
-        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
-        modelHolder.put("measurements", Measurement.getAllMeasurements());
-        modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
-        User user = (User) session.getAttribute("LOGGED_USER");
-        ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
-
-        ingredientList.add(ingredient);
-        return "redirect:addrecipe";
-    }
 
     @RequestMapping(path = "/editRecipeIngredients", method = RequestMethod.POST)
     public String editRecipeIngredients(ModelMap modelHolder,
@@ -179,8 +178,10 @@ public class ContentController {
         }
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
-        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("newIngredientList");
         recipeDao.addIngredientListToRecipe(recipe, ingredientList);
+        ingredientList = new ArrayList<>();
+        modelHolder.put("newIngredientList", ingredientList);
         return "dashboard";
     }
 
