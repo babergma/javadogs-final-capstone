@@ -92,17 +92,45 @@ public class ContentController {
 	}
 
 	@RequestMapping(path="/editrecipe", method=RequestMethod.GET)
-	public String displayEditRecipeDetails()
-			{
+	public String displayEditRecipeDetails(ModelMap modelHolder,
+										   HttpSession session,
+										   @RequestParam(required = false) Long id){
+		Recipe recipe = null;
+		if (!modelHolder.containsKey("recipe")) {
+			recipe = recipeDao.getRecipeByRecipeId(id);
+			modelHolder.put("recipe", recipe);
+		} else {
+			recipe = (Recipe)modelHolder.getAttribute("recipe");
+		}
+		modelHolder.put("ingredient", new Ingredient());
+
+		if (!modelHolder.containsKey("ingredientList")) {
+			List<Ingredient> ingredientList = recipeDao.getAllIngredientsByRecipeId(recipe.getRecipeId());
+			modelHolder.addAttribute("ingredientList", ingredientList);
+		} else {
+			List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+		}
+		modelHolder.put("measurements", Measurement.getAllMeasurements());
+		modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
 		return "editrecipe";
 	}
 
-	@RequestMapping(path="/editrecipe", method=RequestMethod.POST)
-	public String editRecipeIngredients(){
-		return "editrecipe";
+	@RequestMapping(path="/editrecipeingredients", method=RequestMethod.POST)
+	public String editRecipeIngredients(ModelMap modelHolder,
+										@ModelAttribute("ingredient") Ingredient ingredient,
+										BindingResult result,
+										HttpSession session){
+		if (result.hasErrors()) {
+			return "editrecipe";
+		}
+		List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+		modelHolder.put("measurements", Measurement.getAllMeasurements());
+		modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
+		ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
+		ingredientList.add(ingredient);
+
+		return "redirect:editrecipe";
 	}
-
-
 
 	@RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
 	public String addIngredientToIngredientList(@Valid @ModelAttribute("ingredient") Ingredient ingredient,
@@ -123,13 +151,32 @@ public class ContentController {
 		return "redirect:addrecipe";
 	}
 
+	@RequestMapping(path = "/submitEditRecipe", method = RequestMethod.POST)
+	public String submitEditRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
+							   BindingResult result,
+							   ModelMap modelHolder,
+							   HttpSession session, SessionStatus status) {
+		if (result.hasErrors()) {
+			return "testRecipes";
+		}
+		User user = (User) session.getAttribute("LOGGED_USER");
+		recipe.setAuthorID(user.getId());
+		List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+		recipe.setIngredientList(ingredientList);
+		recipeDao.updateRecipeByRecipeId(recipe, ingredientList);
+		return "viewrecipe";
+	}
+
+
+
+
 	@RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
 	public String submitRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
 							   BindingResult result,
 							   ModelMap modelHolder,
 							   HttpSession session, SessionStatus status) {
 		if (result.hasErrors()) {
-			return "testRecipes";
+			return "addrecipe";
 		}
 		User user = (User) session.getAttribute("LOGGED_USER");
 		recipe.setAuthorID(user.getId());

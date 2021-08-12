@@ -69,15 +69,17 @@ public class JDBCRecipeDAO implements RecipeDao {
     }
 
     @Override
-    public void updateRecipeByRecipeId(Recipe recipe) {
+    @Transactional
+    public void updateRecipeByRecipeId(Recipe recipe, List<Ingredient> ingredients) {
         String sqlUpdateRecipe = "UPDATE recipe " +
                 " SET recipename = ?," +
                 " cooktime = ?," +
+                " servingsize = ?," +
                 " calories = ?," +
                 " cookinginstruction = ?," +
                 " visible = ?" +
                 " WHERE recipe_id = ?";
-        jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(),
+        jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
                 recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
     }
 
@@ -102,6 +104,7 @@ public class JDBCRecipeDAO implements RecipeDao {
         recipe.setRecipeName(results.getString("recipename"));
         recipe.setAuthorID(results.getLong("author_id"));
         recipe.setCookTime(results.getInt("cooktime"));
+        recipe.setServingSize(results.getInt("servingsize"));
         recipe.setCalories(results.getInt("calories"));
         recipe.setPictureUrl(results.getString("pictureurl"));
         recipe.setCookingInstruction(results.getString("cookingInstruction"));

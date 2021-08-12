@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:import url="/WEB-INF/jsp/header.jsp"/>
 <%--<link href="../css/recipedetails.css" rel="stylesheet" type="text/css">--%>
 
@@ -20,7 +20,7 @@
                 <div class="card-header py-3">
                     <div class="position-relative overflow-hidden p-3 p-xs-5 m-xs-3 text-center bg-light">
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
-                            <h3 class="m-0 font-weight-bold text-primary ">Recipe Name</h3>
+                            <h3 class="m-0 font-weight-bold text-primary ">${recipe.recipeName}</h3>
                             <p class="lead fw-normal">Summary of recipe story or whatever</p>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Input an image</label>
@@ -35,8 +35,8 @@
         </div>
 
         <div class="card-body">
-
-            <form>
+<c:url var="formActionUrl" value="/user/editrecipeingredients"/>
+            <form:form modelAttribute="ingredient" action="${formActionUrl}" method="POST">
                 <h4>Ingredients</h4>
                 <div class="form-row">
 
@@ -45,34 +45,43 @@
 
                         <label for="ingredientName">Ingredient Name</label>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button" id="ingredientName"
+                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
+                                    id="ingredientName"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Thyme
+                                <form:select path="ingredientName" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <c:forEach items="${displayIngredients}" var="displayIngredient">
+                                            <form:option
+                                                    value="${displayIngredient.ingredientName}" cssStyle="background-color: #858796">
+                                                <td>
+                                                <button class="btn btn-danger me-md-2" type="button"><i class="fas fa-trash-alt"></i></button>
+                                                </td>${displayIngredient.ingredientName}</form:option>
+                                        </c:forEach>
+                                    </div>
+                                </form:select>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
                         </div>
                     </div>
 
                     <div class="form-group col-lg">
                         <label for="measurementAmount">Quantity</label>
-                        <input type="number" class="form-control" id="measurementAmount" placeholder="1">
+                        <form:input type="number" class="form-control" path="measurementAmount"
+                                    placeholder="1"/>
                     </div>
 
                     <div class="form-group col-lg" >
                         <label for="measurementType">Measurement Type</label>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button" id="measurementType"
+                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
+                                    id="measurementType"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tsp
+                                <form:select path="measurement" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Cup</a>
-                                <a class="dropdown-item" href="#">Tbs</a>
+                                <form:options items="${Measurements.values()}" itemLabel="abbreviation"
+                                              itemValue="name" cssStyle="background-color: #858796"/>
                             </div>
+                            </form:select>
                         </div>
                     </div>
 
@@ -103,64 +112,66 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <%--                                            <c:forEach items="${ingredients}" var="ingredient">--%>
-                                <tr>
-                                    <td> <button class="btn btn-danger me-md-2" type="button"><i class="fas fa-trash-alt"></i></button></td>
-                                    <td>Thyme</td>
-                                    <td>1</td>
-                                    <td>Tsp</td>
-                                </tr>
-                                <%--                                            </c:forEach>--%>
+                                <c:forEach items="${ingredientList}" var="currentIngredient">
+                                    <tr>
+                                        <td>DeleteButtonPlaceHolder</td>
+                                        <td>${currentIngredient.ingredientName}</td>
+                                        <td>${currentIngredient.measurementAmount}</td>
+                                        <td>${currentIngredient.measurement.abbreviation}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </form>
-            <form>
-                <div class="form-group">
-                    <label for="recipeName">Name</label>
-                    <input type="text" class="form-control" id="recipeName" placeholder="Cajun Shrimp">
+            </form:form>
+            <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
+        <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
+            <div class="form-group">
+                <form:label path="recipeName" value="Name"/>
+                <form:input path="recipeName" type="text" cssClass="form-control" placeholder="Cajun Shrimp"/>
+            </div>
+            <div class="form-row ">
+                <div class="form-group col-md-4 col-auto">
+                    <form:label path="cookTime" value="Cook Time"/>
+                    <form:input path="cookTime" type="number" cssClass="form-control" placeholder="60"/>minutes
                 </div>
-                <div class="form-row ">
-                    <div class="form-group col-md-4 col-auto">
-                        <label for="cookTime">Cook Time</label>
-                        <input type="number" class="form-control" id="cookTime" placeholder="60">minutes
-                    </div>
-                    <div class="form-group col-md-4 col-auto">
-                        <label for="servingSize">Serving Size</label>
-                        <input type="number" class="form-control" id="servingSize" placeholder="5">servings
-                    </div>
-                    <div class="form-group col-md-4 col-auto">
-                        <label for="calories">Calories</label>
-                        <input type="number" class="form-control" id="calories" placeholder="600">
-                        calories
-                    </div>
+                <div class="form-group col-md-4 col-auto">
+                    <form:label path="servingSize" value="Serving Size"/>
+                    <form:input path="servingSize" type="number" cssClass="form-control" placeholder="5"/>servings
                 </div>
+                <div class="form-group col-md-4 col-auto">
+                    <form:label path="calories" value="Calories"/>
+                    <form:input path="calories" type="number" cssClass="form-control" placeholder="600"/>
+                    calories
+                </div>
+            </div>
 
-                <div class="form-group col-md-12">
-                    <h4 for="cookingInstructions">Instructions</h4>
-                    <textarea class="form-control" id="cookingInstructions" rows="5"></textarea>
-                </div>
-                <div class="form-group col-md-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="visibility" id="public"
-                               value="option1" checked>
-                        <label class="form-check-label" for="public">Public</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="visibility" id="private"
-                               value="option2">
-                        <label class="form-check-label" for="private">Private</label>
-                    </div>
-                </div>
+            <div class="form-group col-md-12">
+                <h4 for="cookingInstruction">Instructions</h4>
+                <form:textarea id="cookingInstruction" path="cookingInstruction" cssClass="form-control"
+                               rows="5"/>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="form-check">
 
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-success btn-lg">Save Recipe</button>
+                    <form:radiobutton path="visible" cssClass="form-check-input" value="true"/>
+                    <label for="false" id="false" class="form-check-label" name="true">Public</label>
                 </div>
+                <div class="form-check">
+
+                    <form:radiobutton path="visible" cssClass="form-check-input" value="false"/>
+                    <label for="false" id="false" class="form-check-label" name="private">Private</label
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-success btn-lg">Add Recipe</button>
+            </div>
         </div>
 
-        </form>
+        </form:form>
     </div>
 </div>
 

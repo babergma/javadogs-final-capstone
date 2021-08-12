@@ -62,11 +62,6 @@
                                         <form:select path="measurement" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <%--                                        <c:forEach items="${Measurement.values()}" var="measurement">--%>
-                                            <%--                                            <form:option path="measurement">--%>
-                                            <%--                                                ${measurement.abbreviation}>--%>
-                                            <%--                                            </form:option>--%>
-                                            <%--                                        </c:forEach>--%>
                                         <form:options items="${Measurements.values()}" itemLabel="abbreviation"
                                                       itemValue="name" cssStyle="background-color: #858796"/>
                                     </div>
