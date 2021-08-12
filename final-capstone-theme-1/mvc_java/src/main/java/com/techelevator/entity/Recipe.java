@@ -90,4 +90,8 @@ public class Recipe {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
+
+    public List<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
 }

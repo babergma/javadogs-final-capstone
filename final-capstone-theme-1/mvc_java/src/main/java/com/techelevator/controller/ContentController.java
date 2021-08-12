@@ -37,21 +37,14 @@ public class ContentController {
 	public ContentController(){
 	}
 
-	@RequestMapping(path="/editrecipe", method=RequestMethod.GET)
-	public String displayEditRecipeDetails(HttpSession session) {
 
-		return "editrecipe";
-	}
-
-	@RequestMapping(path="/recipedetails", method=RequestMethod.GET)
-	public String displayRecipeDetails(HttpSession session) {
-
-		return "recipedetails";
-	}
 
 	@RequestMapping(path="/viewrecipe", method=RequestMethod.GET)
-	public String displayViewRecipe(HttpSession session) {
-
+	public String displayViewRecipe(HttpSession session,
+									ModelMap modelMap) {
+		User user = (User) session.getAttribute("LOGGED_USER");
+		List<Recipe> recipeList = recipeDao.getAllRecipesByUserId(user.getId());
+		modelMap.put("recipeList",recipeList);
 		return "viewrecipe";
 	}
 
@@ -98,6 +91,19 @@ public class ContentController {
 		return "addrecipe";
 	}
 
+	@RequestMapping(path="/editrecipe", method=RequestMethod.GET)
+	public String displayEditRecipeDetails()
+			{
+		return "editrecipe";
+	}
+
+	@RequestMapping(path="/editrecipe", method=RequestMethod.POST)
+	public String editRecipeIngredients(){
+		return "editrecipe";
+	}
+
+
+
 	@RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
 	public String addIngredientToIngredientList(@Valid @ModelAttribute("ingredient") Ingredient ingredient,
 												BindingResult result,
@@ -130,6 +136,15 @@ public class ContentController {
 		List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
 		recipeDao.addIngredientListToRecipe(recipe, ingredientList);
 		return "dashboard";
+	}
+
+	@RequestMapping(path="/recipedetails", method=RequestMethod.GET)
+	public String displayRecipeDetails(@RequestParam Long id,
+									   ModelMap modelMap) {
+		System.out.println(id);
+		Recipe recipe = recipeDao.getRecipeByRecipeId(id);
+		modelMap.addAttribute("recipe",recipe);
+		return "recipedetails";
 	}
 
 

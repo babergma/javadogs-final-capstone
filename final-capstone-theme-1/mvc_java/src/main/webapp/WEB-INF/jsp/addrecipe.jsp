@@ -27,18 +27,19 @@
                         <h4>Ingredients</h4>
                         <div class="form-row">
 
-                            <div class="form-group col-lg ">
+                            <div class="form-group col-lg " >
+
 
                                 <label for="ingredientName">Ingredient Name</label>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
                                             id="ingredientName"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <form:select path="ingredientName">
+                                        <form:select path="ingredientName" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <c:forEach items="${displayIngredients}" var="displayIngredient">
                                                     <form:option
-                                                            value="${displayIngredient.ingredientName}">${displayIngredient.ingredientName}</form:option>
+                                                            value="${displayIngredient.ingredientName}" cssStyle="background-color: #858796"><td> <button class="btn btn-danger me-md-2" type="button"><i class="fas fa-trash-alt"></i></button></td>${displayIngredient.ingredientName}</form:option>
                                                 </c:forEach>
                                             </div>
                                         </form:select>
@@ -58,7 +59,7 @@
                                     <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
                                             id="measurementType"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <form:select path="measurement">
+                                        <form:select path="measurement" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <%--                                        <c:forEach items="${Measurement.values()}" var="measurement">--%>
@@ -67,17 +68,16 @@
                                             <%--                                            </form:option>--%>
                                             <%--                                        </c:forEach>--%>
                                         <form:options items="${Measurements.values()}" itemLabel="abbreviation"
-                                                      itemValue="name"/>
+                                                      itemValue="name" cssStyle="background-color: #858796"/>
                                     </div>
                                     </form:select>
                                 </div>
                             </div>
 
-                            <div class="form-group col-lg-4">
-                                <label for="add"><p></p></label>
-                                <form:button type="submit" cssClass="btn btn-success btn-block" id="add">Add to Recipe
-                                    <i
-                                            class="fas fa-plus"></i></form:button>
+                            <div class="form-group col-lg-3">
+                                <label for="add"><p> </p></label>
+                                <button type="submit" class="btn btn-success btn-block" id="add">Add to Recipe <i
+                                        class="fas fa-plus"></i></button>
                             </div>
 
                             <div class="form-group col-lg-12">
