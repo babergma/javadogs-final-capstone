@@ -80,13 +80,14 @@
 					<h6 class="collapse-header">Login Screens:</h6>
 					<c:if test="${LOGGED_USER == null}">
 						<a class="collapse-item" href="${baseUrl}login">Login</a>
-					</c:if>
+
 					<a class="collapse-item" href="${baseUrl}register">Register</a>
-					<div class="collapse-divider"></div>
+					</c:if>
+					<%--<div class="collapse-divider"></div>
 					<h6 class="collapse-header">Other Pages:</h6>
 					<a class="collapse-item" href="${baseUrl}user/404">404 Page</a>
 					<a class="collapse-item" href="${baseUrl}error">Error Page</a>
-					<a class="collapse-item" href="${baseUrl}user/blank">Blank Page</a>
+					<a class="collapse-item" href="${baseUrl}user/blank">Blank Page</a>--%>
 				</div>
 			</div>
 		</li>
@@ -100,17 +101,19 @@
 		</div>
 
 		<!-- Nav Item - Tables -->
+		<c:if test="${LOGGED_USER != null}">
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/editrecipe">
 				<i class="fas fa-fw fa-bullseye"></i>
 				<span>Edit Recipe</span></a>
 		</li>
 
-		<li class="nav-item">
+
+		<%--<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/recipedetails">
 				<i class="fas fa-fw fa-bullseye"></i>
 				<span>Recipe Details</span></a>
-		</li>
+		</li>--%>
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/viewrecipe">
@@ -123,6 +126,8 @@
 				<i class="fas fa-fw fa-bullseye"></i>
 				<span>Add Recipe</span></a>
 		</li>
+
+
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/grocerylist">
 				<i class="fas fa-fw fa-bullseye"></i>
@@ -135,7 +140,8 @@
 				<span>User Add Grocery List</span></a>
 		</li>
 
-		<li class="nav-item">
+		</c:if>
+		<%--<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/basic/table">
 				<i class="fas fa-fw fa-table"></i>
 				<span>Basic Table</span></a>
@@ -161,7 +167,7 @@
 			<a class="nav-link" href="${baseUrl}user/accordion">
 				<i class="fas fa-fw fa-bullseye"></i>
 				<span>Accordion</span></a>
-		</li>
+		</li>--%>
 
 		<!-- Divider -->
 		<hr class="sidebar-divider">
@@ -172,11 +178,11 @@
 		</div>
 
 		<!-- Nav Item - Charts -->
-		<li class="nav-item">
+		<%--<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/charts">
 				<i class="fas fa-fw fa-chart-area"></i>
 				<span>Charts</span></a>
-		</li>
+		</li>--%>
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">
@@ -220,7 +226,7 @@
 				<ul class="navbar-nav ml-auto">
 
 					<!-- Nav Item - Alerts -->
-					<li class="nav-item dropdown no-arrow mx-1">
+					<%--<li class="nav-item dropdown no-arrow mx-1">
 						<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<c:url var="alertImageUrl" value="/img/alert.png" />
 							<img src="${alertImageUrl}" />
@@ -228,7 +234,7 @@
 							<span class="badge badge-danger badge-counter">3+</span>
 						</a>
 						<!-- Dropdown - Alerts -->
-						<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+						&lt;%&ndash;<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
 							<h6 class="dropdown-header">
 								Alerts Center
 							</h6>
@@ -266,8 +272,8 @@
 								</div>
 							</a>
 							<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-						</div>
-					</li>
+						</div>&ndash;%&gt;
+					</li>--%>
 
 					<div class="topbar-divider d-none d-sm-block"></div>
 

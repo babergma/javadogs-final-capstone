@@ -14,6 +14,7 @@
       <h1 class="jumbotron-heading">My Recipes</h1>
       <p class="lead text-muted">Look at all of your saved recipes</p>
       <p>
+        //add a link to the add a new recipe
         <a href="#" class="btn btn-primary my-2">Add new recipe</a>
       </p>
     </div>
