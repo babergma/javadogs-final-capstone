@@ -1,6 +1,6 @@
 
 BEGIN TRANSACTION;
-DROP TABLE IF EXISTS person, measurementType, goal, category, ingredient, person_goal, recipe, mealPlan, person_mealPlan, recipe_mealPlan, recipe_category, groceryList, ingredient_recipe CASCADE;
+DROP TABLE IF EXISTS person, measurementType, goal, category, ingredient, person_goal, recipe, mealPlan, person_mealPlan, recipe_mealPlan, recipe_category, groceryList, ingredient_recipe, dayOfWeek, timeOfDay CASCADE;
 
 CREATE TABLE person
 (
@@ -151,5 +151,23 @@ CREATE TABLE ingredient_recipe
         constraint fk_recipe_id foreign key (recipe_id) references recipe (recipe_id), 
         constraint fk_measurementType_id foreign key (measurementType_id) references measurementType (measurementType_id)
 );
+
+CREATE TABLE dayOfWeek
+(
+        dayOfWeek serial, 
+        dayName varchar(10),
+        
+        constraint pk_dayOfWeek primary key (dayOfWeek)
+);
+
+CREATE TABLE timeOfDay
+(
+        timeOfDay serial, 
+        timeName varchar(10),
+        
+        constraint pk_timeOfDay primary key (timeOfDay)
+);
+
+
 
 END TRANSACTION;

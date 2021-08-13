@@ -124,8 +124,35 @@ VALUES(1, 1, 1, 3),
         (20, 4, 1, 3),
         (22, 4, 1, 3);
      
+INSERT INTO dayofweek(dayname)
+VALUES ('Monday'),   
+        ('Tuesday'),  
+        ('Wednesday'),
+        ('Thursday'),
+        ('Friday'),
+        ('Saturday'),
+        ('Sunday');
         
+INSERT INTO timeofday(timename)
+VALUES ('Breakfast'),
+        ('Lunch'),
+        ('Dinner');
 
 
 
 END TRANSACTION;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
