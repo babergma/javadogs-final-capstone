@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class JDBCRecipeDAO implements RecipeDao {
@@ -119,6 +120,8 @@ public class JDBCRecipeDAO implements RecipeDao {
             jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientID(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementid());
     }
 
+
+
     @Override
     public List<Recipe> getAllRecipesByUserId(Long user_id) {
         String sqlSearchForRecipe = "SELECT * " +
@@ -133,6 +136,24 @@ public class JDBCRecipeDAO implements RecipeDao {
         }
         return recipeList;
     }
+
+    @Override
+    public List<Recipe> getAllPublicRecipes() {
+        String sqlSearchForRecipe = "SELECT * " +
+                "FROM recipe " +
+                "JOIN person ON recipe.author_id = person.user_id " +
+                "WHERE visible = ?";
+        List<Recipe> recipeList = new ArrayList<>();
+        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, true);
+        while (recipe.next()) {
+            Recipe thisRecipe = mapResultstoRecipe(recipe);
+            recipeList.add(thisRecipe);
+        }
+        return recipeList;
+    }
+
+
+
 
     public Recipe mapResultstoRecipe(SqlRowSet results){
         Recipe recipe = new Recipe();
@@ -193,17 +214,23 @@ public class JDBCRecipeDAO implements RecipeDao {
 
     @Transactional
     public void deleteRecipeByRecipeID(Long recipe_id) {
-        deleteFromIngredientRecipe(recipe_id);
+        deleteRecipeFromIngredientRecipe(recipe_id);
         String sql = "DELETE FROM recipe where recipe_id = ?";
         jdbcTemplate.update(sql, recipe_id);
     }
 
     @Transactional
-    public void deleteFromIngredientRecipe(Long recipe_id) {
+    public void deleteRecipeFromIngredientRecipe(Long recipe_id) {
         String sql = "DELETE FROM ingredient_recipe WHERE recipe_id = ?";
         jdbcTemplate.update(sql, recipe_id);
     }
 
+
+    @Transactional
+    public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id) {
+        String sql = "DELETE FROM ingredient_recipe WHERE recipe_id = ? AND ingredient_id = ?";
+        jdbcTemplate.update(sql, recipe_id, ingredient_id);
+    }
 
 }
 

@@ -90,13 +90,14 @@
                         <button type="submit" class="btn btn-block" style="background-color: #a5cfab; color:white" id="add">Add to Recipe <i
                                 class="fas fa-plus"></i></button>
                     </div>
-
+                    </form:form>
                     <div class="form-group col-lg-12">
                         Ingredient not there?
                         <button type="button" class="btn btn-outline-danger" id="newIngredient">Add new
                             ingredient</button>
                     </div>
-
+                    <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
+                    <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
                     <div class="form-group col-md-12 alert alert-info" role="alert">
                         <div class="container">
 
@@ -114,7 +115,11 @@
                                 <tbody>
                                 <c:forEach items="${ingredientList}" var="currentIngredient">
                                     <tr>
-                                        <td>DeleteButtonPlaceHolder</td>
+                                        <td>
+                                            <a href="" class="btn btn-danger btn-circle btn-sm">
+                                                <button type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
+                                            </a>
+                                        </td>
                                         <td>${currentIngredient.ingredientName}</td>
                                         <td>${currentIngredient.measurementAmount}</td>
                                         <td>${currentIngredient.measurement.abbreviation}</td>
@@ -125,9 +130,7 @@
                         </div>
                     </div>
                 </div>
-            </form:form>
-            <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
-        <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
+
             <div class="form-group">
                 <form:label path="recipeName" value="Name"/>
                 <form:input path="recipeName" type="text" cssClass="form-control" placeholder="Cajun Shrimp"/>
@@ -167,7 +170,7 @@
             </div>
 
             <div class="form-group col-md-12">
-                <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white">Add Recipe</button>
+                <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white" value="add" name="add">Add Recipe</button>
             </div>
         </div>
 

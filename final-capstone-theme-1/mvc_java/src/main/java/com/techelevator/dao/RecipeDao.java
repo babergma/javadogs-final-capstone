@@ -9,6 +9,7 @@ public interface RecipeDao {
     public Recipe saveRecipe(Recipe recipe);
 
     public List<Recipe> getAllRecipesByUserId(Long user_id);
+    public List<Recipe> getAllPublicRecipes();
 
     public List<Ingredient> getAllIngredientsByRecipeId(Long recipe_id);
 
@@ -22,4 +23,6 @@ public interface RecipeDao {
     public void updateRecipeByRecipeId(Recipe recipe, Ingredient ingredient);
 
     void updateRecipe(Recipe recipe);
+
+    public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id);
 }

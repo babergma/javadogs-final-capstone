@@ -117,26 +117,32 @@
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/viewrecipe">
-				<i class="fas fa-fw fa-utensils"></i>
-				<span>View Recipe</span></a>
+				<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+				<span>My Recipes</span></a>
 		</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/viewallrecipes">
+					<i class="fas fa-fw fa-cookie-bite" style="color: #EE964B"></i>
+					<span>All Recipes</span></a>
+			</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/addrecipe">
-				<i class="fas fa-fw fa-carrot"></i>
+				<i class="fas fa-fw fa-carrot" style="color: #EE964B"></i>
 				<span>Add Recipe</span></a>
 		</li>
 
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/grocerylist">
-				<i class="fas fa-fw fa-egg"></i>
+				<i class="fas fa-fw fa-egg" style="color: #EE964B"></i>
 				<span>Grocery List</span></a>
 		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/addgrocerylist">
-				<i class="fas fa-fw fa-cheese"></i>
+				<i class="fas fa-fw fa-cheese" style="color: #EE964B"></i>
 				<span>Add Ingredient</span></a>
 		</li>
 
@@ -173,9 +179,7 @@
 		<hr class="sidebar-divider">
 
 		<!-- Heading -->
-		<div class="sidebar-heading">
-			Addons
-		</div>
+
 
 		<!-- Nav Item - Charts -->
 		<%--<li class="nav-item">

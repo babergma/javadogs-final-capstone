@@ -5,18 +5,21 @@
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 <c:import url="/WEB-INF/jsp/header.jsp" />
-<header>
 
-</header>
 <main role="main">
   <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading">My Recipes</h1>
-      <p class="lead text-muted">Look at all of your saved recipes</p>
+      <h1 class="jumbotron-heading">View All Recipes</h1>
+      <p class="lead text-muted">A Look at the great recipes provided by our community!</p>
+      <c:if test="${LOGGED_USER != null}">
       <p>
+
         <c:url var="addRecipe" value="/user/addrecipe"/>
         <a href="${addRecipe}" class="btn btn-primary my-2">Add new recipe</a>
+        <c:url var="addRecipe" value="/user/randomrecipe"/>
+        <a href="${addRecipe}" class="btn btn-primary my-2">Random Recipe</a>
       </p>
+      </c:if>
     </div>
   </section>
   <div class="album py-5 bg-light">
@@ -36,10 +39,6 @@
                         <c:param name="id" value="${currentRecipe.recipeId}"/>
                       </c:url>
                       <a href="${detailsURL}">View</a></button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">        <c:url var = "editURL" value="/user/editrecipe">
-                      <c:param name="id" value="${currentRecipe.recipeId}"/>
-                    </c:url>
-                      <a href="${editURL}">Edit</a></button>
                   </div>
                   <small class="text-muted">${currentRecipe.cookTime}</small>
                 </div>

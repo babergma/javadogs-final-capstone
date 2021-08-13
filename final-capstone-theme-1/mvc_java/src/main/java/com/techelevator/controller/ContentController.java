@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @Controller
@@ -155,9 +157,14 @@ public class ContentController {
     public String submitEditRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
                                    BindingResult result,
                                    ModelMap modelHolder,
-                                   HttpSession session, SessionStatus status) {
+                                   HttpSession session, SessionStatus status,
+                                   @RequestParam(required = false) Long delete) {
         if (result.hasErrors()) {
-            return "testRecipes";
+            return "error";
+        }
+        if(delete != null){
+            recipeDao.deleteSingleIngredientFromRecipe(recipe.getRecipeId(),delete);
+            return "dashboard";
         }
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
@@ -253,10 +260,31 @@ public class ContentController {
         return "accordionExample";
     }
 
+
+    @RequestMapping(path="/viewallrecipes", method=RequestMethod.GET)
+    public String displayAllRecipes(ModelMap modelMap) {
+
+        List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
+        modelMap.put("recipeList", recipeList);
+        return "viewpublicrecipes";
+
+    }
+
+    @RequestMapping(path="/randomrecipe", method=RequestMethod.GET)
+    public String showRandomPublicRecipe(HttpServletRequest request){
+        List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
+        Random rand = new Random();
+        Recipe recipe = recipeList.get(rand.nextInt(recipeList.size()));
+        request.setAttribute("id",recipe.getRecipeId());
+        return "forward:recipedetails";
+    }
+
     @ExceptionHandler(NullPointerException.class)
     public String catchNull(){
         return "error";
     }
+
+
 
 
 
