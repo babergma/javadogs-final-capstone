@@ -1,5 +1,6 @@
 package com.techelevator.entity;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 public class Recipe {
@@ -13,7 +14,11 @@ public class Recipe {
     private String cookingInstruction;
     private boolean visible;
     private List<Ingredient> ingredientList;
-
+    private DayOfWeek dayOfWeek;
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+    private String type;
 
     public Long getRecipeId() {
         return recipeId;

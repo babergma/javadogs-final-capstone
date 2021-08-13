@@ -78,7 +78,7 @@ public class ContentController {
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
     public String displayAddRecipe(ModelMap modelHolder,
                                    HttpSession session) {
-            modelHolder.put("recipe", new Recipe());
+        modelHolder.put("recipe", new Recipe());
         modelHolder.put("ingredient", new Ingredient());
         if (!modelHolder.containsKey("newIngredientList")) {
             List<Ingredient> ingredientList = new ArrayList<>();
@@ -239,6 +239,12 @@ public class ContentController {
     public String displayButtons() {
 
         return "buttons";
+    }
+
+    @RequestMapping(path = "/mealplandetails", method = RequestMethod.GET)
+    public String displayMealPLanDetails() {
+
+        return "mealplandetails";
     }
 
     @RequestMapping(path = "/cards", method = RequestMethod.GET)
