@@ -108,13 +108,15 @@ CREATE TABLE recipe_mealPlan
         recipe_mealPlan serial,
         mealPlan_id int,
         recipe_id int, 
+        dayOfTheWeek varchar(20),
+        timeOfDay varchar(20),
         
         constraint pk_recipe_mealPlan primary key (recipe_mealPlan),
         constraint fk_mealPlan_id foreign key (mealPlan_id) references mealPlan (mealPlan_id), 
         constraint fk_recipe_id foreign key (recipe_id) references recipe (recipe_id)
 );
 
-CREATE TABLE recipe_category
+CREATE TABLE recipe_category 
 (
         recipe_category serial, 
         recipe_id int, 
