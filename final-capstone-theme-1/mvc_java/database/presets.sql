@@ -40,7 +40,11 @@ VALUES ('Vegitarian Spaghetti', 30, 4, 350, 'Boil lightly salted water. Once wat
         ('Vanilla Almond Spiced French Toast', 20, 4, 337, 'Mix whole milk and brown sugar in a large bowl. Beat eggs, vanilla extract, almond extract, cinnamon, nutmeg, and allspice 
                 together in a separate bowl until the eggs are well beaten; add to the milk mixture and stir to dissolve the brown sugar. Heat a non-stick skillet or griddle over medium-low heat.
                 Set one slice of Texas toast into the milk mixture; let soak until moistened, about 10 seconds per side. Cook the dipped toast in the preheated skillet until bottom is golden brown, 
-                3 to 5 minutes; flip toast and continue to cook until the other side is browned, 3 to 5 minutes more. Repeat dipping and cooking with remaining bread slices.', true, 1);             
+                3 to 5 minutes; flip toast and continue to cook until the other side is browned, 3 to 5 minutes more. Repeat dipping and cooking with remaining bread slices.', true, 1), 
+        ('Carrot Mango Bread', 50, 10, 287, 'Preheat oven to 350 degrees and grease a loaf pan with baking spray. Combine the flour, baking powder, baking soda, salt and spices in a large bowl.
+                Whisk together the sugar, eggs, coconut oil, V8 vegetable & fruit blend and vanilla in a medium bowl. Add the wet ingredients to the dry and stir until combined.
+                Fold in the carrots, mango and pecans until well combined. Transfer batter to the loaf pan and bake for about 40 minutes until toothpick inserted in the middle comes out clean.
+                Remove from oven and let rest until cool enough to touch. Gently remove bread from the pan and let cool on a rack.', true, 1);
 
 
 INSERT INTO ingredient(ingredientname)
@@ -66,8 +70,18 @@ VALUES ('salt'),
         ('ground cinnamon'),
         ('ground nutmeg'),
         ('all spice'),
-        ('texas toast style bread');
-        
+        ('texas toast style bread'),
+        ('flour'),
+        ('baking powder'),
+        ('baking soda'),
+        ('ground ginger'),
+        ('ground cloves'),       
+        ('coconut sugar'),
+        ('tablespoons melted coconut oil'),
+        ('cup V8 Carrot Mango Vegetable & Fruit Blend'),      
+        ('shredded carrots'),
+        ('diced mango'),
+        ('chopped pecans');
        
 INSERT INTO ingredient_recipe(ingredient_id, recipe_id, measurementamount, measurementtype_id)
 VALUES(1, 1, 1, 3),
@@ -92,7 +106,24 @@ VALUES(1, 1, 1, 3),
         (20, 3, 1, 3),
         (21, 3, 1, 3),
         (22, 3, 1, 3),
-        (23, 3, 8, 6);    
+        (23, 3, 8, 6), 
+        (24, 4, 1, 1),
+        (25, 4, 1, 3),
+        (26, 4, 1, 3),
+        (27, 4, 1, 3),
+        (28, 4, 1, 3),
+        (29, 4, 1, 3),
+        (30, 4, 3, 2),
+        (31, 4, 1, 1),
+        (32, 4, 1, 1),
+        (33, 4, 1, 1),
+        (34, 4, 1, 1),
+        (1, 4, 1, 3),
+        (17, 4, 2, 3),
+        (18, 4, 1, 3),
+        (20, 4, 1, 3),
+        (22, 4, 1, 3);
+     
         
 
 
