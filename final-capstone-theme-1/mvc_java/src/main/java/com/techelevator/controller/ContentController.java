@@ -104,7 +104,6 @@ public class ContentController {
         modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
         User user = (User) session.getAttribute("LOGGED_USER");
         ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
-
         ingredientList.add(ingredient);
         return "redirect:addrecipe";
     }
