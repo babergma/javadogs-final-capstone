@@ -30,13 +30,20 @@ public class JDBCMealPlanDAO implements MealPlanDao {
 
 
     @Transactional
+    @Override
     public MealPlan saveMealPlan(MealPlan mealPlan) {
         String sql = "INSERT INTO mealplan(mealplanname)" +
-                " VALUES (?)";
+                " VALUES (?) RETURNING mealplan_id";
         Long newId = jdbcTemplate.queryForObject(sql, Long.class,
-                mealPlan.getMealPlanId(),
-                mealPlan.getMealPlanName()
-        );
+                mealPlan.getMealPlanName());
+        mealPlan.setMealPlanId(newId);
+        return mealPlan;
+    }
+
+    public MealPlan addAuthorToMealPlan(MealPlan mealPlan, Long user_id) {
+        String sql = "INSERT INTO person_mealplan(mealplan_id, user_id)" +
+                " VALUES (?, ?)";
+        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), user_id);
         return mealPlan;
     }
 
@@ -91,6 +98,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
     @Transactional
     @Override
     public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe) {
+        System.out.println("In the JDBC" + mealPlan.getMealPlanId());
         String sql = "INSERT INTO recipe_mealplan(mealplan_id, recipe_id, dayofweek, timeofday) " +
                 " VALUES (?,?,?,?)";
         jdbcTemplate.update(sql, mealPlan.getMealPlanId(), recipe.getRecipeId(), recipe.getDayOfWeek().getValue(), recipe.getTimeOfDay().getTimeOfDayId());
@@ -130,10 +138,6 @@ public class JDBCMealPlanDAO implements MealPlanDao {
                 "FROM person_mealplan " +
                 "JOIN person p on person_mealplan.user_id = p.user_id " +
                 "JOIN mealplan m on person_mealplan.mealplan_id = m.mealplan_id " +
-                "JOIN recipe_mealplan rm on m.mealplan_id = rm.mealplan_id " +
-                "JOIN recipe r on rm.recipe_id = r.recipe_id " +
-                "JOIN dayofweek d on rm.dayofweek = d.dayofweek " +
-                "JOIN timeofday t on rm.timeofday = t.timeofday " +
                 "WHERE m.mealplan_id = ?";
         MealPlan thisMealPlan = new MealPlan();
         SqlRowSet mealPlanResults = jdbcTemplate.queryForRowSet(sqlSearchForMealPlan, id);
@@ -194,6 +198,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
     public MealPlan mapResultsToMealPlan(SqlRowSet results) {
         MealPlan mealPlan = new MealPlan();
         mealPlan.setMealPlanId(results.getLong("mealplan_id"));
+        System.out.println("In the maping show me the id" + mealPlan.getMealPlanId());
         mealPlan.setMealPlanName(results.getString("mealplanname"));
         return mealPlan;
     }

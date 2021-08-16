@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-lg-9">
                                 <h1>Grocery List  <a href="#" class="btn btn-info btn-circle btn-sm">
-                                    <i class="fas fa-print"></i>
+                                    <a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print<i class="fas fa-edit" style="color: white;"></i></button></a>
                                 </a></h1>
                             </div>
 
@@ -37,8 +37,6 @@
                             <i class="fa fa-search" aria-hidden="true"></i>
                           </button>
                         </span>
-                                    <input type="search" id="accordion_search_bar" class="form-control"
-                                           placeholder="Search to add ingredient to grocery list">
                                 </div>
                                 <!-- /input-group -->
                             </div>

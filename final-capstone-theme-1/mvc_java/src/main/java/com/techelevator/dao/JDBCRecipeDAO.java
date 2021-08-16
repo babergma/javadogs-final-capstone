@@ -200,7 +200,6 @@ public class JDBCRecipeDAO implements RecipeDao {
         String sql = "SELECT * " +
                 "FROM recipe " +
                 "WHERE recipe_id = ?";
-        System.out.println(recipe_id);
         SqlRowSet recipe = jdbcTemplate.queryForRowSet(sql, recipe_id);
         Recipe thisRecipe = new Recipe();
         while(recipe.next()) {

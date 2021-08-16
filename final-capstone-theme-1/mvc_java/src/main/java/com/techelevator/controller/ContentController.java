@@ -190,7 +190,7 @@ public class ContentController {
     @RequestMapping(path = "/recipedetails", method = RequestMethod.GET)
     public String displayRecipeDetails(@RequestParam Long id,
                                        ModelMap modelMap) {
-        System.out.println(id);
+
         Recipe recipe = recipeDao.getRecipeByRecipeId(id);
         modelMap.addAttribute("recipe", recipe);
         return "recipedetails";
@@ -259,10 +259,12 @@ public class ContentController {
                                              @RequestParam int dayOfWeekId,
                                              @RequestParam Long recipeId,
                                              @RequestParam TimeOfDay timeOfDay) {
+
         MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(mealPlanId);
         Recipe recipe = recipeDao.getRecipeByRecipeId(recipeId);
         recipe.setDayOfWeek(DayOfWeek.of(dayOfWeekId));
         recipe.setTimeOfDay(timeOfDay);
+        System.out.println("Post Method in the controler:" + mealPlan.getMealPlanId());
         mealPlanDao.addRecipeToMealPlan(mealPlan, recipe);
         User user = (User) session.getAttribute("LOGGED_USER");
         return "index";
@@ -293,6 +295,24 @@ public class ContentController {
         List<Ingredient> ingredientList = new ArrayList(new HashSet(ingredientListTemp));
         modelMap.addAttribute("ingredientList", ingredientList);
         return "grocerylist";
+    }
+
+    @RequestMapping(path = "/addmealplanname", method = RequestMethod.GET)
+    public String displayAddMealPlanNAme() {
+
+        return "addmealplanname";
+    }
+
+    @RequestMapping(path = "/addmealplanname", method = RequestMethod.POST)
+    public String submitAddMealPlanNAme(HttpSession session,
+                                        @RequestParam String mealPlanName) {
+        User user = (User) session.getAttribute("LOGGED_USER");
+        MealPlan mealPlan = new MealPlan();
+        mealPlan.setMealPlanName(mealPlanName);
+        mealPlan = mealPlanDao.saveMealPlan(mealPlan);
+        mealPlanDao.addAuthorToMealPlan(mealPlan, user.getId());
+
+        return "viewmealplans";
     }
 
     @RequestMapping(path = "/cards", method = RequestMethod.GET)
