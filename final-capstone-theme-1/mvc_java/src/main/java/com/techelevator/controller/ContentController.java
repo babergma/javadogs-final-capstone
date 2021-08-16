@@ -281,12 +281,22 @@ public class ContentController {
     }
 
     @RequestMapping(path = "/mealplandetails", method = RequestMethod.GET)
-    public String displayMealPLanDetails(@RequestParam Long id,
+    public String displayMealPlanDetails(@RequestParam Long id,
                                          ModelMap modelMap) {
         MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(id);
         modelMap.addAttribute("mealPlan", mealPlan);
         return "mealplandetails";
     }
+
+
+    @RequestMapping(path = "/modifymealplan", method = RequestMethod.GET)
+    public String displayModifyMealPlan(@RequestParam Long id,
+                                         ModelMap modelMap) {
+        MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(id);
+        modelMap.addAttribute("mealPlan", mealPlan);
+        return "modifymealplan";
+    }
+
 
     @RequestMapping(path = "/grocerylist", method = RequestMethod.GET)
     public String displayGroceryList(@RequestParam Long id,

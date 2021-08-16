@@ -34,7 +34,7 @@
                     <c:param name="id" value="${mealPlan.mealPlanId}"/>
                   </c:url>
                   <a href="${editMealPlanDetail}" class="btn btn-sm btn-outline-secondary">View</a>
-                  <c:url var="editMealPlanDetail" value="/user/mealplandetails">
+                  <c:url var="editMealPlanDetail" value="/user/modifymealplan">
                     <c:param name="id" value="${mealPlan.mealPlanId}"/>
                   </c:url>
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="${editMealPlanDetail}">Edit</a></button>
