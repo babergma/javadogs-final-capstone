@@ -55,6 +55,22 @@ CREATE TABLE ingredient
         constraint pk_ingredient_id primary key (ingredient_id)
 );
 
+CREATE TABLE dayOfWeek
+(
+        dayOfWeek serial, 
+        dayName varchar(10),
+        
+        constraint pk_dayOfWeek primary key (dayOfWeek)
+);
+
+CREATE TABLE timeOfDay
+(
+        timeOfDay serial, 
+        timeName varchar(10),
+        
+        constraint pk_timeOfDay primary key (timeOfDay)
+);
+
 CREATE TABLE person_goal
 (
         person_goal serial,
@@ -108,12 +124,14 @@ CREATE TABLE recipe_mealPlan
         recipe_mealPlan serial,
         mealPlan_id int,
         recipe_id int, 
-        dayOfWeek varchar(20),
-        timeOfDay varchar(20),
+        dayOfWeek int,
+        timeOfDay int,
         
         constraint pk_recipe_mealPlan primary key (recipe_mealPlan),
         constraint fk_mealPlan_id foreign key (mealPlan_id) references mealPlan (mealPlan_id), 
-        constraint fk_recipe_id foreign key (recipe_id) references recipe (recipe_id)
+        constraint fk_recipe_id foreign key (recipe_id) references recipe (recipe_id),
+        constraint fk_dayOfWeek foreign key (dayOfWeek) references dayOfWeek (dayOfWeek),
+        constraint fk_timeOfDay foreign key (timeOfDay) references timeOfDay (timeOfDay)
 );
 
 CREATE TABLE recipe_category 
@@ -151,23 +169,6 @@ CREATE TABLE ingredient_recipe
         constraint fk_recipe_id foreign key (recipe_id) references recipe (recipe_id), 
         constraint fk_measurementType_id foreign key (measurementType_id) references measurementType (measurementType_id)
 );
-
-CREATE TABLE dayOfWeek
-(
-        dayOfWeek serial, 
-        dayName varchar(10),
-        
-        constraint pk_dayOfWeek primary key (dayOfWeek)
-);
-
-CREATE TABLE timeOfDay
-(
-        timeOfDay serial, 
-        timeName varchar(10),
-        
-        constraint pk_timeOfDay primary key (timeOfDay)
-);
-
 
 
 END TRANSACTION;
