@@ -9,7 +9,7 @@ import java.util.List;
 public interface MealPlanDao {
 
     public List<MealPlan> getAllMealPlansByUserId(Long user_id);
-    public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan);
+    public List<Ingredient> getAllIngredientsByMealPlanId(Long mealPlan_id);
     public MealPlan addRecipeListToMealPlan(MealPlan mealPlan, List<Recipe> recipeList);
     void updateMealPlan(MealPlan mealPlan);
     public void deleteSingleRecipeFromMealPlan(Long mealPlan_id, Long recipe_id);

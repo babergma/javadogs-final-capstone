@@ -63,70 +63,80 @@
 
 		<!-- Divider -->
 		<c:if test="${LOGGED_USER == null}">
-		<hr class="sidebar-divider">
+			<hr class="sidebar-divider">
 
-		<!-- Heading -->
+			<!-- Heading -->
 
-		<div class="sidebar-heading">
-			Site Access
-		</div>
+			<div class="sidebar-heading">
+				Site Access
+			</div>
 
-		<!-- Nav Item - Pages Collapse Menu -->
+			<!-- Nav Item - Pages Collapse Menu -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-				<i class="fas fa-fw fa-folder"></i>
-				<span>Access Pages</span>
-			</a>
-			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Login Screens:</h6>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+					<i class="fas fa-fw fa-folder"></i>
+					<span>Access Pages</span>
+				</a>
+				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Login Screens:</h6>
 
 						<a class="collapse-item" href="${baseUrl}login">Login</a>
 
-					<a class="collapse-item" href="${baseUrl}register">Register</a>
+						<a class="collapse-item" href="${baseUrl}register">Register</a>
 
-					<%--<div class="collapse-divider"></div>
-					<h6 class="collapse-header">Other Pages:</h6>
-					<a class="collapse-item" href="${baseUrl}user/404">404 Page</a>
-					<a class="collapse-item" href="${baseUrl}error">Error Page</a>
-					<a class="collapse-item" href="${baseUrl}user/blank">Blank Page</a>--%>
+							<%--<div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Other Pages:</h6>
+                            <a class="collapse-item" href="${baseUrl}user/404">404 Page</a>
+                            <a class="collapse-item" href="${baseUrl}error">Error Page</a>
+                            <a class="collapse-item" href="${baseUrl}user/blank">Blank Page</a>--%>
+					</div>
 				</div>
-			</div>
-		</li>
+			</li>
 		</c:if>
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 
 		<!-- Heading -->
 		<c:if test="${LOGGED_USER != null}">
-		<div class="sidebar-heading">
+			<div class="sidebar-heading">
 
-			${LOGGED_USER}
-		</div>
+					${LOGGED_USER}
+			</div>
 
-		<!-- Nav Item - Tables -->
+			<!-- Nav Item - Tables -->
 
 
 
-		<%--<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/recipedetails">
-				<i class="fas fa-fw fa-bullseye"></i>
-				<span>Recipe Details</span></a>
-		</li>--%>
+			<%--<li class="nav-item">
+                <a class="nav-link" href="${baseUrl}user/recipedetails">
+                    <i class="fas fa-fw fa-bullseye"></i>
+                    <span>Recipe Details</span></a>
+            </li>--%>
 
 			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/mealplandetails?id=1">
+				<a class="nav-link" href="${baseUrl}user/addrecipetomealplan">
 					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
-					<span>Meal Plan Details</span></a>
+					<span>Add to Meal Plan</span></a>
 			</li>
 
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/addmealplanname">
+					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<span>Create New Meal Plan</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/viewmealplans">
+					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<span>My Meal Plans</span></a>
+			</li>
 
 			<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/viewrecipe">
-				<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
-				<span>My Recipes</span></a>
-		</li>
+				<a class="nav-link" href="${baseUrl}user/viewrecipe">
+					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<span>My Recipes</span></a>
+			</li>
 
 			<li class="nav-item">
 				<a class="nav-link" href="${baseUrl}user/viewallrecipes">
@@ -134,24 +144,24 @@
 					<span>All Recipes</span></a>
 			</li>
 
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/addrecipe">
-				<i class="fas fa-fw fa-carrot" style="color: #EE964B"></i>
-				<span>Add Recipe</span></a>
-		</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/addrecipe">
+					<i class="fas fa-fw fa-carrot" style="color: #EE964B"></i>
+					<span>Add Recipe</span></a>
+			</li>
 
 
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/grocerylist">
-				<i class="fas fa-fw fa-egg" style="color: #EE964B"></i>
-				<span>Grocery List</span></a>
-		</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/grocerylist">
+					<i class="fas fa-fw fa-egg" style="color: #EE964B"></i>
+					<span>Grocery List</span></a>
+			</li>
 
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/addgrocerylist">
-				<i class="fas fa-fw fa-cheese" style="color: #EE964B"></i>
-				<span>Add Ingredient</span></a>
-		</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/addgrocerylist">
+					<i class="fas fa-fw fa-cheese" style="color: #EE964B"></i>
+					<span>Add Ingredient</span></a>
+			</li>
 
 		</c:if>
 		<%--<li class="nav-item">

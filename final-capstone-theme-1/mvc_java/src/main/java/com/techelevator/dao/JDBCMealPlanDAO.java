@@ -59,10 +59,10 @@ public class JDBCMealPlanDAO implements MealPlanDao {
 
 
     @Override
-    public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan) {
+    public List<Ingredient> getAllIngredientsByMealPlanId(Long mealPlan_id) {
         String sql = "";
         List<Ingredient> ingredients = new ArrayList<>();
-        SqlRowSet planIngredients = jdbcTemplate.queryForRowSet(sql, mealPlan);
+        SqlRowSet planIngredients = jdbcTemplate.queryForRowSet(sql, mealPlan_id);
         while (planIngredients.next()) {
             Ingredient thisIngredient = new Ingredient();
             thisIngredient.setIngredientId(planIngredients.getInt("ingredient_id"));

@@ -52,13 +52,6 @@ public class ContentController {
     }
 
 
-    @RequestMapping(path = "/grocerylist", method = RequestMethod.GET)
-    public String displayGroceryList(HttpSession session) {
-////		List<Ingredient> ingredientList = ingredientDAO.searchForIngredientByUserID();
-//		session.setAttribute("ingredients", ingredientList);
-        return "grocerylist";
-    }
-
     @RequestMapping(path = "/addgrocerylist", method = RequestMethod.GET)
     public String displayAddGroceryList(HttpSession session) {
         List<Ingredient> ingredientList = ingredientDAO.getAllIngredients();
@@ -148,7 +141,7 @@ public class ContentController {
         ingredientList.add(ingredient);
         Recipe recipe = (Recipe) modelHolder.getAttribute("recipe");
         recipe.setIngredientList(ingredientList);
-        recipeDao.updateRecipeByRecipeId(recipe,ingredient);
+        recipeDao.updateRecipeByRecipeId(recipe, ingredient);
 
 
         return "redirect:editrecipe";
@@ -163,8 +156,8 @@ public class ContentController {
         if (result.hasErrors()) {
             return "error";
         }
-        if(delete != null){
-            recipeDao.deleteSingleIngredientFromRecipe(recipe.getRecipeId(),delete);
+        if (delete != null) {
+            recipeDao.deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
             return "dashboard";
         }
         User user = (User) session.getAttribute("LOGGED_USER");
@@ -243,20 +236,32 @@ public class ContentController {
         return "buttons";
     }
 
+
+    @RequestMapping(path = "/viewmealplans", method = RequestMethod.GET)
+    public String displayViewMealPlans(HttpSession session,
+                                       ModelMap modelMap) {
+        User user = (User) session.getAttribute("LOGGED_USER");
+        List<MealPlan> mealPlanList = mealPlanDao.getAllMealPlansByUserId(user.getId());
+        modelMap.put("mealPlanList", mealPlanList);
+        return "viewmealplans";
+    }
+
     @RequestMapping(path = "/mealplandetails", method = RequestMethod.GET)
     public String displayMealPLanDetails(@RequestParam Long id,
                                          ModelMap modelMap) {
         MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(id);
         modelMap.addAttribute("mealPlan", mealPlan);
-        for (Recipe recipe : mealPlan.getRecipeList()) {
-            if(recipe.getDayOfWeek()== DayOfWeek.MONDAY) {
-                System.out.println(recipe.getRecipeName());
-                System.out.println(recipe.getDayOfWeek());
-                System.out.println(recipe.getTimeOfDay());
-            }
-        }
         return "mealplandetails";
     }
+
+    @RequestMapping(path = "/grocerylist", method = RequestMethod.GET)
+    public String displayGroceryList(@RequestParam Long id,
+                                     ModelMap modelMap) {
+        List<Ingredient> ingredientList = mealPlanDao.getAllIngredientsByMealPlan(mealPlanDao.getMealPlanByMealPlanId(id));
+        modelMap.addAttribute("ingredientList", ingredientList);
+        return "grocerylist";
+    }
+
     @RequestMapping(path = "/cards", method = RequestMethod.GET)
     public String displayCards() {
 
@@ -276,7 +281,7 @@ public class ContentController {
     }
 
 
-    @RequestMapping(path="/viewallrecipes", method=RequestMethod.GET)
+    @RequestMapping(path = "/viewallrecipes", method = RequestMethod.GET)
     public String displayAllRecipes(ModelMap modelMap) {
 
         List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
@@ -285,22 +290,19 @@ public class ContentController {
 
     }
 
-    @RequestMapping(path="/randomrecipe", method=RequestMethod.GET)
-    public String showRandomPublicRecipe(HttpServletRequest request){
+    @RequestMapping(path = "/randomrecipe", method = RequestMethod.GET)
+    public String showRandomPublicRecipe(HttpServletRequest request) {
         List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
         Random rand = new Random();
         Recipe recipe = recipeList.get(rand.nextInt(recipeList.size()));
-        request.setAttribute("id",recipe.getRecipeId());
+        request.setAttribute("id", recipe.getRecipeId());
         return "forward:recipedetails";
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public String catchNull(){
+    public String catchNull() {
         return "error";
     }
-
-
-
 
 
 }
