@@ -19,7 +19,7 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="position-relative overflow-hidden p-3 p-xs-5 m-xs-3 text-center bg-light">
-                        <c:url var="placeholderImageUrl" value="/img/kibble.jpg" />
+                        <c:url var="placeholderImageUrl" value="/img/${recipe.pictureUrl}" />
                         <img src="${placeholderImageUrl}" />
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
                             <h3 class="m-0 font-weight-bold text-primary ">${recipe.recipeName}</h3>

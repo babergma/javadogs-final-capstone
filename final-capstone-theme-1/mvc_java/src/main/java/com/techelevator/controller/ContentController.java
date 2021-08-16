@@ -17,10 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -54,22 +52,22 @@ public class ContentController {
     }
 
 
-    @RequestMapping(path = "/addgrocerylist", method = RequestMethod.GET)
-    public String displayAddGroceryList(HttpSession session) {
+    @RequestMapping(path = "/addingredient", method = RequestMethod.GET)
+    public String displayAddIngredient(HttpSession session) {
         List<Ingredient> ingredientList = ingredientDAO.getAllIngredients();
         session.setAttribute("ingredients", ingredientList);
-        return "addgrocerylist";
+        return "addingredient";
     }
 
 
-    @RequestMapping(path = "/addgrocerylist", method = RequestMethod.POST)
-    public String processAddGroceryList(@RequestParam String input) {
+    @RequestMapping(path = "/addingredient", method = RequestMethod.POST)
+    public String processAddIngredient(@RequestParam String input) {
 
         Ingredient ingredient = new Ingredient();
         ingredient.setIngredientName(input);
         ingredientDAO.saveIngredient(ingredient);
 
-        return "redirect:addgrocerylist";
+        return "redirect:/user/addingredient";
     }
 
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
@@ -160,7 +158,7 @@ public class ContentController {
         }
         if (delete != null) {
             recipeDao.deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
-            return "dashboard";
+            return "redirect:/user/viewrecipe";
         }
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
@@ -268,7 +266,7 @@ public class ContentController {
 
         mealPlanDao.addRecipeToMealPlan(mealPlan, recipe);
         User user = (User) session.getAttribute("LOGGED_USER");
-        return "index";
+        return "redirect:/user/viewmealplans";
     }
 
 
@@ -308,7 +306,7 @@ public class ContentController {
         if (delete != null) {
             mealPlanDao.deleteSingleRecipeFromMealPlan(mealPlanId, delete);
 //                    deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
-            return "dashboard";
+            return "redirect:/user/viewmealplans";
         }
         return "error";
     }
@@ -342,7 +340,7 @@ public class ContentController {
         mealPlan = mealPlanDao.saveMealPlan(mealPlan);
         mealPlanDao.addAuthorToMealPlan(mealPlan, user.getId());
 
-        return "viewmealplans";
+        return "redirect:/user/viewmealplans";
     }
 
     @RequestMapping(path = "/cards", method = RequestMethod.GET)
@@ -374,11 +372,13 @@ public class ContentController {
     }
 
     @RequestMapping(path = "/randomrecipe", method = RequestMethod.GET)
-    public String showRandomPublicRecipe(HttpServletRequest request) {
+    public String showRandomPublicRecipe(HttpServletRequest request,
+                                         RedirectAttributes redirectAttributes) {
         List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
         Random rand = new Random();
         Recipe recipe = recipeList.get(rand.nextInt(recipeList.size()));
-        request.setAttribute("id", recipe.getRecipeId());
+        System.out.println(recipe.getRecipeId());
+        redirectAttributes.addFlashAttribute("id", recipe.getRecipeId());
         return "forward:recipedetails";
     }
 

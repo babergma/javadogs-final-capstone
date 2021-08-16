@@ -17,9 +17,8 @@
 
 
 <!-- Begin Page Content -->
-<c:url var="formActionUrl" value="/user/addgrocerylist"/>
-<c:url var="colorURL" value="/user/addgrocerylist"/>
-<form action="${colorURL}" method="POST">
+<c:url var="formActionUrl" value="/user/addingredient"/>
+<form action="${formActionUrl}" method="POST">
     <div class="container-fluid">
         <div class="col-lg-12">
             <div class="container">
@@ -55,44 +54,7 @@
                             </div>
                             <!-- row -->
 
-                            <div class="row">
-                                <div class="col-lg-12 col-xs-12">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                                        <c:set var="counter" value="0"/>
-                                        <c:forEach var="employee" items="${employees}">
-                                            <c:set var="counter" value="${counter + 1}"/>
-                                            <div class="panel panel-default" id="collapse${counter}_container">
-                                                <div class="panel-heading" role="tab" id="heading${counter}">
-                                                    <h4 class="panel-title">
-                                                        <a role="button"
-                                                           data-toggle="collapse"
-                                                           data-parent="#accordion"
-                                                           href="#collapse${counter}"
-                                                           aria-expanded="true"
-                                                           aria-controls="collapse${counter}">
-                                                            <i class="fa fa-paw fa-fw"
-                                                               aria-hidden="true"></i>${employee.firstName} ${employee.lastName}
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse${counter}" class="panel-collapse collapse in"
-                                                     role="tabpanel"
-                                                     aria-labelledby="heading${counter}">
-                                                    <div class="panel-body">
-                                                        <ul>
-                                                            <li>${employee.position}</li>
-                                                            <li>${employee.office}</li>
-                                                            <li>${employee.startDate}</li>
-                                                            <li>${employee.salary}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- row -->
 
                         </div>
@@ -112,7 +74,6 @@
 
                 <thead>
                 <tr>
-                    <th scope="col">Add</th>
                     <th scope="col">Item Name</th>
 
 
@@ -122,16 +83,9 @@
                 <tbody>
                 <c:forEach items="${ingredients}" var="ingredient">
                     <tr>
-                        <td scope="row">
-                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                        </td>
+
 
                         <td> ${ingredient.ingredientName}</td>
-                        <td>
-
-                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

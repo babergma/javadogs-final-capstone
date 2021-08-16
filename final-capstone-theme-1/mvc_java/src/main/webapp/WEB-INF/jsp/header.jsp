@@ -117,18 +117,18 @@
 
 			<li class="nav-item">
 				<a class="nav-link" href="${baseUrl}user/addrecipetomealplan">
-					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<i class="fas fa-fw fa-apple-alt" style="color: #EE964B"></i>
 					<span>Add to Meal Plan</span></a>
 			</li>
 
 			<li class="nav-item">
 				<a class="nav-link" href="${baseUrl}user/addmealplanname">
-					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<i class="fas fa-fw fa-bacon" style="color: #EE964B"></i>
 					<span>Create New Meal Plan</span></a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${baseUrl}user/viewmealplans">
-					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<i class="fas fa-fw fa-fish" style="color: #EE964B"></i>
 					<span>My Meal Plans</span></a>
 			</li>
 
@@ -152,13 +152,7 @@
 
 
 			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/grocerylist">
-					<i class="fas fa-fw fa-egg" style="color: #EE964B"></i>
-					<span>Grocery List</span></a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/addgrocerylist">
+				<a class="nav-link" href="${baseUrl}user/addingredient">
 					<i class="fas fa-fw fa-cheese" style="color: #EE964B"></i>
 					<span>Add Ingredient</span></a>
 			</li>

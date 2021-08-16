@@ -12,7 +12,7 @@ public class Recipe {
     private int cookTime;
     private int servingSize;
     private int calories;
-    private String pictureUrl = "";
+    private String pictureUrl = "placeholder.jpg";
     private String cookingInstruction;
     private boolean visible;
     private List<Ingredient> ingredientList;
