@@ -36,23 +36,23 @@ VALUES ('Vegitarian'),
         ('Kosher'),
         ('Pescatarian');
         
-INSERT INTO recipe(recipename, cooktime, servingsize, calories, cookinginstruction, visible, author_id)
+INSERT INTO recipe(recipename, cooktime, servingsize, calories, cookinginstruction, visible, author_id, pictureurl)
 VALUES ('Vegitarian Spaghetti', 30, 4, 350, 'Boil lightly salted water. Once water is at a boil place noodles in the pot and apply gentle pressure until all noodles are submerged. 
                 Once noodles are tender (you can test this by tossing a noodle at the wall. If the noodle sticks, they are ready) drain the water from the pot and lower the stove 
-                 temperature to low. Add the pasta sauce of your choice and stir in. Serve with freshly toasted bread.', true, 1),
+                 temperature to low. Add the pasta sauce of your choice and stir in. Serve with freshly toasted bread.', true, 1, 'spaghetti.jpg'),
         ('Spicy Green Tomato Salsa', 30, 40, 27, 'Combine green tomatoes, onions, jalapeno peppers, serrano peppers, and red bell pepper in a large bowl.
                 Mix cilantro, sugar, garlic, oregano, and cayenne pepper together in a small bowl. Fill a blender with about 2 cups tomato mixture, 1 teaspoon lime juice, 
                 and 1/4 of the spice mixture; blend to desired consistency and pour into a large bowl. Repeat blending with remaining tomato mixture, lime juice, and spice mixture, 
-                working in batches, until all ingredients are blended. Stir vinegar into salsa.', true, 1),
+                working in batches, until all ingredients are blended. Stir vinegar into salsa.', true, 1, 'greentomatosalsa.jpg'),
         ('Vanilla Almond Spiced French Toast', 20, 4, 337, 'Mix whole milk and brown sugar in a large bowl. Beat eggs, vanilla extract, almond extract, cinnamon, nutmeg, and allspice 
                 together in a separate bowl until the eggs are well beaten; add to the milk mixture and stir to dissolve the brown sugar. Heat a non-stick skillet or griddle over medium-low heat.
                 Set one slice of Texas toast into the milk mixture; let soak until moistened, about 10 seconds per side. Cook the dipped toast in the preheated skillet until bottom is golden brown, 
-                3 to 5 minutes; flip toast and continue to cook until the other side is browned, 3 to 5 minutes more. Repeat dipping and cooking with remaining bread slices.', true, 1), 
+                3 to 5 minutes; flip toast and continue to cook until the other side is browned, 3 to 5 minutes more. Repeat dipping and cooking with remaining bread slices.', true, 1, 'frenchtoast.jpg'), 
         ('Carrot Mango Bread', 50, 10, 287, 'Preheat oven to 350 degrees and grease a loaf pan with baking spray. Combine the flour, baking powder, baking soda, salt and spices in a large bowl.
                 Whisk together the sugar, eggs, coconut oil, V8 vegetable & fruit blend and vanilla in a medium bowl. Add the wet ingredients to the dry and stir until combined.
                 Fold in the carrots, mango and pecans until well combined. Transfer batter to the loaf pan and bake for about 40 minutes until toothpick inserted in the middle comes out clean.
-                Remove from oven and let rest until cool enough to touch. Gently remove bread from the pan and let cool on a rack.', true, 1),
-        ('Kibble', 2, 1, 1000, 'Fill dinner bowl to the brim with kibble. Patiently wait until human sets it on the ground and says: EAT!', false, 2);
+                Remove from oven and let rest until cool enough to touch. Gently remove bread from the pan and let cool on a rack.', true, 1, 'mango-bread.jpg'),
+        ('Kibble', 2, 1, 1000, 'Fill dinner bowl to the brim with kibble. Patiently wait until human sets it on the ground and says: EAT!', false, 2, 'kibble.jpg');
 
 
 INSERT INTO ingredient(ingredientname)
