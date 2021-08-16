@@ -16,4 +16,5 @@ public interface MealPlanDao {
     public void updateMealPlanByRecipe(MealPlan mealPlan, Recipe recipe);
     public MealPlan getMealPlanByMealPlanId(Long id);
     public void addRecipeListToMealPLan(MealPlan mealPlan, List<Recipe> recipeList);
+    public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe);
 }

@@ -32,37 +32,37 @@
 
                 </div>
                 <div class="card-body">
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="submit" class="btn btn-warning ">
-        <c:url var = "editURL" value="/user/editrecipe">
-            <c:param name="id" value="${recipe.recipeId}"/>
-        </c:url>
-        <a href="${editURL}" style="color: white;">
-        Edit <i class="fas fa-edit" style="color: white;"></i></a></button>
-</div>
-                        <h4>Ingredients</h4>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-warning ">
+                            <c:url var = "editURL" value="/user/editrecipe">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                            <a href="${editURL}" style="color: white;">
+                                Edit <i class="fas fa-edit" style="color: white;"></i></a></button>
+                    </div>
+                    <h4>Ingredients</h4>
 
-                        <div class="form-row">
+                    <div class="form-row">
                         <c:forEach items="${recipe.ingredientList}" var="ingredient">
                             <div class="form-group col-md-12 alert alert-info" role="alert">
                                 <div class="container">
                                     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                                            <ul id="bullets">
-                                                <li>${ingredient.measurementAmount} ${ingredient.measurement.abbreviation} ${ingredient.ingredientName}</li>
-                                            </ul>
+                                    <ul id="bullets">
+                                        <li>${ingredient.measurementAmount} ${ingredient.measurement.abbreviation} ${ingredient.ingredientName}</li>
+                                    </ul>
                                 </div>
                             </div>
                         </c:forEach>
-                            <div class="form-group col-md-4">
-                                 Serving size: ${recipe.servingSize}
-                            </div>
-                            <div class="form-group col-md-4">
-                                Calories: ${recipe.calories}
-                            </div>
-                            <div class="form-group col-md-4">
-                                Cook Time: ${recipe.cookTime} minutes
-                            </div>
-                            <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
+                            Serving size: ${recipe.servingSize}
+                        </div>
+                        <div class="form-group col-md-4">
+                            Calories: ${recipe.calories}
+                        </div>
+                        <div class="form-group col-md-4">
+                            Cook Time: ${recipe.cookTime} minutes
+                        </div>
+                        <div class="form-group col-md-12">
 
 
                             <h4>Instructions</h4>
@@ -71,9 +71,9 @@
                                 <div class="form-group col-md-12 alert alert-info" role="alert">
                                     <div class="container">
                                         <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                                      <p>
-                                         ${recipe.cookingInstruction}
-                                      </p>
+                                        <p>
+                                            ${recipe.cookingInstruction}
+                                        </p>
 
                                     </div>
                                 </div>
@@ -81,15 +81,15 @@
                                         class="fas fa-plus"></i></button>
                             </div>
                         </div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
 
     </div>
-
-</div>
-
-</div>
-<!-- /.container-fluid -->
-<!-- End of Page Content -->
+    <!-- /.container-fluid -->
+    <!-- End of Page Content -->
 </div>
 <c:import url="/WEB-INF/jsp/footer.jsp"/>

@@ -89,10 +89,11 @@ public class JDBCMealPlanDAO implements MealPlanDao {
 
     //addRecipeToMealPlan
     @Transactional
+    @Override
     public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe) {
         String sql = "INSERT INTO recipe_mealplan(mealplan_id, recipe_id, dayofweek, timeofday) " +
                 " VALUES (?,?,?,?)";
-        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), recipe.getRecipeId(), recipe.getDayOfWeek(), recipe.getTimeOfDay());
+        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), recipe.getRecipeId(), recipe.getDayOfWeek().getValue(), recipe.getTimeOfDay().getTimeOfDayId());
     }
 
     @Transactional

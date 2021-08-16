@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.IngredientDAO;
 import com.techelevator.dao.MealPlanDao;
 import com.techelevator.dao.RecipeDao;
+import com.techelevator.dao.TimeOfDay;
 import com.techelevator.entity.*;
 import com.techelevator.util.EmployeeDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -149,7 +151,7 @@ public class ContentController {
     @RequestMapping(path = "/submitEditRecipe", method = RequestMethod.POST)
     public String submitEditRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
                                    BindingResult result,
-                                   ModelMap modelHolder,
+                                   ModelMap modelMap,
                                    HttpSession session, SessionStatus status,
                                    @RequestParam(required = false) Long delete) {
         if (result.hasErrors()) {
@@ -161,7 +163,7 @@ public class ContentController {
         }
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
-        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
+        List<Ingredient> ingredientList = (List<Ingredient>) modelMap.getAttribute("ingredientList");
         recipe.setIngredientList(ingredientList);
         recipeDao.updateRecipe(recipe);
         return "viewrecipe";
@@ -171,17 +173,17 @@ public class ContentController {
     @RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
     public String submitRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
                                BindingResult result,
-                               ModelMap modelHolder,
+                               ModelMap modelMap,
                                HttpSession session, SessionStatus status) {
         if (result.hasErrors()) {
             return "addrecipe";
         }
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
-        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("newIngredientList");
+        List<Ingredient> ingredientList = (List<Ingredient>) modelMap.getAttribute("newIngredientList");
         recipeDao.addIngredientListToRecipe(recipe, ingredientList);
         ingredientList = new ArrayList<>();
-        modelHolder.put("newIngredientList", ingredientList);
+        modelMap.put("newIngredientList", ingredientList);
         return "dashboard";
     }
 
@@ -233,6 +235,37 @@ public class ContentController {
     public String displayButtons() {
 
         return "buttons";
+    }
+
+
+    @RequestMapping(path = "/addrecipetomealplan", method = RequestMethod.GET)
+    public String displayAddRecipeToMealPlan(@Valid @ModelAttribute("newRecipe") Recipe recipe,
+                                             BindingResult result,
+                                             HttpSession session,
+                                             ModelMap modelMap) {
+        User user = (User) session.getAttribute("LOGGED_USER");
+        modelMap.put("recipeList", recipeDao.getAllRecipesByUserId(user.getId()));
+        modelMap.put("mealPlanList", mealPlanDao.getAllMealPlansByUserId(user.getId()));
+        modelMap.put("timeOfdays", TimeOfDay.getAllTimeOfDay());
+        modelMap.put("daysOfWeek", DayOfWeek.values());
+        return "addrecipetomealplan";
+    }
+
+
+    @RequestMapping(path = "/addrecipetomealplan", method = RequestMethod.POST)
+    public String displayAddRecipeToMealPlan(HttpSession session,
+                                             ModelMap modelMap,
+                                             @RequestParam Long mealPlanId,
+                                             @RequestParam int dayOfWeekId,
+                                             @RequestParam Long recipeId,
+                                             @RequestParam TimeOfDay timeOfDay) {
+        MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(mealPlanId);
+        Recipe recipe = recipeDao.getRecipeByRecipeId(recipeId);
+        recipe.setDayOfWeek(DayOfWeek.of(dayOfWeekId));
+        recipe.setTimeOfDay(timeOfDay);
+        mealPlanDao.addRecipeToMealPlan(mealPlan, recipe);
+        User user = (User) session.getAttribute("LOGGED_USER");
+        return "index";
     }
 
 
