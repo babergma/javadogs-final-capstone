@@ -264,7 +264,7 @@ public class ContentController {
         Recipe recipe = recipeDao.getRecipeByRecipeId(recipeId);
         recipe.setDayOfWeek(DayOfWeek.of(dayOfWeekId));
         recipe.setTimeOfDay(timeOfDay);
-        System.out.println("Post Method in the controler:" + mealPlan.getMealPlanId());
+
         mealPlanDao.addRecipeToMealPlan(mealPlan, recipe);
         User user = (User) session.getAttribute("LOGGED_USER");
         return "index";

@@ -35,101 +35,101 @@
         </div>
 
         <div class="card-body">
-<c:url var="formActionUrl" value="/user/editRecipeIngredients"/>
+            <c:url var="formActionUrl" value="/user/editRecipeIngredients"/>
             <form:form modelAttribute="ingredient" action="${formActionUrl}" method="POST">
-                <h4>Ingredients</h4>
-                <div class="form-row">
+            <h4>Ingredients</h4>
+            <div class="form-row">
 
-                    <div class="form-group col-lg " >
+                <div class="form-group col-lg " >
 
 
-                        <label for="ingredientName">Ingredient Name</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
-                                    id="ingredientName"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <form:select path="ingredientName" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <c:forEach items="${displayIngredients}" var="displayIngredient">
-                                            <form:option
-                                                    value="${displayIngredient.ingredientName}" cssStyle="background-color: #858796">
-                                                <td>
+                    <label for="ingredientName">Ingredient Name</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
+                                id="ingredientName"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <form:select path="ingredientName" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <c:forEach items="${displayIngredients}" var="displayIngredient">
+                                        <form:option
+                                                value="${displayIngredient.ingredientName}" cssStyle="background-color: #858796">
+                                            <td>
                                                 <button class="btn btn-danger me-md-2" type="button"><i class="fas fa-trash-alt"></i></button>
-                                                </td>${displayIngredient.ingredientName}</form:option>
-                                        </c:forEach>
-                                    </div>
-                                </form:select>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-lg">
-                        <label for="measurementAmount">Quantity</label>
-                        <form:input type="number" class="form-control" path="measurementAmount"
-                                    placeholder="1"/>
-                    </div>
-
-                    <div class="form-group col-lg" >
-                        <label for="measurementType">Measurement Type</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
-                                    id="measurementType"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <form:select path="measurement" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <form:options items="${Measurements.values()}" itemLabel="abbreviation"
-                                              itemValue="name" cssStyle="background-color: #858796"/>
-                            </div>
+                                            </td>${displayIngredient.ingredientName}</form:option>
+                                    </c:forEach>
+                                </div>
                             </form:select>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-lg-3">
-                        <label for="add"><p> </p></label>
-                        <button type="submit" class="btn btn-block" style="background-color: #a5cfab; color:white" id="add">Add to Recipe <i
-                                class="fas fa-plus"></i></button>
-                    </div>
-                    </form:form>
-                    <div class="form-group col-lg-12">
-                        Ingredient not there?
-                        <button type="button" class="btn btn-outline-danger" id="newIngredient">Add new
-                            ingredient</button>
-                    </div>
-                    <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
-                    <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
-                    <div class="form-group col-md-12 alert alert-info" role="alert">
-                        <div class="container">
-
-                            <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                            <table class="table caption-top">
-
-                                <thead>
-                                <tr>
-                                    <th scope="col"><p></p></th>
-                                    <th scope="col">Ingredient Name</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Measurement Type</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${ingredientList}" var="currentIngredient">
-                                    <tr>
-                                        <td>
-                                            <a href="" class="btn btn-danger btn-circle btn-sm">
-                                                <button type="submit" name="delete" value="${currentIngredient.ingredientId}"><i class="fas fa-trash"></i></button>
-                                            </a>
-                                        </td>
-                                        <td>${currentIngredient.ingredientName}</td>
-                                        <td>${currentIngredient.measurementAmount}</td>
-                                        <td>${currentIngredient.measurement.abbreviation}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
+                        </button>
                     </div>
                 </div>
+
+                <div class="form-group col-lg">
+                    <label for="measurementAmount">Quantity</label>
+                    <form:input type="number" class="form-control" path="measurementAmount"
+                                placeholder="1"/>
+                </div>
+
+                <div class="form-group col-lg" >
+                    <label for="measurementType">Measurement Type</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-block" type="button"
+                                id="measurementType"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <form:select path="measurement" cssStyle="background-color: transparent;	color: #fff; border-color: #fff">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form:options items="${Measurements.values()}" itemLabel="abbreviation"
+                                          itemValue="name" cssStyle="background-color: #858796"/>
+                        </div>
+                        </form:select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label for="add"><p> </p></label>
+                    <button type="submit" class="btn btn-block" style="background-color: #a5cfab; color:white" id="add">Add to Recipe <i
+                            class="fas fa-plus"></i></button>
+                </div>
+                </form:form>
+                <div class="form-group col-lg-12">
+                    Ingredient not there?
+                    <button type="button" class="btn btn-outline-danger" id="newIngredient">Add new
+                        ingredient</button>
+                </div>
+                <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
+                <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
+                <div class="form-group col-md-12 alert alert-info" role="alert">
+                    <div class="container">
+
+                        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                        <table class="table caption-top">
+
+                            <thead>
+                            <tr>
+                                <th scope="col"><p></p></th>
+                                <th scope="col">Ingredient Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Measurement Type</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${ingredientList}" var="currentIngredient">
+                                <tr>
+                                    <td>
+                                        <a href="" class="btn btn-danger btn-circle btn-sm">
+                                            <button type="submit" name="delete" value="${currentIngredient.ingredientId}"><i class="fas fa-trash"></i></button>
+                                        </a>
+                                    </td>
+                                    <td>${currentIngredient.ingredientName}</td>
+                                    <td>${currentIngredient.measurementAmount}</td>
+                                    <td>${currentIngredient.measurement.abbreviation}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group">
                 <form:label path="recipeName" value="Name"/>

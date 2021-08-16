@@ -98,7 +98,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
     @Transactional
     @Override
     public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe) {
-        System.out.println("In the JDBC" + mealPlan.getMealPlanId());
+
         String sql = "INSERT INTO recipe_mealplan(mealplan_id, recipe_id, dayofweek, timeofday) " +
                 " VALUES (?,?,?,?)";
         jdbcTemplate.update(sql, mealPlan.getMealPlanId(), recipe.getRecipeId(), recipe.getDayOfWeek().getValue(), recipe.getTimeOfDay().getTimeOfDayId());
@@ -198,7 +198,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
     public MealPlan mapResultsToMealPlan(SqlRowSet results) {
         MealPlan mealPlan = new MealPlan();
         mealPlan.setMealPlanId(results.getLong("mealplan_id"));
-        System.out.println("In the maping show me the id" + mealPlan.getMealPlanId());
+
         mealPlan.setMealPlanName(results.getString("mealplanname"));
         return mealPlan;
     }
