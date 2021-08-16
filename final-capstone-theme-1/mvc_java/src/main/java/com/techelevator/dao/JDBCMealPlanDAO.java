@@ -198,7 +198,6 @@ public class JDBCMealPlanDAO implements MealPlanDao {
     public MealPlan mapResultsToMealPlan(SqlRowSet results) {
         MealPlan mealPlan = new MealPlan();
         mealPlan.setMealPlanId(results.getLong("mealplan_id"));
-
         mealPlan.setMealPlanName(results.getString("mealplanname"));
         return mealPlan;
     }

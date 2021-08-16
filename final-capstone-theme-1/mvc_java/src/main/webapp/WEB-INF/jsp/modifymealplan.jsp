@@ -13,7 +13,7 @@
       <div class="position-relative overflow-hidden p-3 p-xs-5 m-xs-3 text-center bg-light">
         <div class="col-md-5 p-xs-5 mx-auto my-5">
           <%--                        <h3 class="m-0 font-weight-bold text-primary ">${mealplan.mealplanname}</h3>--%>
-          <h3 class="m-0 font-weight-bold text-primary ">Edit Meal Plan (*Name of Meal Plan*)</h3>
+          <h3 class="m-0 font-weight-bold text-primary ">${mealPlan.mealPlanName}</h3>
           <p>
             <c:url var="addRecipetoMealPlan" value="/user/addrecipetomealplan"/>
             <a href="${addRecipetoMealPlan}" class="btn btn-primary my-2">Add recipe to meal plan</a>
@@ -36,12 +36,27 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+<c:url var="formActionUrl" value="/user/submitDeleteRecipeFromMealPlan"/>
+<form action="${formActionUrl}" method="POST">
+
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==1  && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
+
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
+
+
 
       </tbody>
     </table>
@@ -49,26 +64,44 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Burger</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==1  && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Salad</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==1  && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <hr>
@@ -80,39 +113,66 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr class="">
-        <td ><a href="" class="btn btn-sm col-auto">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==2  && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Lunch</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Burger</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==2  && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Salad</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==2  && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -125,39 +185,66 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==3  && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Lunch</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Burger</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==3  && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Salad</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==3 && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -170,13 +257,22 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==4  && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -184,13 +280,22 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Burger</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==4 && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -198,13 +303,22 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Salad</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==4  && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -217,38 +331,66 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Lunch</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4></h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4></h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
+
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -261,13 +403,22 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==6  && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     </table>
@@ -275,25 +426,44 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4></h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==6  && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4></h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==6  && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
+
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
 
@@ -306,12 +476,22 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4>Pancake</h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==7 && recipe.timeOfDay.timeOfDayId==1}">
+          <td>
+
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     </table>
@@ -319,28 +499,48 @@
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4></h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==7  && recipe.timeOfDay.timeOfDayId==2}">
+          <td>
 
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
       <tbody>
-      <tr>
-        <td><a href="" class="btn btn-sm align-baseline">
-          <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
-        </a></td>
-        <td><h4></h4></td>
-      </tr>
+      <c:forEach items="${mealPlan.recipeList}" var="recipe">
+        <tr>
+        <c:if test="${recipe.dayOfWeek.getValue()==7  && recipe.timeOfDay.timeOfDayId==3}">
+          <td>
+
+
+
+
+
+            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+          </td>
+          <td><h4>${recipe.recipeName}</h4></td>
+          </tr>
+
+        </c:if>
+      </c:forEach>
       </tbody>
     </table>
-
+      <input hidden name="mealPlanId" value="${mealPlan.mealPlanId}">
+    </form>
   </div>
 </div>
 </div>

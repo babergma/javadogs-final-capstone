@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -288,14 +289,33 @@ public class ContentController {
         return "mealplandetails";
     }
 
-
     @RequestMapping(path = "/modifymealplan", method = RequestMethod.GET)
     public String displayModifyMealPlan(@RequestParam Long id,
-                                         ModelMap modelMap) {
+                                        ModelMap modelMap,
+                                        RedirectAttributes redirectAttributes) {
         MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(id);
-        modelMap.addAttribute("mealPlan", mealPlan);
+        redirectAttributes.addFlashAttribute("mealPlan", mealPlan);
+        modelMap.addAttribute("mealPlan",mealPlan);
         return "modifymealplan";
     }
+
+    @RequestMapping(path = "/submitDeleteRecipeFromMealPlan", method = RequestMethod.POST)
+    public String submitEditRecipe(
+                                   ModelMap modelMap,
+                                   HttpSession session, SessionStatus status,
+                                   @RequestParam(required = false) Long delete,
+                                   @RequestParam Long mealPlanId) {
+        if (delete != null) {
+            mealPlanDao.deleteSingleRecipeFromMealPlan(mealPlanId, delete);
+//                    deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
+            return "dashboard";
+        }
+        return "error";
+    }
+
+
+
+
 
 
     @RequestMapping(path = "/grocerylist", method = RequestMethod.GET)
