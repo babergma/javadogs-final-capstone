@@ -110,14 +110,16 @@
             </thead>
             <tbody>
             <tbody>
+        <c:forEach items="${ingredientList}" var="ingredient">
             <tr>
                 <td >
                     <a href="#" class="btn btn-danger btn-circle btn-sm">
                         <i class="fas fa-trash"></i>
                     </a>
                 </td>
-                <td>Carrot</td>
-                <td>${LOGGED_USER.birthday}</td>
+                <td>${ingredient.ingredientName}</td>
+<%--                <td>${ingredient.measurementAmount}</td>--%>
+<%--                <td>${ingredient.measurement.abbreviation}</td>--%>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -131,7 +133,7 @@
                     </div>
                 </td>
             </tr>
-
+        </c:forEach>
             </tbody>
         </table>
 

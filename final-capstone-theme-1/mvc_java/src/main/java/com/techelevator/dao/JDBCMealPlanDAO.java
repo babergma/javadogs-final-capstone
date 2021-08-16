@@ -55,14 +55,20 @@ public class JDBCMealPlanDAO implements MealPlanDao {
         return mealPlans;
     }
 
-    //Tyshaun made getRecipesByMealPlanId
+
 
 
     @Override
-    public List<Ingredient> getAllIngredientsByMealPlanId(Long mealPlan_id) {
-        String sql = "";
+    public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan) {
+        String sql = "SELECT * " +
+                " FROM ingredient i" +
+                " JOIN ingredient_recipe ir on i.ingredient_id = ir.ingredient_id" +
+                " JOIN recipe_mealplan rm on ir.recipe_id = rm.recipe_id" +
+                " JOIN measurementtype m on ir.measurementtype_id = m.measurementtype_id " +
+                " JOIN mealplan m2 on rm.mealplan_id = m2.mealplan_id " +
+                " WHERE m2.mealplan_id = ?";
         List<Ingredient> ingredients = new ArrayList<>();
-        SqlRowSet planIngredients = jdbcTemplate.queryForRowSet(sql, mealPlan_id);
+        SqlRowSet planIngredients = jdbcTemplate.queryForRowSet(sql, mealPlan.getMealPlanId());
         while (planIngredients.next()) {
             Ingredient thisIngredient = new Ingredient();
             thisIngredient.setIngredientId(planIngredients.getInt("ingredient_id"));
@@ -75,6 +81,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
                     break;
                 }
             }
+
             ingredients.add(thisIngredient);
         }
         return ingredients;
@@ -167,7 +174,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
             recipe.setDayOfWeek(DayOfWeek.of(results.getInt("dayofweek")));
             List<TimeOfDay> timeOfDayList = TimeOfDay.getAllTimeOfDay();
             for (TimeOfDay timeOfDay : timeOfDayList) {
-                if(timeOfDay.name().equalsIgnoreCase(results.getString("timename"))){
+                if (timeOfDay.name().equalsIgnoreCase(results.getString("timename"))) {
                     recipe.setTimeOfDay(timeOfDay);
                     break;
                 }

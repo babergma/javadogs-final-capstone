@@ -16,9 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -257,7 +256,8 @@ public class ContentController {
     @RequestMapping(path = "/grocerylist", method = RequestMethod.GET)
     public String displayGroceryList(@RequestParam Long id,
                                      ModelMap modelMap) {
-        List<Ingredient> ingredientList = mealPlanDao.getAllIngredientsByMealPlan(mealPlanDao.getMealPlanByMealPlanId(id));
+        List<Ingredient> ingredientListTemp = mealPlanDao.getAllIngredientsByMealPlan(mealPlanDao.getMealPlanByMealPlanId(id));
+        List<Ingredient> ingredientList = new ArrayList(new HashSet(ingredientListTemp));
         modelMap.addAttribute("ingredientList", ingredientList);
         return "grocerylist";
     }
