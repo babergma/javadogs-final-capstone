@@ -1,6 +1,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link href="../css/viewrecipe.css" rel="stylesheet" type="text/css">
+<link href="../css/mealplandetails.css" rel="stylesheet" type="text/css">
 <!-- Bootstrap core CSS -->
 <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
@@ -11,45 +11,321 @@
 <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">My Recipes</h1>
-            <p class="lead text-muted">Look at all of your saved recipes</p>
+            <h1 class="jumbotron-heading">${mealPlan.mealPlanName}</h1>
+            <p class="lead text-muted">Goal: Health!</p>
             <p>
                 <c:url var="addRecipe" value="/user/addrecipe"/>
-                <a href="${addRecipe}" class="btn btn-primary my-2">Add new recipe</a>
+                <a href="${addRecipe}" class="btn btn-primary my-2">Edit Meal Plan</a>
+                <a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print<i class="fas fa-edit" style="color: white;"></i></button></a>
+
             </p>
         </div>
     </section>
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <c:forEach items="${recipeList}" var="currentRecipe">
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <c:url var="placeholderImageUrl" value="/img/kibble.jpg" />
-                            <img src="${placeholderImageUrl}" />
-                            <div class="card-body">
-                                <h3 class="card-text">${currentRecipe.recipeName}</h3>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                                            <c:url var = "detailsURL" value="/user/recipedetails">
-                                                <c:param name="id" value="${currentRecipe.recipeId}"/>
-                                            </c:url>
-                                            <a href="${detailsURL}">View</a></button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">        <c:url var = "editURL" value="/user/editrecipe">
-                                            <c:param name="id" value="${currentRecipe.recipeId}"/>
-                                        </c:url>
-                                            <a href="${editURL}">Edit</a></button>
-                                    </div>
-                                    <small class="text-muted">${currentRecipe.cookTime}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </div>
-    </div>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope = "col"> </th>
+            <th scope = "col">Breakfast</th>
+            <th scope = "col">Lunch</th>
+            <th scope = "col">Dinner</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+            <th scope = "row">Monday</th>
+            <td id = "Monday Breakfast">
+
+        <ul>
+            <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                    <c:if test="${recipe.dayOfWeek.getValue()==1  && recipe.timeOfDay.timeOfDayId==1}">
+                    <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                        <c:param name="id" value="${recipe.recipeId}"/>
+                    </c:url>
+                        <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                    </c:if>
+            </c:forEach>
+                </ul>
+
+            </td>
+            <td id = "Monday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==1  && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Monday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==1  && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th scope = "row">Tuesday</th>
+            <td id = "Tuesday Breakfast">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==2  && recipe.timeOfDay.timeOfDayId==1}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Tuesday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==2 && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+
+            <td id = "Tuesday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==2  && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope = "row">Wednesday</th>
+            <td id = "Wednesday Breakfast">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==3  && recipe.timeOfDay.timeOfDayId==1}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Wednesday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==3  && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Wednesday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==3  && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope = "row">Thursday</th>
+            <td id = "Thursday Breakfast">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==4  && recipe.timeOfDay.timeOfDayId==1}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+
+                </ul>
+            </td>
+            <td id = "Thursday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==4  && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Thursday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==4 && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+
+        </tr>
+
+        <tr>
+            <th scope = "row">Friday</th>
+            <td id = "Friday Breakfast">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==1}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Friday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Friday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope = "row">Saturday</th>
+            <td id = "Saturday Breakfast">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==6  && recipe.timeOfDay.timeOfDayId==1}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Saturday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==6 && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Saturday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==6  && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope = "row">Sunday</th>
+            <td id = "Sunday Breakfast">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==7  && recipe.timeOfDay.timeOfDayId==1}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Sunday Lunch">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==7  && recipe.timeOfDay.timeOfDayId==2}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+            <td id = "Sunday Dinner">
+                <ul>
+                    <c:forEach items="${mealPlan.recipeList}" var="recipe">
+                        <c:if test="${recipe.dayOfWeek.getValue()==7 && recipe.timeOfDay.timeOfDayId==3}">
+                            <li> <c:url var = "detailsURL" value="/user/recipedetails">
+                                <c:param name="id" value="${recipe.recipeId}"/>
+                            </c:url>
+                                <a href="${detailsURL}">${recipe.recipeName}</a></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+
 </main>
 <footer class="text-muted">
     <div class="container">

@@ -117,7 +117,7 @@
                                     <tr>
                                         <td>
                                             <a href="" class="btn btn-danger btn-circle btn-sm">
-                                                <button type="submit" name="delete" value="${currentIngredient.ingredientID}"><i class="fas fa-trash"></i></button>
+                                                <button type="submit" name="delete" value="${currentIngredient.ingredientId}"><i class="fas fa-trash"></i></button>
                                             </a>
                                         </td>
                                         <td>${currentIngredient.ingredientName}</td>

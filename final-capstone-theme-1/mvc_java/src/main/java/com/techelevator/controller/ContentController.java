@@ -1,8 +1,8 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.IngredientDAO;
+import com.techelevator.dao.MealPlanDao;
 import com.techelevator.dao.RecipeDao;
-import com.techelevator.dao.UserDAO;
 import com.techelevator.entity.*;
 import com.techelevator.util.EmployeeDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,11 +28,13 @@ public class ContentController {
 
     private IngredientDAO ingredientDAO;
     private RecipeDao recipeDao;
+    private MealPlanDao mealPlanDao;
 
     @Autowired
-    public ContentController(IngredientDAO ingredientDAO, RecipeDao recipeDao) {
+    public ContentController(IngredientDAO ingredientDAO, RecipeDao recipeDao, MealPlanDao mealPlanDao) {
         this.recipeDao = recipeDao;
         this.ingredientDAO = ingredientDAO;
+        this.mealPlanDao = mealPlanDao;
     }
 
 
@@ -103,7 +105,7 @@ public class ContentController {
         modelHolder.put("measurements", Measurement.getAllMeasurements());
         modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
         User user = (User) session.getAttribute("LOGGED_USER");
-        ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
+        ingredient.setIngredientId(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientId());
         ingredientList.add(ingredient);
         return "redirect:addrecipe";
     }
@@ -142,7 +144,7 @@ public class ContentController {
         List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("ingredientList");
         modelHolder.put("measurements", Measurement.getAllMeasurements());
         modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
-        ingredient.setIngredientID(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientID());
+        ingredient.setIngredientId(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientId());
         ingredientList.add(ingredient);
         Recipe recipe = (Recipe) modelHolder.getAttribute("recipe");
         recipe.setIngredientList(ingredientList);
@@ -242,11 +244,19 @@ public class ContentController {
     }
 
     @RequestMapping(path = "/mealplandetails", method = RequestMethod.GET)
-    public String displayMealPLanDetails() {
-
+    public String displayMealPLanDetails(@RequestParam Long id,
+                                         ModelMap modelMap) {
+        MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(id);
+        modelMap.addAttribute("mealPlan", mealPlan);
+        for (Recipe recipe : mealPlan.getRecipeList()) {
+            if(recipe.getDayOfWeek()== DayOfWeek.MONDAY) {
+                System.out.println(recipe.getRecipeName());
+                System.out.println(recipe.getDayOfWeek());
+                System.out.println(recipe.getTimeOfDay());
+            }
+        }
         return "mealplandetails";
     }
-
     @RequestMapping(path = "/cards", method = RequestMethod.GET)
     public String displayCards() {
 

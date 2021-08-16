@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Component
 public class JDBCRecipeDAO implements RecipeDao {
@@ -57,7 +56,7 @@ public class JDBCRecipeDAO implements RecipeDao {
     public void addIngredientToRecipe(Recipe recipe, Ingredient ingredient) {
         String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
                 " VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientID(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementid());
+        jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientId(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementId());
     }
 
     @Transactional
@@ -98,7 +97,7 @@ public class JDBCRecipeDAO implements RecipeDao {
         for (Ingredient ingredient : ingredients) {
             String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
                     " VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientID(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementid());
+            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientId(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementId());
         }
     }
 
@@ -117,7 +116,7 @@ public class JDBCRecipeDAO implements RecipeDao {
                 recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
             String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
                     " VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientID(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementid());
+            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientId(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementId());
     }
 
 
@@ -181,7 +180,7 @@ public class JDBCRecipeDAO implements RecipeDao {
         SqlRowSet ingredientList = jdbcTemplate.queryForRowSet(sql, recipe_id);
         while (ingredientList.next()) {
             Ingredient thisIngredient = new Ingredient();
-            thisIngredient.setIngredientID(ingredientList.getInt("ingredient_id"));
+            thisIngredient.setIngredientId(ingredientList.getInt("ingredient_id"));
             thisIngredient.setIngredientName(ingredientList.getString("ingredientname"));
             thisIngredient.setMeasurementAmount(ingredientList.getInt("measurementamount"));
             List<Measurement> measurementList = Measurement.getAllMeasurements();

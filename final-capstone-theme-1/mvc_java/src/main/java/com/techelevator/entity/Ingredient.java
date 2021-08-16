@@ -1,9 +1,7 @@
 package com.techelevator.entity;
 
-import java.util.Map;
-
 public class Ingredient {
-    private int ingredientID;
+    private int ingredientId;
     private String ingredientName;
     private Measurement measurement;
     private int measurementAmount;
@@ -16,8 +14,8 @@ public class Ingredient {
         return measurementAmount;
     }
 
-    public int getIngredientID() {
-        return ingredientID;
+    public int getIngredientId() {
+        return ingredientId;
     }
 
     public String getIngredientName() {
@@ -25,8 +23,8 @@ public class Ingredient {
     }
 
 
-    public void setIngredientID(int ingredientID) {
-        this.ingredientID = ingredientID;
+    public void setIngredientId(int ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
     public void setIngredientName(String ingredientName) {

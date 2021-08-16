@@ -115,7 +115,14 @@
 				<span>Recipe Details</span></a>
 		</li>--%>
 
-		<li class="nav-item">
+			<li class="nav-item">
+				<a class="nav-link" href="${baseUrl}user/mealplandetails?id=1">
+					<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
+					<span>Meal Plan Details</span></a>
+			</li>
+
+
+			<li class="nav-item">
 			<a class="nav-link" href="${baseUrl}user/viewrecipe">
 				<i class="fas fa-fw fa-utensils" style="color: #EE964B"></i>
 				<span>My Recipes</span></a>

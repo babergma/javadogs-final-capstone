@@ -14,4 +14,6 @@ public interface MealPlanDao {
     void updateMealPlan(MealPlan mealPlan);
     public void deleteSingleRecipeFromMealPlan(Long mealPlan_id, Long recipe_id);
     public void updateMealPlanByRecipe(MealPlan mealPlan, Recipe recipe);
+    public MealPlan getMealPlanByMealPlanId(Long id);
+    public void addRecipeListToMealPLan(MealPlan mealPlan, List<Recipe> recipeList);
 }

@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
 import com.techelevator.entity.Ingredient;
-import com.techelevator.entity.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -43,7 +42,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
         SqlRowSet ingredient = jdbcTemplate.queryForRowSet(sqlSearchForIngredient);
         while (ingredient.next()) {
             Ingredient thisIngredient = new Ingredient();
-            thisIngredient.setIngredientID(ingredient.getInt("ingredient_id"));
+            thisIngredient.setIngredientId(ingredient.getInt("ingredient_id"));
             thisIngredient.setIngredientName(ingredient.getString("ingredientname"));
             ingredientList.add(thisIngredient);
         }
@@ -60,7 +59,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
         Ingredient thisIngredient = new Ingredient();
         if (ingredient.next()) {
 
-            thisIngredient.setIngredientID(ingredient.getInt("ingredient_id"));
+            thisIngredient.setIngredientId(ingredient.getInt("ingredient_id"));
             thisIngredient.setIngredientName(ingredient.getString("ingredientname"));
         }
 
@@ -76,7 +75,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
         SqlRowSet ingredient = jdbcTemplate.queryForRowSet(sqlSearchForIngredient, user_id);
         if (ingredient.next()) {
             Ingredient thisIngredient = new Ingredient();
-            thisIngredient.setIngredientID(ingredient.getInt("ingredient_id"));
+            thisIngredient.setIngredientId(ingredient.getInt("ingredient_id"));
             thisIngredient.setIngredientName(ingredient.getString("ingredientname"));
             ingredientList.add(thisIngredient);
         }

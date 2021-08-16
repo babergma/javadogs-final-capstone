@@ -1,18 +1,17 @@
 package com.techelevator.entity;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MealPlan {
-    private int mealPlanID;
+    private Long mealPlanId;
     private String mealPlanName;
     private List<Recipe> recipeList = new ArrayList<>();
     private Recipe mainDish;
 
 
-    public int getMealPlanID() {
-        return mealPlanID;
+    public Long getMealPlanId() {
+        return mealPlanId;
     }
 
     public String getMealPlanName() {
@@ -27,8 +26,8 @@ public class MealPlan {
         return mainDish;
     }
 
-    public void setMealPlanID(int mealPlanID) {
-        this.mealPlanID = mealPlanID;
+    public void setMealPlanId(Long mealPlanId) {
+        this.mealPlanId = mealPlanId;
     }
 
     public void setMealPlanName(String mealPlanName) {
@@ -42,4 +41,6 @@ public class MealPlan {
     public void setMainDish(Recipe mainDish) {
         this.mainDish = mainDish;
     }
+
+
 }
