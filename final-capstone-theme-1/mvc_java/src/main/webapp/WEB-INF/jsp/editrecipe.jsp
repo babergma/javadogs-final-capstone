@@ -93,7 +93,7 @@
                 </form:form>
                 <div class="form-group col-lg-12">
                     Ingredient not there?
-                    <button type="button" class="btn btn-outline-danger" id="newIngredient"><a href=addingredient">Add new
+                    <button type="button" class="btn btn-outline-danger" id="newIngredient"><a href="addingredient">Add new
                         ingredient</a></button>
                 </div>
                 <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
