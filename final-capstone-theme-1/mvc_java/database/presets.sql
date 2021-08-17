@@ -10,16 +10,22 @@ VALUES ('cups'),
         ('pound');
 
 INSERT INTO public.person (user_id, goal_id, firstname, lastname, username, pword, salt, birthday, height, weight, role) 
-VALUES (1, null, 'Test', 'Testerson', 'testing@gmail.com', 'C6OIBbS7HuNntHAsTHU2nA==', 
+VALUES (1, 1, 'Test', 'Testerson', 'testing@gmail.com', 'C6OIBbS7HuNntHAsTHU2nA==', 
 '9+9BjPiSm3TboHveZNf4NbpUr2C9eDBCxslmjWNustHQVrsf3GGuQNoNPwl2ce2fMsfOFBs9beK73C2pufoBzUKH3HcMXMzPXdjpmpvIA50JaeMDrBHMeTvA7fty8sP2IwPxsf2wRW12YDvkzakdaoiOhEvXb5LA6Z7p2JA6EVg=', 
 '2021-08-13', '5', '120', 'CUSTOMER');
 
 --testing@gmail.com TestingDogs1
 INSERT INTO public.person (user_id, goal_id, firstname, lastname, username, pword, salt, birthday, height, weight, role) 
-VALUES (2, null, 'Wilson', 'Thompson', 'wilsonSnugs@gmail.com', 'voYR91tJp4wKqJMpOqqaJw==', 'm0o6YFRzs2ehvT5fXr0GIMobbkB947b1npYrED7utAwTCwZBjS/Pu9NU9nXh/vvrm0n4Xe99b4JDQNCfEC
-AYrlSiphK30FRAqebErh0cErTNyshvsHYxpwDbpFG7CAsgOTgLHD+nxtFBjC2LdBERsNp2NsK3VuDCR1gtULGgy78=', 
+VALUES (2, 3, 'Wilson', 'Thompson', 'wilsonSnugs@gmail.com', 'voYR91tJp4wKqJMpOqqaJw==',
+'m0o6YFRzs2ehvT5fXr0GIMobbkB947b1npYrED7utAwTCwZBjS/Pu9NU9nXh/vvrm0n4Xe99b4JDQNCfECAYrlSiphK30FRAqebErh0cErTNyshvsHYxpwDbpFG7CAsgOTgLHD+nxtFBjC2LdBERsNp2NsK3VuDCR1gtULGgy78=', 
 '2021-08-03', '2', '53', 'CUSTOMER');
 --wilsonSnugs@gmail.com CatHater200
+
+INSERT INTO public.person (user_id, goal_id, firstname, lastname, username, pword, salt, birthday, height, weight, role) 
+VALUES (3, 2, 'Addie', 'Admin', 'admin@gmail.com', 'BR1IvR6fvpJ/KCo+tp6aGw==', 
+'wAWdcxPnS6CWJC691V8hr9V5u9cy9VGCc8VxaDWGfcw4HWv2F/YZl0Gdh42Rt4iJPVr/hEKTK6SkxtqaK433U2yKXrA6RY1K4AAke6OGVrtzniHlOp4aVT+GYRUkhmnLp940CY1prLjdYaibEdibrzjI1XMN7GedVIGNPJvdr0g=', 
+'2021-08-17', '7', '200', 'ADMIN');
+--admin@gmail.com AdminPerson2
 
 INSERT INTO goal(goalname)
 VALUES ('weight loss'),
@@ -222,6 +228,24 @@ INSERT INTO person_mealplan (user_id, mealplan_id)
 VALUES (1, 1),
         (1, 2),
         (2, 3);
+        
+INSERT INTO recipe_category(recipe_id, category_id)
+VALUES (1, 1),
+        (1, 6),
+        (1, 8),
+        (2, 1),
+        (2, 3),
+        (2, 4),
+        (2, 5),
+        (2, 6),
+        (2, 8),
+        (3, 1),
+        (3, 8),
+        (4, 1),
+        (4, 8),
+        (5, 2),
+        (5, 4),
+        (5, 8);
         
 END TRANSACTION;
 
