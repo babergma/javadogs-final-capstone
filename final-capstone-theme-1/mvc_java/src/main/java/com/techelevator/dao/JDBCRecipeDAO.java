@@ -52,6 +52,77 @@ public class JDBCRecipeDAO implements RecipeDao {
         return typeList;
     }
 
+    @Override
+    public List<Recipe> getAllRecipesByUserId(Long user_id) {
+        String sqlSearchForRecipe = "SELECT * " +
+                "FROM recipe " +
+                "JOIN person ON recipe.author_id = person.user_id " +
+                "WHERE user_id = ?";
+        List<Recipe> recipeList = new ArrayList<>();
+        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, user_id);
+        while (recipe.next()) {
+            Recipe thisRecipe = mapResultstoRecipe(recipe);
+            recipeList.add(thisRecipe);
+        }
+        return recipeList;
+    }
+
+    @Override
+    public List<Recipe> getAllPublicRecipes() {
+        String sqlSearchForRecipe = "SELECT * " +
+                "FROM recipe " +
+                "JOIN person ON recipe.author_id = person.user_id " +
+                "WHERE visible = ?";
+        List<Recipe> recipeList = new ArrayList<>();
+        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, true);
+        while (recipe.next()) {
+            Recipe thisRecipe = mapResultstoRecipe(recipe);
+            recipeList.add(thisRecipe);
+        }
+        return recipeList;
+    }
+
+    @Override
+    public List<Ingredient> getAllIngredientsByRecipeId(Long recipe_id) {
+        String sql = "SELECT * " +
+                "FROM ingredient i " +
+                "JOIN ingredient_recipe ir ON i.ingredient_id = ir.ingredient_id " +
+                "JOIN recipe r ON r.recipe_id = ir.recipe_id " +
+                " JOIN measurementtype m on ir.measurementtype_id = m.measurementtype_id " +
+                "WHERE r.recipe_id = ?";
+        List<Ingredient> ingredients = new ArrayList<>();
+        SqlRowSet ingredientList = jdbcTemplate.queryForRowSet(sql, recipe_id);
+        while (ingredientList.next()) {
+            Ingredient thisIngredient = new Ingredient();
+            thisIngredient.setIngredientId(ingredientList.getInt("ingredient_id"));
+            thisIngredient.setIngredientName(ingredientList.getString("ingredientname"));
+            thisIngredient.setMeasurementAmount(ingredientList.getInt("measurementamount"));
+            List<Measurement> measurementList = Measurement.getAllMeasurements();
+            for (Measurement measurement : measurementList) {
+                if(measurement.name().equalsIgnoreCase(ingredientList.getString("measurementname"))){
+                    thisIngredient.setMeasurement(measurement);
+                    break;
+                }
+            }
+            ingredients.add(thisIngredient);
+        }
+        return ingredients;
+    }
+
+    @Override
+    public Recipe getRecipeByRecipeId(Long recipe_id) {
+        String sql = "SELECT * " +
+                "FROM recipe " +
+                "WHERE recipe_id = ?";
+        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sql, recipe_id);
+        Recipe thisRecipe = new Recipe();
+        while(recipe.next()) {
+            thisRecipe = mapResultstoRecipe(recipe);
+        }
+        thisRecipe.setIngredientList(getAllIngredientsByRecipeId(thisRecipe.getRecipeId()));
+        return thisRecipe;
+    }
+
     @Transactional
     public void addIngredientToRecipe(Recipe recipe, Ingredient ingredient) {
         String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
@@ -119,41 +190,6 @@ public class JDBCRecipeDAO implements RecipeDao {
             jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientId(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementId());
     }
 
-
-
-    @Override
-    public List<Recipe> getAllRecipesByUserId(Long user_id) {
-        String sqlSearchForRecipe = "SELECT * " +
-                "FROM recipe " +
-                "JOIN person ON recipe.author_id = person.user_id " +
-                "WHERE user_id = ?";
-        List<Recipe> recipeList = new ArrayList<>();
-        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, user_id);
-        while (recipe.next()) {
-            Recipe thisRecipe = mapResultstoRecipe(recipe);
-            recipeList.add(thisRecipe);
-        }
-        return recipeList;
-    }
-
-    @Override
-    public List<Recipe> getAllPublicRecipes() {
-        String sqlSearchForRecipe = "SELECT * " +
-                "FROM recipe " +
-                "JOIN person ON recipe.author_id = person.user_id " +
-                "WHERE visible = ?";
-        List<Recipe> recipeList = new ArrayList<>();
-        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, true);
-        while (recipe.next()) {
-            Recipe thisRecipe = mapResultstoRecipe(recipe);
-            recipeList.add(thisRecipe);
-        }
-        return recipeList;
-    }
-
-
-
-
     public Recipe mapResultstoRecipe(SqlRowSet results){
         Recipe recipe = new Recipe();
         recipe.setRecipeId(results.getLong("recipe_id"));
@@ -168,48 +204,6 @@ public class JDBCRecipeDAO implements RecipeDao {
        return recipe;
     }
 
-    @Override
-    public List<Ingredient> getAllIngredientsByRecipeId(Long recipe_id) {
-        String sql = "SELECT * " +
-                "FROM ingredient i " +
-                "JOIN ingredient_recipe ir ON i.ingredient_id = ir.ingredient_id " +
-                "JOIN recipe r ON r.recipe_id = ir.recipe_id " +
-                " JOIN measurementtype m on ir.measurementtype_id = m.measurementtype_id " +
-                "WHERE r.recipe_id = ?";
-        List<Ingredient> ingredients = new ArrayList<>();
-        SqlRowSet ingredientList = jdbcTemplate.queryForRowSet(sql, recipe_id);
-        while (ingredientList.next()) {
-            Ingredient thisIngredient = new Ingredient();
-            thisIngredient.setIngredientId(ingredientList.getInt("ingredient_id"));
-            thisIngredient.setIngredientName(ingredientList.getString("ingredientname"));
-            thisIngredient.setMeasurementAmount(ingredientList.getInt("measurementamount"));
-            List<Measurement> measurementList = Measurement.getAllMeasurements();
-            for (Measurement measurement : measurementList) {
-                if(measurement.name().equalsIgnoreCase(ingredientList.getString("measurementname"))){
-                    thisIngredient.setMeasurement(measurement);
-                    break;
-                }
-            }
-            ingredients.add(thisIngredient);
-        }
-        return ingredients;
-    }
-
-    @Override
-    public Recipe getRecipeByRecipeId(Long recipe_id) {
-        String sql = "SELECT * " +
-                "FROM recipe " +
-                "WHERE recipe_id = ?";
-        SqlRowSet recipe = jdbcTemplate.queryForRowSet(sql, recipe_id);
-        Recipe thisRecipe = new Recipe();
-        while(recipe.next()) {
-           thisRecipe = mapResultstoRecipe(recipe);
-        }
-        thisRecipe.setIngredientList(getAllIngredientsByRecipeId(thisRecipe.getRecipeId()));
-        return thisRecipe;
-    }
-
-
     @Transactional
     public void deleteRecipeByRecipeID(Long recipe_id) {
         deleteRecipeFromIngredientRecipe(recipe_id);
@@ -223,7 +217,6 @@ public class JDBCRecipeDAO implements RecipeDao {
         jdbcTemplate.update(sql, recipe_id);
     }
 
-
     @Transactional
     public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id) {
         String sql = "DELETE FROM ingredient_recipe WHERE recipe_id = ? AND ingredient_id = ?";
@@ -231,5 +224,3 @@ public class JDBCRecipeDAO implements RecipeDao {
     }
 
 }
-
-

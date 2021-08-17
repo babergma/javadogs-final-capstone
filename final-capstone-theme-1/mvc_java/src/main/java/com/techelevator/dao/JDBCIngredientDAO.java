@@ -26,6 +26,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
      *                            <i>mutually comparable</i> (for example, strings and integers).
      */
 
+//saving a new ingredient to the database
     @Override
     public void saveIngredient(Ingredient ingredient) {
         jdbcTemplate.update("INSERT INTO ingredient(ingredientname) " +
@@ -33,7 +34,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
                 ingredient.getIngredientName());
 
     }
-
+//getting all the ingredients in the database
     @Override
     public List<Ingredient> getAllIngredients() {
         String sqlSearchForIngredient = "SELECT * " +
@@ -49,7 +50,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
         return ingredientList;
     }
 
-
+//searching for an ingredient by the name
     @Override
     public Ingredient searchForIngredient(String ingredientName) {
         String sql = "SELECT * " +
@@ -65,7 +66,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
 
         return thisIngredient;
     }
-
+//returning the ingredients associated by the user id
     public List<Ingredient> searchForIngredientByUserID(int user_id) {
         String sqlSearchForIngredient = "SELECT * " +
                 "FROM grocerylist " +
@@ -81,7 +82,7 @@ public class JDBCIngredientDAO implements IngredientDAO {
         }
         return ingredientList;
     }
-
+//
     @Override
     public void updateIngredientByIngredientId(Ingredient ingredient) {
         String sqlUpdateIngredient = "UPDATE ingredient " +

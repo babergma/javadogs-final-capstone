@@ -28,7 +28,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-
+//saving a meal plan
     @Transactional
     @Override
     public MealPlan saveMealPlan(MealPlan mealPlan) {
@@ -37,13 +37,6 @@ public class JDBCMealPlanDAO implements MealPlanDao {
         Long newId = jdbcTemplate.queryForObject(sql, Long.class,
                 mealPlan.getMealPlanName());
         mealPlan.setMealPlanId(newId);
-        return mealPlan;
-    }
-
-    public MealPlan addAuthorToMealPlan(MealPlan mealPlan, Long user_id) {
-        String sql = "INSERT INTO person_mealplan(mealplan_id, user_id)" +
-                " VALUES (?, ?)";
-        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), user_id);
         return mealPlan;
     }
 
@@ -61,77 +54,6 @@ public class JDBCMealPlanDAO implements MealPlanDao {
         }
         return mealPlans;
     }
-
-
-
-
-    @Override
-    public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan) {
-        String sql = "SELECT * " +
-                " FROM ingredient i" +
-                " JOIN ingredient_recipe ir on i.ingredient_id = ir.ingredient_id" +
-                " JOIN recipe_mealplan rm on ir.recipe_id = rm.recipe_id" +
-                " JOIN measurementtype m on ir.measurementtype_id = m.measurementtype_id " +
-                " JOIN mealplan m2 on rm.mealplan_id = m2.mealplan_id " +
-                " WHERE m2.mealplan_id = ?";
-        List<Ingredient> ingredients = new ArrayList<>();
-        SqlRowSet planIngredients = jdbcTemplate.queryForRowSet(sql, mealPlan.getMealPlanId());
-        while (planIngredients.next()) {
-            Ingredient thisIngredient = new Ingredient();
-            thisIngredient.setIngredientId(planIngredients.getInt("ingredient_id"));
-            thisIngredient.setIngredientName(planIngredients.getString("ingredientname"));
-            thisIngredient.setMeasurementAmount(planIngredients.getInt("measurementamount"));
-            List<Measurement> measurementList = Measurement.getAllMeasurements();
-            for (Measurement measurement : measurementList) {
-                if (measurement.name().equalsIgnoreCase(planIngredients.getString("measurementname"))) {
-                    thisIngredient.setMeasurement(measurement);
-                    break;
-                }
-            }
-
-            ingredients.add(thisIngredient);
-        }
-        return ingredients;
-    }
-
-    //addRecipeToMealPlan
-    @Transactional
-    @Override
-    public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe) {
-
-        String sql = "INSERT INTO recipe_mealplan(mealplan_id, recipe_id, dayofweek, timeofday) " +
-                " VALUES (?,?,?,?)";
-        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), recipe.getRecipeId(), recipe.getDayOfWeek().getValue(), recipe.getTimeOfDay().getTimeOfDayId());
-    }
-
-    @Transactional
-    public MealPlan addRecipeListToMealPlan(MealPlan mealPlan, List<Recipe> recipeList) {
-        MealPlan newMealPlan = saveMealPlan(mealPlan);
-        for (Recipe recipe : recipeList) {
-            addRecipeToMealPlan(mealPlan, recipe);
-        }
-        return newMealPlan;
-    }
-
-    @Override
-    public void updateMealPlan(MealPlan mealPlan) {
-        String sql = "UPDATE mealplan " +
-                " SET mealplanname = ?";
-        jdbcTemplate.update(sql, mealPlan.getMealPlanName());
-    }
-
-    @Override
-    public void deleteSingleRecipeFromMealPlan(Long mealPlan_id, Long recipe_id) {
-        String sql = "DELETE FROM recipe_mealplan " +
-                " WHERE mealplan_id = ? AND recipe_id = ?";
-        jdbcTemplate.update(sql, mealPlan_id, recipe_id);
-    }
-
-    @Override
-    public void updateMealPlanByRecipe(MealPlan mealPlan, Recipe recipe) {
-
-    }
-
     @Override
     public MealPlan getMealPlanByMealPlanId(Long id) {
         String sqlSearchForMealPlan = "SELECT * " +
@@ -189,10 +111,82 @@ public class JDBCMealPlanDAO implements MealPlanDao {
 
         return recipes;
     }
+    @Override
+    public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan) {
+        String sql = "SELECT * " +
+                " FROM ingredient i" +
+                " JOIN ingredient_recipe ir on i.ingredient_id = ir.ingredient_id" +
+                " JOIN recipe_mealplan rm on ir.recipe_id = rm.recipe_id" +
+                " JOIN measurementtype m on ir.measurementtype_id = m.measurementtype_id " +
+                " JOIN mealplan m2 on rm.mealplan_id = m2.mealplan_id " +
+                " WHERE m2.mealplan_id = ?";
+        List<Ingredient> ingredients = new ArrayList<>();
+        SqlRowSet planIngredients = jdbcTemplate.queryForRowSet(sql, mealPlan.getMealPlanId());
+        while (planIngredients.next()) {
+            Ingredient thisIngredient = new Ingredient();
+            thisIngredient.setIngredientId(planIngredients.getInt("ingredient_id"));
+            thisIngredient.setIngredientName(planIngredients.getString("ingredientname"));
+            thisIngredient.setMeasurementAmount(planIngredients.getInt("measurementamount"));
+            List<Measurement> measurementList = Measurement.getAllMeasurements();
+            for (Measurement measurement : measurementList) {
+                if (measurement.name().equalsIgnoreCase(planIngredients.getString("measurementname"))) {
+                    thisIngredient.setMeasurement(measurement);
+                    break;
+                }
+            }
+
+            ingredients.add(thisIngredient);
+        }
+        return ingredients;
+    }
+
+    //addRecipeToMealPlan
+    @Transactional
+    @Override
+    public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe) {
+
+        String sql = "INSERT INTO recipe_mealplan(mealplan_id, recipe_id, dayofweek, timeofday) " +
+                " VALUES (?,?,?,?)";
+        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), recipe.getRecipeId(), recipe.getDayOfWeek().getValue(), recipe.getTimeOfDay().getTimeOfDayId());
+    }
+
+    @Transactional
+    public MealPlan addRecipeListToMealPlan(MealPlan mealPlan, List<Recipe> recipeList) {
+        MealPlan newMealPlan = saveMealPlan(mealPlan);
+        for (Recipe recipe : recipeList) {
+            addRecipeToMealPlan(mealPlan, recipe);
+        }
+        return newMealPlan;
+    }
+
+    public MealPlan addAuthorToMealPlan(MealPlan mealPlan, Long user_id) {
+        String sql = "INSERT INTO person_mealplan(mealplan_id, user_id)" +
+                " VALUES (?, ?)";
+        jdbcTemplate.update(sql, mealPlan.getMealPlanId(), user_id);
+        return mealPlan;
+    }
 
     @Override
-    public void addRecipeListToMealPLan(MealPlan mealPlan, List<Recipe> recipeList) {
+    public void updateMealPlan(MealPlan mealPlan) {
+        String sql = "UPDATE mealplan " +
+                " SET mealplanname = ?";
+        jdbcTemplate.update(sql, mealPlan.getMealPlanName());
+    }
 
+    @Override
+    public void deleteSingleRecipeFromMealPlan(Long mealPlan_id, Long recipe_id) {
+        String sql = "DELETE FROM recipe_mealplan " +
+                " WHERE mealplan_id = ? AND recipe_id = ?";
+        jdbcTemplate.update(sql, mealPlan_id, recipe_id);
+    }
+
+    @Override
+    public void updateMealPlanByRecipe(MealPlan mealPlan, Recipe recipe) {
+        //potentially remove
+    }
+    @Override
+    public void addRecipeListToMealPLan(MealPlan mealPlan, List<Recipe> recipeList) {
+        //potentially remove
     }
 
     public MealPlan mapResultsToMealPlan(SqlRowSet results) {
