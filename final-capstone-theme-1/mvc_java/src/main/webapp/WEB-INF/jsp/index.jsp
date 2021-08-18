@@ -98,6 +98,14 @@
                             <a class="btn btn-primary btn-lg" style="background-color:#EE964B"
                                href="${baseUrl}user/viewrecipe" role="button">My Recipes</a>
                         </p></li>
+                        <br>
+                        <li><p>
+                            <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
+                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B" href="#" data-toggle="modal" data-target="#logoutModal">
+                                Logout
+                            </a>
+                        </p></li>
+
                     </ul>
                 </td>
             </tr>

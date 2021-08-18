@@ -16,6 +16,8 @@
       <p>
         <c:url var="addRecipe" value="/user/addrecipe"/>
         <a href="${addRecipe}" class="btn btn-primary my-2">Add new recipe</a>
+        <c:url var="addIngredient" value="/user/addingredient"/>
+        <a href="${addIngredient}" class="btn btn-primary my-2">Add Ingredient</a>
       </p>
     </div>
   </section>
