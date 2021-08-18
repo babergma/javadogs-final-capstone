@@ -33,7 +33,7 @@ VALUES ('weight loss'),
         ('maintain weight');
 
 INSERT INTO category(categoryname)
-VALUES ('Vegitarian'),
+VALUES ('Vegetarian'),
         ('High Protein'),
         ('Low Carb'),
         ('Dairy Free'),
@@ -43,7 +43,7 @@ VALUES ('Vegitarian'),
         ('Pescatarian');
         
 INSERT INTO recipe(recipename, cooktime, servingsize, calories, cookinginstruction, visible, author_id, pictureurl)
-VALUES ('Vegitarian Spaghetti', 30, 4, 350, 'Boil lightly salted water. Once water is at a boil place noodles in the pot and apply gentle pressure until all noodles are submerged. 
+VALUES ('Vegetarian Spaghetti', 30, 4, 350, 'Boil lightly salted water. Once water is at a boil place noodles in the pot and apply gentle pressure until all noodles are submerged. 
                 Once noodles are tender (you can test this by tossing a noodle at the wall. If the noodle sticks, they are ready) drain the water from the pot and lower the stove 
                  temperature to low. Add the pasta sauce of your choice and stir in. Serve with freshly toasted bread.', true, 1, 'spaghetti.jpg'),
         ('Spicy Green Tomato Salsa', 30, 40, 27, 'Combine green tomatoes, onions, jalapeno peppers, serrano peppers, and red bell pepper in a large bowl.
