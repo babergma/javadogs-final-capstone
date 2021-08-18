@@ -98,8 +98,8 @@
                 </div>
                 <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
                 <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
-                +                        <form:hidden path="recipeId" value="${recipe.recipeId}"/>
-                    ${recipe.recipeId}
+                                       <form:hidden path="recipeId" value="${recipe.recipeId}"/>
+
                 <div class="form-group col-md-12 alert alert-info" role="alert">
                     <div class="container">
 

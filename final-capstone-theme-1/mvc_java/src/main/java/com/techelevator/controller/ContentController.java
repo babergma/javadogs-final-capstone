@@ -168,13 +168,12 @@ public class ContentController {
             redirectAttributes.addFlashAttribute("recipe", recipe);
             return "redirect:/user/editrecipe";
         }
-        System.out.println(recipe.getRecipeId() + "HERE IS MY RECIPE");
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
         List<Ingredient> ingredientList = (List<Ingredient>) modelMap.getAttribute("ingredientList");
         recipe.setIngredientList(ingredientList);
         recipeDao.updateRecipe(recipe);
-        return "viewrecipe";
+        return "redirect:/user/viewrecipe";
     }
 
 
