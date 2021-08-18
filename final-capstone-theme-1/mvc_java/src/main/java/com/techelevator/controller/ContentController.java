@@ -175,20 +175,18 @@ public class ContentController {
         recipeDao.updateRecipe(currentRecipe);
         return "redirect:/user/viewrecipe";
     }
-
-
     @RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
     public String submitRecipe(@Valid @ModelAttribute("newRecipe") Recipe recipe,
                                BindingResult result,
+                               @RequestParam(required = false, defaultValue = "placeholder.png") String url,
                                ModelMap modelMap,
-                               RedirectAttributes redirectAttributes,
-                               HttpSession session) {
+                               HttpSession session, SessionStatus status, RedirectAttributes flash) {
         if (result.hasErrors()) {
-            System.out.println("error in form");
-            redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "newRecipe", result);
-            redirectAttributes.addFlashAttribute("newRecipe", recipe);
+            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "newRecipe", result);
+            flash.addFlashAttribute("newRecipe", recipe);
             return "redirect:/user/addrecipe";
         }
+        flash.addFlashAttribute("message", "You have successfully added a recipe.");
         User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         recipe.setAuthorID(user.getId());
         List<Ingredient> ingredientList = (List<Ingredient>) modelMap.getAttribute("newIngredientList");

@@ -2,6 +2,8 @@ package com.techelevator.entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
@@ -10,13 +12,23 @@ public class Recipe {
     private Long recipeId;
     private Long authorID;
 
-    @NotBlank(message = "Recipe name is required!")
+    @NotBlank(message = "Name is required")
     private String recipeName;
+
+    @Min(value=1, message = "Please enter a value > 1")
+    @NotNull(message = "You must enter a cook time")
     private int cookTime;
+
+    @Min(value=1, message = "Please enter a value > 1")
+    @NotNull(message = "You must enter a serving size")
     private int servingSize;
+
+    @Min(value=1, message = "Please enter a value > 1")
+    @NotNull(message = "You must enter the amount of calories")
     private int calories;
     private String pictureUrl="placeholder.png";
-    @NotBlank(message = "CookingInstruction Required")
+
+    @NotBlank(message = "Cooking instructions are required")
     private String cookingInstruction;
     private boolean visible;
     private List<Ingredient> ingredientList;

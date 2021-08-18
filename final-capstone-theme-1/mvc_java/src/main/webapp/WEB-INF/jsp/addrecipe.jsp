@@ -118,21 +118,29 @@
 
                         <form:label path="recipeName" value="Name"/>
                         <form:input path="recipeName" type="text" cssClass="form-control" placeholder="Cajun Shrimp"/>
-                        <form:errors path="recipeName" cssClass="error" element="p" >error</form:errors>
+                        <span class="error">
+                        <form:errors required="true" path="recipeName" cssClass="error" element="p">*required*</form:errors>
+                        </span>
                     </div>
                     <div class="form-row ">
                         <div class="form-group col-md-4 col-auto">
                             <form:label path="cookTime" value="Cook Time"/>
                             <form:input path="cookTime" type="number" cssClass="form-control" placeholder="60"/>minutes
+                            <span class="error"><form:errors required="true" path="cookTime" cssClass="error" element="p" >*required*</form:errors>
+                        </span>
                         </div>
                         <div class="form-group col-md-4 col-auto">
                             <form:label path="servingSize" value="Serving Size"/>
                             <form:input path="servingSize" type="number" cssClass="form-control" placeholder="5"/>servings
+                            <span class="error"> <form:errors required="true" path="servingSize" cssClass="error" element="p" >*required*</form:errors>
+                            </span>
                         </div>
                         <div class="form-group col-md-4 col-auto">
                             <form:label path="calories" value="Calories"/>
                             <form:input path="calories" type="number" cssClass="form-control" placeholder="600"/>
                             calories
+                            <span class="error">  <form:errors required="true" path="calories" cssClass="error" element="p" >*required*</form:errors>
+                            </span>
                         </div>
                         <div class="form-row">
                             <div class="form-check">
@@ -154,7 +162,8 @@
                         <h4 for="cookingInstruction">Instructions</h4>
                         <form:textarea id="cookingInstruction" path="cookingInstruction" cssClass="form-control"
                                        rows="5"/>
-                        <form:errors path="cookingInstruction"/>
+                      <span>  <form:errors required="true" path="cookingInstruction" cssClass="error" element="p" >*required*</form:errors>
+                   </span>
                     </div>
                     <div class="form-group col-md-12">
                         <div class="form-check">
