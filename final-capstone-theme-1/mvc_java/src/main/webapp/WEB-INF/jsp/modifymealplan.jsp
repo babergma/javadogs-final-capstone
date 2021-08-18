@@ -331,7 +331,12 @@
         <c:if test="${recipe.dayOfWeek.getValue()==4 && recipe.timeOfDay.timeOfDayId==2}">
           <td>
 
-
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
 
 
 
@@ -388,7 +393,12 @@
           <td>
 
 
-
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
 
 
             <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>

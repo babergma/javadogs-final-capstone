@@ -179,7 +179,11 @@
                                 <%--                                       value="false" />--%>
                         </div>
                     </div>
-
+                        <div class="form-check">
+                            <form:label path="pictureUrl" value="Picture Url"/>Do you want to upload a picture of the recipe?
+                            <form:input path="pictureUrl" type="file" cssClass="form-control" placeholder="frenchtoast.jpg"/>
+                            <br/><br/>
+                        </div>
                     <div class="form-group col-md-12">
                         <button type="submit" class="btn btn-success btn-lg">Add Recipe</button>
                     </div>

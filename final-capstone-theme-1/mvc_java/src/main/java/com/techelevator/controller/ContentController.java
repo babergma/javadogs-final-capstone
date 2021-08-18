@@ -194,7 +194,7 @@ public class ContentController {
         ingredientList = new ArrayList<>();
         modelMap.put("newIngredientList", ingredientList);
         modelMap.put("newRecipe", new Recipe());
-        return "dashboard";
+        return "redirect:/user/viewrecipe";
     }
 
     @RequestMapping(path = "/recipedetails", method = RequestMethod.GET)

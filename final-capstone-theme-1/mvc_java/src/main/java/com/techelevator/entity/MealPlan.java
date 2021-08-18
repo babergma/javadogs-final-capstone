@@ -1,11 +1,15 @@
 package com.techelevator.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class MealPlan {
     private Long mealPlanId;
+
+    @NotBlank(message = "Name is required")
     private String mealPlanName;
     private List<Recipe> recipeList = new ArrayList<>();
     private Recipe mainDish;

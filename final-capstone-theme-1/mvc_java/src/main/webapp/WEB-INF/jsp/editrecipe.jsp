@@ -24,7 +24,7 @@
                             <p class="lead fw-normal">Summary of recipe story or whatever</p>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Input an image</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" path="pictureUrl">
                             </div>
                         </div>
                         <div class="product-device shadow-sm d-none d-md-block"></div>
@@ -118,8 +118,8 @@
                             <c:forEach items="${ingredientList}" var="currentIngredient">
                                 <tr>
                                     <td>
-                                        <a href="" class="btn btn-danger btn-circle btn-sm">
-                                            <button type="submit" name="delete" value="${currentIngredient.ingredientId}"><i class="fas fa-trash"></i></button>
+                                        <a href="" class="btn btn-sm">
+                                            <button type="submit" class="btn btn-danger btn-circle" name="delete" value="${currentIngredient.ingredientId}"><i class="fas fa-trash"></i></button>
                                         </a>
                                     </td>
                                     <td>${currentIngredient.ingredientName}</td>
