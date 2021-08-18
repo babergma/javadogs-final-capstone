@@ -386,19 +386,6 @@ public class ContentController {
 
     }
 
-    @RequestMapping(path = "/randomrecipe", method = RequestMethod.GET)
-    public String showRandomPublicRecipe(HttpServletRequest request,
-                                         RedirectAttributes redirectAttributes) {
-        List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
-        Random rand = new Random();
-        Recipe recipe = recipeList.get(rand.nextInt(recipeList.size()));
-        System.out.println(recipe.getRecipeId());
-        redirectAttributes.addFlashAttribute("id", recipe.getRecipeId());
-        return "forward:recipedetails";
-    }
-
-
-
 
 
     @ExceptionHandler(NullPointerException.class)

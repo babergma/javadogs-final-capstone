@@ -5,7 +5,7 @@
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
 				<div class="copyright text-center my-auto">
-					<span>Copyright &copy; JPMC Tech Start Columbus 2020</span>
+					<span>Copyright &copy; JavaDogs 2021 <i class="fas fa-dog"></i></span>
 				</div>
 			</div>
 		</footer>

@@ -16,8 +16,6 @@
 
           <c:url var="addRecipe" value="/user/addrecipe"/>
           <a href="${addRecipe}" class="btn btn-primary my-2">Add new recipe</a>
-          <c:url var="addRecipe" value="/user/randomrecipe"/>
-          <a href="${addRecipe}" class="btn btn-primary my-2">Random Recipe</a>
         </p>
       </c:if>
     </div>

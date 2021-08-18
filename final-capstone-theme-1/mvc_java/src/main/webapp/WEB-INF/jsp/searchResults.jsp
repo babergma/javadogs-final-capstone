@@ -25,7 +25,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
                     <a href="#collapseCard${searchedRecipe.recipeId}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCard${searchedRecipe.recipeId}">
-                        <h6 class="m-0 font-weight-bold text-primary">${searchedRecipe.recipeName} <span class="badge badge-pill badge-info">${searchedRecipe.category}</span></h6>
+                        <h6 class="m-0 font-weight-bold text-primary">${searchedRecipe.recipeName}              </h6>
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse" id="collapseCard${searchedRecipe.recipeId}">
@@ -50,6 +50,13 @@
                                 </div>
                             </div>
 
+                            <div class="card-footer">
+                                <c:forEach items="${searchedRecipe.categoryList}" var="category">
+                  <span class="badge badge-pill badge-info ${category.abbreviation}">
+                          ${category.abbreviation}
+                  </span>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
 
