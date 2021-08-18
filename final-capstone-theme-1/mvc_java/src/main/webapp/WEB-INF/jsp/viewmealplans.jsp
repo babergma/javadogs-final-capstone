@@ -14,8 +14,8 @@
       <h1 class="jumbotron-heading">My Meal Plans</h1>
       <p class="lead text-muted">Look at all of your saved meal plans</p>
       <p>
-<%--        <c:url var="addMealPlanName" value="/user/addmealplanname"/>--%>
-<%--        <a href="${addMealPlanName}" class="btn btn-primary my-2">Add new meal plan</a>--%>
+        <c:url var="addMealPlanName" value="/user/addmealplanname"/>
+        <a href="${addMealPlanName}" class="btn btn-primary my-2">Add new meal plan</a>
       </p>
     </div>
   </section>
@@ -24,25 +24,25 @@
     <div class="container">
       <div class="row">
         <c:forEach items="${mealPlanList}" var="mealPlan">
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <p class="card-text">${mealPlan.mealPlanName}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <c:url var="viewMealPlanDetail" value="/user/mealplandetails">
-                    <c:param name="id" value="${mealPlan.mealPlanId}"/>
-                  </c:url>
-                  <a href="${viewMealPlanDetail}" class="btn btn-sm btn-outline-secondary">View</a>
-                  <c:url var="editMealPlanDetail" value="/user/modifymealplan">
-                    <c:param name="id" value="${mealPlan.mealPlanId}"/>
-                  </c:url>
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="${editMealPlanDetail}">Edit</a></button>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body">
+                <p class="card-text">${mealPlan.mealPlanName}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <c:url var="viewMealPlanDetail" value="/user/mealplandetails">
+                      <c:param name="id" value="${mealPlan.mealPlanId}"/>
+                    </c:url>
+                    <a href="${viewMealPlanDetail}" class="btn btn-sm btn-outline-secondary">View</a>
+                    <c:url var="editMealPlanDetail" value="/user/modifymealplan">
+                      <c:param name="id" value="${mealPlan.mealPlanId}"/>
+                    </c:url>
+                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="${editMealPlanDetail}">Edit</a></button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </c:forEach>
       </div>
     </div>

@@ -25,7 +25,7 @@
             <label for="dayOfWeek">Day of the week:</label>
             <select class="form-control" id="dayOfWeek" name="dayOfWeekId">
                 <c:forEach items="${daysOfWeek}" var="dayOfWeek">
-                <option value="${dayOfWeek.value}">${dayOfWeek.name()}</option>
+                    <option value="${dayOfWeek.value}">${dayOfWeek.name()}</option>
                 </c:forEach>
             </select>
         </div>
@@ -41,7 +41,7 @@
             <label for="timeOfDay">Meal Time</label>
             <select class="form-control" id="timeOfDay" name="timeOfDay">
                 <c:forEach items="${timeOfdays}" var="timeOfDay">
-                <option value="${timeOfDay}">${timeOfDay.abbreviation}</option>
+                    <option value="${timeOfDay}">${timeOfDay.abbreviation}</option>
                 </c:forEach>
             </select>
         </div>
@@ -57,5 +57,5 @@
     </form>
     <!-- /.container-fluid -->
     <!-- End of Page Content -->
-
+</div>
 <c:import url="/WEB-INF/jsp/footer.jsp"/>

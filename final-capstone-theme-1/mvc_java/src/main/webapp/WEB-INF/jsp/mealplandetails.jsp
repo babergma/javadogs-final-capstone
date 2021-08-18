@@ -17,8 +17,10 @@
             </c:url>
             <a href="${viewMealPlanGroceryList}" class="btn btn-sm btn-outline-secondary">Grocery List</a>
             <p>
-                <c:url var="addRecipe" value="/user/addrecipe"/>
-                <a href="${addRecipe}" class="btn btn-primary my-2">Edit Meal Plan</a>
+                <c:url var="modifyMealPlan" value="/user/modifymealplan">
+                    <c:param name="id" value="${mealPlan.mealPlanId}"/>
+                </c:url>
+                <a href="${modifyMealPlan}" class="btn btn-primary my-2">Edit Meal Plan</a>
                 <a href="javascript:print()">
                     <button type="submit" class="btn btn-warning ">Print<i class="fas fa-edit"
                                                                            style="color: white;"></i></button>
