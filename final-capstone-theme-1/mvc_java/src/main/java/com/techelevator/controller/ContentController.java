@@ -245,13 +245,9 @@ public class ContentController {
 
 
     @RequestMapping(path = "/addrecipetomealplan", method = RequestMethod.GET)
-    public String displayAddRecipeToMealPlan(@Valid @ModelAttribute("newRecipe") Recipe recipe,
-                                             BindingResult result,
+    public String displayAddRecipeToMealPlan(
                                              HttpSession session,
                                              ModelMap modelMap) {
-        if (!modelMap.containsKey("newRecipe")) {
-            modelMap.put("newRecipe", new Recipe());
-        }
         User user = (User) session.getAttribute("LOGGED_USER");
         modelMap.put("recipeList", recipeDao.getAllRecipesByUserId(user.getId()));
         modelMap.put("mealPlanList", mealPlanDao.getAllMealPlansByUserId(user.getId()));

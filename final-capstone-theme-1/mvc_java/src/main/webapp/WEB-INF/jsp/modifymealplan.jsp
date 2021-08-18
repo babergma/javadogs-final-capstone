@@ -411,31 +411,31 @@
       </tbody>
     </table>
     <h2>Lunch</h2>
-    <table>
-      <thead></thead>
-      <tbody>
-      <c:forEach items="${mealPlan.recipeList}" var="recipe">
-        <tr>
-        <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==2}">
-          <td>
+      <table>
+          <thead></thead>
+          <tbody>
+          <c:forEach items="${mealPlan.recipeList}" var="recipe">
+              <tr>
+              <c:if test="${recipe.dayOfWeek.getValue()==5  && recipe.timeOfDay.timeOfDayId==2}">
+                  <td>
 
 
 
 
-              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
-                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
-                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
-                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
-                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
-              </c:url>
-              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a></td>
-          <td><h4>${recipe.recipeName}</h4></td>
-          </tr>
 
-        </c:if>
-      </c:forEach>
-      </tbody>
-    </table>
+                      <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                          <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                          <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                          <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                          <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+                      </c:url>
+                      <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
+                  <td><h4>${recipe.recipeName}</h4></td>
+                  </tr>
+
+              </c:if>
+          </c:forEach>
+          </tbody>
     <h2>Dinner</h2>
     <table>
       <thead></thead>
