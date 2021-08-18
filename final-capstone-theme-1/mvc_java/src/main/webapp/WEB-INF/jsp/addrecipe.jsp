@@ -162,7 +162,7 @@
                         <h4 for="cookingInstruction">Instructions</h4>
                         <form:textarea id="cookingInstruction" path="cookingInstruction" cssClass="form-control"
                                        rows="5"/>
-                      <span class="error">  <form:errors required="true" path="cookingInstruction" cssClass="error" element="p" >*required*</form:errors>
+                        <span class="error">  <form:errors required="true" path="cookingInstruction" cssClass="error" element="p" >*required*</form:errors>
                    </span>
                     </div>
                     <div class="form-group col-md-12">
