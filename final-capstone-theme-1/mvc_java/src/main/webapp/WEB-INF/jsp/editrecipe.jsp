@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link href="../css/viewrecipe.css" rel="stylesheet" type="text/css">
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:import url="/WEB-INF/jsp/header.jsp"/>
 <%--<link href="../css/recipedetails.css" rel="stylesheet" type="text/css">--%>
@@ -21,11 +22,7 @@
                     <div class="position-relative overflow-hidden p-3 p-xs-5 m-xs-3 text-center bg-light">
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
                             <h3 class="m-0 font-weight-bold text-primary ">${currentRecipe.recipeName}</h3>
-                            <p class="lead fw-normal">Summary of recipe story or whatever</p>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Input an image</label>
-                                <input class="form-control" type="file" id="formFile" path="pictureUrl">
-                            </div>
+
                         </div>
                         <div class="product-device shadow-sm d-none d-md-block"></div>
                         <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
@@ -87,7 +84,7 @@
 
                 <div class="form-group col-lg-3">
                     <label for="add"><p> </p></label>
-                    <button type="submit" class="btn btn-block" style="background-color: #a5cfab; color:white" id="add">Add to Recipe <i
+                    <button type="submit" class="btn btn-success btn-block" id="add">Add to Recipe <i
                             class="fas fa-plus"></i></button>
                 </div>
                 </form:form>
@@ -151,6 +148,7 @@
                     <form:input path="calories" type="number" cssClass="form-control" placeholder="600"/>
                     calories
                 </div>
+
             </div>
             <div class="form-row">
                 <div class="form-check">
@@ -190,9 +188,12 @@
                 <label for="false" id="false" class="form-check-label" name="private">Private</label>
             </div>
         </div>
-
+        <div class="form-group">
+            <form:label path="pictureUrl" value="Picture"/>Input a different or new image
+            <form:input path="pictureUrl" type="file" cssClass="form-control" />
+        </div>
         <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white" value="add" name="add">Add Recipe</button>
+            <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white" value="add" name="add">Update Recipe</button>
         </div>
     </div>
 
