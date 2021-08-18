@@ -2,6 +2,7 @@ package com.techelevator.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MealPlan {
     private Long mealPlanId;
@@ -42,5 +43,16 @@ public class MealPlan {
         this.mainDish = mainDish;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MealPlan mealPlan = (MealPlan) o;
+        return Objects.equals(getMealPlanId(), mealPlan.getMealPlanId()) && Objects.equals(getMealPlanName(), mealPlan.getMealPlanName()) && Objects.equals(getRecipeList(), mealPlan.getRecipeList()) && Objects.equals(getMainDish(), mealPlan.getMainDish());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMealPlanId(), getMealPlanName(), getRecipeList(), getMainDish());
+    }
 }

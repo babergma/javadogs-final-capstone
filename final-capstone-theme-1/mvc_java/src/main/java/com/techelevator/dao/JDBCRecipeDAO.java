@@ -223,4 +223,39 @@ public class JDBCRecipeDAO implements RecipeDao {
         jdbcTemplate.update(sql, recipe_id, ingredient_id);
     }
 
+    @Override
+    public List<Recipe> searchForRecipeByFilter(String searchText, String filterBy){
+        List<Recipe> recipeList = new ArrayList<>();
+        searchText = "%" + searchText + "%";
+        SqlRowSet recipe;
+        String sqlSearchForRecipe;
+        if(filterBy.equalsIgnoreCase("ingredient")) {
+
+            sqlSearchForRecipe = "SELECT DISTINCT * " +
+                    "FROM ingredient_recipe " +
+                    "JOIN ingredient i on ingredient_recipe.ingredient_id = i.ingredient_id " +
+                    "JOIN recipe r on ingredient_recipe.recipe_id = r.recipe_id " +
+                    "WHERE ingredientname ILIKE ? AND visible=true";
+            recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, searchText);
+            while (recipe.next()) {
+                Recipe thisRecipe = mapResultstoRecipe(recipe);
+                recipeList.add(thisRecipe);
+            }
+        }
+        else if(filterBy.equalsIgnoreCase("category")){
+            sqlSearchForRecipe = "SELECT DISTINCT * " +
+                    "FROM recipe_category " +
+                    "JOIN category c on c.category_id = recipe_category.category_id " +
+                    "JOIN recipe r on recipe_category.recipe_id = r.recipe_id " +
+                    "WHERE categoryname ILIKE ? AND visible=true";
+            recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, searchText);
+            while (recipe.next()) {
+                Recipe thisRecipe = mapResultstoRecipe(recipe);
+                recipeList.add(thisRecipe);
+            }
+
+        }
+        return recipeList;
+    }
+
 }

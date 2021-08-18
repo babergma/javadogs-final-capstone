@@ -4,6 +4,7 @@ import com.techelevator.dao.TimeOfDay;
 
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Objects;
 
 public class Recipe {
     private Long recipeId;
@@ -123,5 +124,18 @@ public class Recipe {
 
     public List<Ingredient> getIngredientList() {
         return ingredientList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return getCookTime() == recipe.getCookTime() && getServingSize() == recipe.getServingSize() && getCalories() == recipe.getCalories() && isVisible() == recipe.isVisible() && Objects.equals(getRecipeId(), recipe.getRecipeId()) && Objects.equals(getAuthorID(), recipe.getAuthorID()) && Objects.equals(getRecipeName(), recipe.getRecipeName()) && Objects.equals(getPictureUrl(), recipe.getPictureUrl()) && Objects.equals(getCookingInstruction(), recipe.getCookingInstruction()) && Objects.equals(getIngredientList(), recipe.getIngredientList()) && getDayOfWeek() == recipe.getDayOfWeek() && getTimeOfDay() == recipe.getTimeOfDay() && Objects.equals(getType(), recipe.getType());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRecipeId(), getAuthorID(), getRecipeName(), getCookTime(), getServingSize(), getCalories(), getPictureUrl(), getCookingInstruction(), isVisible(), getIngredientList(), getDayOfWeek(), getTimeOfDay(), getType());
     }
 }

@@ -32,6 +32,15 @@ input:valid {
     margin-bottom: 10px;
 }
 
+.searchImage {
+    width: 75%;
+    height: auto;
+}
+
+.searchSubHeading {
+color: #5386E4;
+}
+
 .panel {
     margin-top: 10px;
     background-color: rgba(255, 255, 255, .9)!important;
@@ -69,3 +78,5 @@ td.details-control {
 tr.shown td.details-control {
     background: url('/img/details_close.png') no-repeat center center;
 }
+
+

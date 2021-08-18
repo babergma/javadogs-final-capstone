@@ -201,10 +201,6 @@ public class ContentController {
         return "dashboard";
     }
 
-    @RequestMapping(path = "/search", method = RequestMethod.GET)
-    public String displaySearchResults() {
-        return "searchResults";
-    }
 
     @RequestMapping(path = "/blank", method = RequestMethod.GET)
     public String displayBlankPage() {
@@ -312,7 +308,14 @@ public class ContentController {
     }
 
 
-
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    public String displaySearchResults(@RequestParam(required = false) String searchText,
+                                       @RequestParam(required = false) String filterBy,
+                                       ModelMap modelMap) {
+        List<Recipe> searchedRecipes = new ArrayList(new HashSet(recipeDao.searchForRecipeByFilter(searchText, filterBy)));
+        modelMap.put("searchedRecipes", searchedRecipes);
+        return "searchResults";
+    }
 
 
 
@@ -381,6 +384,10 @@ public class ContentController {
         redirectAttributes.addFlashAttribute("id", recipe.getRecipeId());
         return "forward:recipedetails";
     }
+
+
+
+
 
     @ExceptionHandler(NullPointerException.class)
     public String catchNull() {
