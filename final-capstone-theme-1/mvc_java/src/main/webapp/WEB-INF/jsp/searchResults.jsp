@@ -25,28 +25,28 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
                     <a href="#collapseCard${searchedRecipe.recipeId}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCard${searchedRecipe.recipeId}">
-                        <h6 class="m-0 font-weight-bold text-primary">${searchedRecipe.recipeName}</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">${searchedRecipe.recipeName} <span class="badge badge-pill badge-info">${searchedRecipe.category}</span></h6>
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse" id="collapseCard${searchedRecipe.recipeId}">
                         <div class="card-body">
                             <c:url var="placeholderImageUrl" value="/img/${searchedRecipe.pictureUrl}" />
                             <div class="form-group col-md-12">
-                            <img class="mx-auto margin img-thumbnail searchImage" src="${placeholderImageUrl}" />
+                                <img class="mx-auto margin img-thumbnail searchImage" src="${placeholderImageUrl}" />
                             </div>
                             <div class="form-group col-md-12">
                                 <div class="form-group col-md-3">
-                                <span><strong class="searchSubHeading">Serving size:</strong> ${searchedRecipe.servingSize}</span>
+                                    <span><strong class="searchSubHeading">Serving size:</strong> ${searchedRecipe.servingSize}</span>
                                 </div>
                                 <div class="form-group col-md-3">
-                                <span><strong class="searchSubHeading">Calories:</strong> ${searchedRecipe.calories}</span>
+                                    <span><strong class="searchSubHeading">Calories:</strong> ${searchedRecipe.calories}</span>
                                 </div>
                                 <div class="form-group col-md-3">
 
-                                <span><strong class="searchSubHeading">Cook Time:</strong> ${searchedRecipe.cookTime} minutes</span>
+                                    <span><strong class="searchSubHeading">Cook Time:</strong> ${searchedRecipe.cookTime} minutes</span>
                                 </div>
                                 <div class="form-group col-md-3">
-                                <a href="recipedetails?id=${searchedRecipe.recipeId}">Ingredients & Instructions</a>
+                                    <a href="recipedetails?id=${searchedRecipe.recipeId}">Ingredients & Instructions</a>
                                 </div>
                             </div>
 

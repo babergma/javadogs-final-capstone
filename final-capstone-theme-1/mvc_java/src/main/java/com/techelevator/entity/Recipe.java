@@ -1,7 +1,5 @@
 package com.techelevator.entity;
 
-import com.techelevator.dao.TimeOfDay;
-
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
@@ -13,12 +11,21 @@ public class Recipe {
     private int cookTime;
     private int servingSize;
     private int calories;
-    private String pictureUrl = "placeholder.jpg";
+    private String pictureUrl="placeholder.png";
     private String cookingInstruction;
     private boolean visible;
     private List<Ingredient> ingredientList;
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
+    private List<Category> categoryList;
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
 
     public void setDayOfWeek(DayOfWeek dayOfWeek) {
         this.dayOfWeek = dayOfWeek;

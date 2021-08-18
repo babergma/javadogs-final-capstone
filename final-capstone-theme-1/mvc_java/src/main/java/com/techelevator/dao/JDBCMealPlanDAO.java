@@ -1,9 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.entity.Ingredient;
-import com.techelevator.entity.MealPlan;
-import com.techelevator.entity.Measurement;
-import com.techelevator.entity.Recipe;
+import com.techelevator.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -28,7 +25,9 @@ public class JDBCMealPlanDAO implements MealPlanDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-//saving a meal plan
+
+
+    //saving a meal plan
     @Transactional
     @Override
     public MealPlan saveMealPlan(MealPlan mealPlan) {
@@ -99,6 +98,7 @@ public class JDBCMealPlanDAO implements MealPlanDao {
             recipe.setCookingInstruction(results.getString("cookingInstruction"));
             recipe.setVisible(results.getBoolean("visible"));
             recipe.setDayOfWeek(DayOfWeek.of(results.getInt("dayofweek")));
+
             List<TimeOfDay> timeOfDayList = TimeOfDay.getAllTimeOfDay();
             for (TimeOfDay timeOfDay : timeOfDayList) {
                 if (timeOfDay.name().equalsIgnoreCase(results.getString("timename"))) {
@@ -106,10 +106,30 @@ public class JDBCMealPlanDAO implements MealPlanDao {
                     break;
                 }
             }
+
+            mapCategoryToRecipe(recipe);
             recipes.add(recipe);
         }
 
         return recipes;
+    }
+
+    public Recipe mapCategoryToRecipe(Recipe recipe){
+        String sqlSearchForRecipeCategory = "SELECT * FROM recipe_category " +
+                "JOIN category c on c.category_id = recipe_category.category_id " +
+                "WHERE recipe_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForRecipeCategory, recipe.getRecipeId());
+        List<Category> categories = Category.getAllCategories();
+        List<Category> categoryList = new ArrayList<>();
+        while (results.next()) {
+            for (Category category : categories) {
+                if (category.name().equalsIgnoreCase(results.getString("categoryname"))) {
+                    categoryList.add(category);
+                }
+            }
+        }
+        recipe.setCategoryList(categoryList);
+        return recipe;
     }
     @Override
     public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan) {

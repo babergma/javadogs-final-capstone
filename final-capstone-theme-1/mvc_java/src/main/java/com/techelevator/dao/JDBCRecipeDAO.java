@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.entity.Category;
 import com.techelevator.entity.Ingredient;
 import com.techelevator.entity.Measurement;
 import com.techelevator.entity.Recipe;
@@ -28,19 +29,23 @@ public class JDBCRecipeDAO implements RecipeDao {
     public Recipe saveRecipe(Recipe recipe) {
 
         String sql = "INSERT INTO recipe(author_id, recipeName, cooktime, servingsize" +
-                ", calories, cookinginstruction, visible)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING recipe_id";
+                ", calories, pictureurl, cookinginstruction, visible)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING recipe_id";
         Long newId = jdbcTemplate.queryForObject(sql, Long.class,
                 recipe.getAuthorID(),
                 recipe.getRecipeName(),
                 recipe.getCookTime(),
                 recipe.getServingSize(),
                 recipe.getCalories(),
+                recipe.getPictureUrl(),
                 recipe.getCookingInstruction(),
                 recipe.isVisible());
         recipe.setRecipeId(newId);
+        updateRecipeCategories(recipe);
         return recipe;
     }
+
+
 
     public List<String> getIngredientTypes() {
         String sql = "";
@@ -57,7 +62,7 @@ public class JDBCRecipeDAO implements RecipeDao {
         String sqlSearchForRecipe = "SELECT * " +
                 "FROM recipe " +
                 "JOIN person ON recipe.author_id = person.user_id " +
-                "WHERE user_id = ?";
+                "WHERE user_id = ? ";
         List<Recipe> recipeList = new ArrayList<>();
         SqlRowSet recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, user_id);
         while (recipe.next()) {
@@ -113,7 +118,7 @@ public class JDBCRecipeDAO implements RecipeDao {
     public Recipe getRecipeByRecipeId(Long recipe_id) {
         String sql = "SELECT * " +
                 "FROM recipe " +
-                "WHERE recipe_id = ?";
+                "WHERE recipe.recipe_id = ?";
         SqlRowSet recipe = jdbcTemplate.queryForRowSet(sql, recipe_id);
         Recipe thisRecipe = new Recipe();
         while(recipe.next()) {
@@ -150,7 +155,24 @@ public class JDBCRecipeDAO implements RecipeDao {
                 " WHERE recipe_id = ?";
         jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
                 recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
+        updateRecipeCategories(recipe);
     }
+
+    @Transactional
+    public Recipe updateRecipeCategories(Recipe recipe){
+        String sqlRemoveExistingCategories = "DELETE FROM recipe_category " +
+                "WHERE recipe_id = ?";
+        jdbcTemplate.update(sqlRemoveExistingCategories, recipe.getRecipeId());
+        String sqlInsertCategories = "INSERT INTO recipe_category(recipe_id, category_id)" +
+                " VALUES (?, ?)";
+        for (Category category : recipe.getCategoryList()) {
+            jdbcTemplate.update(sqlInsertCategories, recipe.getRecipeId(), category.getCategoryId());
+        }
+        return recipe;
+    }
+
+
+
 
     @Override
     @Transactional
@@ -185,9 +207,9 @@ public class JDBCRecipeDAO implements RecipeDao {
                 " WHERE recipe_id = ?";
         jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
                 recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
-            String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
-                    " VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientId(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementId());
+        String sql = "INSERT INTO ingredient_recipe(recipe_id, ingredient_id, measurementamount, measurementtype_id) " +
+                " VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, recipe.getRecipeId(), ingredient.getIngredientId(), ingredient.getMeasurementAmount(), ingredient.getMeasurement().getMeasurementId());
     }
 
     public Recipe mapResultstoRecipe(SqlRowSet results){
@@ -201,7 +223,26 @@ public class JDBCRecipeDAO implements RecipeDao {
         recipe.setPictureUrl(results.getString("pictureurl"));
         recipe.setCookingInstruction(results.getString("cookingInstruction"));
         recipe.setVisible(results.getBoolean("visible"));
-       return recipe;
+        mapCategoryToRecipe(recipe);
+        return recipe;
+    }
+
+    public Recipe mapCategoryToRecipe(Recipe recipe){
+        String sqlSearchForRecipeCategory = "SELECT * FROM recipe_category " +
+                "JOIN category c on c.category_id = recipe_category.category_id " +
+                "WHERE recipe_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForRecipeCategory, recipe.getRecipeId());
+        List<Category> categories = Category.getAllCategories();
+        List<Category> categoryList = new ArrayList<>();
+        while (results.next()) {
+            for (Category category : categories) {
+                if (category.getAbbreviation().equalsIgnoreCase(results.getString("categoryname"))) {
+                    categoryList.add(category);
+                }
+            }
+        }
+        recipe.setCategoryList(categoryList);
+        return recipe;
     }
 
     @Transactional
@@ -235,6 +276,8 @@ public class JDBCRecipeDAO implements RecipeDao {
                     "FROM ingredient_recipe " +
                     "JOIN ingredient i on ingredient_recipe.ingredient_id = i.ingredient_id " +
                     "JOIN recipe r on ingredient_recipe.recipe_id = r.recipe_id " +
+                    "JOIN recipe_category rc on r.recipe_id = rc.recipe_id " +
+                    "JOIN category c on rc.category_id = c.category_id " +
                     "WHERE ingredientname ILIKE ? AND visible=true";
             recipe = jdbcTemplate.queryForRowSet(sqlSearchForRecipe, searchText);
             while (recipe.next()) {

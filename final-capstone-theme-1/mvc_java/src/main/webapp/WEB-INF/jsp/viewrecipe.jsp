@@ -19,18 +19,18 @@
       </p>
     </div>
   </section>
-  <div class="album py-5 bg-light">
+  <div class="card-group py-5 bg-light">
     <div class="container">
       <div class="row">
         <c:forEach items="${recipeList}" var="currentRecipe">
-          <div class="col-md-4">
+          <div class="card col-md-4">
             <div class="card mb-4 shadow-sm">
               <c:url var="placeholderImageUrl" value="/img/${currentRecipe.pictureUrl}" />
-              <img src="${placeholderImageUrl}" />
+              <img class="card-img-top" src="${placeholderImageUrl}" />
               <div class="card-body">
-                <h3 class="card-text">${currentRecipe.recipeName}</h3>
+                <h4 class="card-title m-0 font-weight-bold text-primary">${currentRecipe.recipeName}</h4>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
+                  <div class="btn-group text-center">
                     <button type="button" class="btn btn-sm btn-outline-secondary">
                       <c:url var = "detailsURL" value="/user/recipedetails">
                         <c:param name="id" value="${currentRecipe.recipeId}"/>
@@ -41,8 +41,22 @@
                     </c:url>
                       <a href="${editURL}">Edit</a></button>
                   </div>
-                  <small class="text-muted">${currentRecipe.cookTime}</small>
                 </div>
+              </div>
+              <div class="card-footer">
+                <c:forEach items="${currentRecipe.categoryList}" var="category">
+                  <span class="badge badge-pill badge-info ${category.abbreviation}">
+                      ${category.abbreviation}
+                  </span>
+                </c:forEach>
+                <c:choose>
+                  <c:when test="${currentRecipe.visible==true}">
+                    <span class="badge badge-pill badge-warning">Public</span>
+                  </c:when>
+                  <c:otherwise>
+                    <span class="badge badge-pill badge-danger">Private</span>
+                  </c:otherwise>
+                </c:choose>
               </div>
             </div>
           </div>

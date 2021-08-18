@@ -1,7 +1,5 @@
 
-package com.techelevator.dao;
-
-import com.techelevator.entity.Measurement;
+package com.techelevator.entity;
 
 import java.util.Arrays;
 import java.util.Collections;

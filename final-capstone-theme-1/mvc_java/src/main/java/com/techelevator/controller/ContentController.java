@@ -3,7 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.IngredientDAO;
 import com.techelevator.dao.MealPlanDao;
 import com.techelevator.dao.RecipeDao;
-import com.techelevator.dao.TimeOfDay;
+import com.techelevator.entity.TimeOfDay;
 import com.techelevator.entity.*;
 import com.techelevator.util.EmployeeDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.awt.*;
 import java.time.DayOfWeek;
 import java.util.*;
+import java.util.List;
 
 
 @Controller
@@ -122,6 +124,7 @@ public class ContentController {
 
         modelHolder.put("measurements", Measurement.getAllMeasurements());
         modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
+        modelHolder.put("categories", Category.getAllCategories());
         return "editrecipe";
     }
 
@@ -295,10 +298,10 @@ public class ContentController {
 
     @RequestMapping(path = "/submitDeleteRecipeFromMealPlan", method = RequestMethod.POST)
     public String submitEditRecipe(
-                                   ModelMap modelMap,
-                                   HttpSession session, SessionStatus status,
-                                   @RequestParam(required = false) Long delete,
-                                   @RequestParam Long mealPlanId) {
+            ModelMap modelMap,
+            HttpSession session, SessionStatus status,
+            @RequestParam(required = false) Long delete,
+            @RequestParam Long mealPlanId) {
         if (delete != null) {
             mealPlanDao.deleteSingleRecipeFromMealPlan(mealPlanId, delete);
 //                    deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
@@ -367,7 +370,6 @@ public class ContentController {
 
     @RequestMapping(path = "/viewallrecipes", method = RequestMethod.GET)
     public String displayAllRecipes(ModelMap modelMap) {
-
         List<Recipe> recipeList = recipeDao.getAllPublicRecipes();
         modelMap.put("recipeList", recipeList);
         return "viewpublicrecipes";

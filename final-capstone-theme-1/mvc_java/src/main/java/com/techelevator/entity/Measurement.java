@@ -7,13 +7,17 @@ import java.util.List;
 import static java.util.stream.Collectors.toMap;
 
 public enum Measurement {
-    CUPS("Cups", 1), TABLESPOONS("tbsp", 2), TEASPOONS("tsp", 3), OUNCES("oz", 4), MILLILITERS("ml", 5);
+    CUPS("Cups", 1),
+    TABLESPOONS("tbsp", 2),
+    TEASPOONS("tsp", 3),
+    OUNCES("oz", 4),
+    MILLILITERS("ml", 5);
     private final String abbreviation;
     private final int measurementId;
 
-    Measurement(String abbreviation, int measurementid) {
+    Measurement(String abbreviation, int measurementId) {
         this.abbreviation = abbreviation;
-        this.measurementId = measurementid;
+        this.measurementId = measurementId;
     }
 
     public String getAbbreviation() {

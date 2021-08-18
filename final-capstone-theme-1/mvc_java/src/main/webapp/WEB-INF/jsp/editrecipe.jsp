@@ -150,32 +150,52 @@
                     calories
                 </div>
             </div>
-
-            <div class="form-group col-md-12">
-                <h4 for="cookingInstruction">Instructions</h4>
-                <form:textarea id="cookingInstruction" path="cookingInstruction" cssClass="form-control"
-                               rows="5"/>
-            </div>
-            <div class="form-group col-md-12">
+            <div class="form-row">
                 <div class="form-check">
-
-                    <form:radiobutton path="visible" cssClass="form-check-input" value="true"/>
-                    <label for="false" id="false" class="form-check-label" name="true">Public</label>
-                </div>
-                <div class="form-check">
-
-                    <form:radiobutton path="visible" cssClass="form-check-input" value="false"/>
-                    <label for="false" id="false" class="form-check-label" name="private">Private</label>
+                    <form:checkbox path="categoryList" value="VEGETARIAN" />Vegetarian
+                    <form:checkbox path="categoryList" value="HIGH_PROTEIN" />High Protein
+                    <form:checkbox path="categoryList" value="LOW_CARB" />Low Carb
+                    <form:checkbox path="categoryList" value="DAIRY_FREE" />Dairy Free
+                    <form:checkbox path="categoryList" value="GLUTEN_FREE" />Gluten Free
+                    <form:checkbox path="categoryList" value="VEGAN" />Vegan
+                    <form:checkbox path="categoryList" value="KOSHER" />Kosher
+                    <form:checkbox path="categoryList" value="PESCRETARIAN" />Pescretarian
                 </div>
             </div>
+                <%--                </form:select>--%>
+                <%--                <div class="form-check">--%>
+                <%--                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">--%>
+                <%--                    <label class="form-check-label" for="flexCheckIndeterminate">--%>
+                <%--                        Indeterminate checkbox--%>
+                <%--                    </label>--%>
+                <%--                </div>--%>
+        </div>
 
-            <div class="form-group col-md-12">
-                <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white" value="add" name="add">Add Recipe</button>
+        <div class="form-group col-md-12">
+            <h4 for="cookingInstruction">Instructions</h4>
+            <form:textarea id="cookingInstruction" path="cookingInstruction" cssClass="form-control"
+                           rows="5"/>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="form-check">
+
+                <form:radiobutton path="visible" cssClass="form-check-input" value="true"/>
+                <label for="false" id="false" class="form-check-label" name="true">Public</label>
+            </div>
+            <div class="form-check">
+
+                <form:radiobutton path="visible" cssClass="form-check-input" value="false"/>
+                <label for="false" id="false" class="form-check-label" name="private">Private</label>
             </div>
         </div>
 
-        </form:form>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-lg" style="background-color: #a5cfab; color:white" value="add" name="add">Add Recipe</button>
+        </div>
     </div>
+
+    </form:form>
+</div>
 </div>
 
 

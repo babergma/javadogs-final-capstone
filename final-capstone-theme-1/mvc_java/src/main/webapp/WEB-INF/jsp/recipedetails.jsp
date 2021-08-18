@@ -23,7 +23,12 @@
                         <img src="${placeholderImageUrl}" />
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
                             <h3 class="m-0 font-weight-bold text-primary ">${recipe.recipeName}</h3>
-                            <p class="lead fw-normal">Summary of recipe story or whatever</p>
+                            <p class="lead fw-normal">
+                                <c:forEach items="${recipe.categoryList}" var="category">
+                  <span class="badge badge-pill badge-info ${category.abbreviation}">
+                          ${category.abbreviation}
+                  </span>
+                                </c:forEach></p>
                             <a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print<i class="fas fa-edit" style="color: white;"></i></button></a>
                         </div>
                         <div class="product-device shadow-sm d-none d-md-block"></div>

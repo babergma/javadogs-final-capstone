@@ -131,7 +131,21 @@
                             <form:input path="calories" type="number" cssClass="form-control" placeholder="600"/>
                             calories
                         </div>
+                        <div class="form-row">
+                            <div class="form-check">
+                                <form:checkbox path="categoryList" value="VEGETARIAN" />Vegetarian
+                                <form:checkbox path="categoryList" value="HIGH_PROTEIN" />High Protein
+                                <form:checkbox path="categoryList" value="LOW_CARB" />Low Carb
+                                <form:checkbox path="categoryList" value="DAIRY_FREE" />Dairy Free
+                                <form:checkbox path="categoryList" value="GLUTEN_FREE" />Gluten Free
+                                <form:checkbox path="categoryList" value="VEGAN" />Vegan
+                                <form:checkbox path="categoryList" value="KOSHER" />Kosher
+                                <form:checkbox path="categoryList" value="PESCRETARIAN" />Pescretarian
+                            </div>
+                        </div>
                     </div>
+
+
 
                     <div class="form-group col-md-12">
                         <h4 for="cookingInstruction">Instructions</h4>
@@ -150,7 +164,6 @@
                             <label for="false" id="false" class="form-check-label" name="private">Private</label>
                                 <%--                                <form:radiobutton path="visible"  type="radio" name="visibility"--%>
                                 <%--                                       value="false" />--%>
-
                         </div>
                     </div>
 
