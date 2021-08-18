@@ -25,7 +25,7 @@ import java.util.List;
 
 
 @Controller
-@SessionAttributes({"ingredientList", "recipe", "ingredient", "newIngredientList", "currentRecipe"})
+@SessionAttributes({"ingredientList", "recipe", "ingredient", "newIngredientList", "currentRecipe", "newRecipe"})
 @RequestMapping(path = "/user")
 public class ContentController {
 
@@ -75,8 +75,8 @@ public class ContentController {
 
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
     public String displayAddRecipe(ModelMap modelHolder) {
-        if(! modelHolder.containsKey("recipe")) {
-            modelHolder.put("recipe", new Recipe());
+        if(! modelHolder.containsKey("newRecipe")) {
+            modelHolder.put("newRecipe", new Recipe());
         }
         modelHolder.put("ingredient", new Ingredient());
         if (!modelHolder.containsKey("newIngredientList")) {
@@ -178,15 +178,15 @@ public class ContentController {
 
 
     @RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
-    public String submitRecipe( @Valid @ModelAttribute("recipe") Recipe recipe,
+    public String submitRecipe( @Valid @ModelAttribute("newRecipe") Recipe recipe,
                                BindingResult result,
                                ModelMap modelMap,
                                RedirectAttributes redirectAttributes,
                                HttpSession session) {
         if (result.hasErrors()) {
             System.out.println("error in form");
-            redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "recipe", result);
-            redirectAttributes.addFlashAttribute("recipe", recipe);
+            redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "newRecipe", result);
+            redirectAttributes.addFlashAttribute("newRecipe", recipe);
             return "redirect:/user/addrecipe";
         }
         User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
@@ -195,6 +195,7 @@ public class ContentController {
         recipeDao.addIngredientListToRecipe(recipe, ingredientList);
         ingredientList = new ArrayList<>();
         modelMap.put("newIngredientList", ingredientList);
+        modelMap.put("newRecipe", new Recipe());
         return "dashboard";
     }
 

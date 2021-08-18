@@ -112,7 +112,7 @@
                         </div>
                     </form:form>
                     <c:url var="submitFormActionUrl" value="/user/submitRecipe"/>
-                    <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
+                    <form:form modelAttribute="newRecipe" action="${submitFormActionUrl}" method="POST">
                     <div class="form-group">
                         <label for="recipeName">RecipeName</label>
 
