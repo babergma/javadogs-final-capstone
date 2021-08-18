@@ -52,55 +52,20 @@
 		<!-- Divider -->
 		<hr class="sidebar-divider my-0">
 
-		<!-- Sidebar - Dashboard -->
-		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="${baseUrl}user/dashboard">
-			<div class="sidebar-brand-icon rotate-n-15">
-				<c:url var="dashboardImageUrl" value="/img/dashboard.png" />
-				<img src="${dashboardImageUrl}" />
-			</div>
-			<div class="sidebar-brand-text mx-3" style="font-size: 80%">Your Goals</div>
-		</a>
-
 		<!-- Divider -->
 		<c:if test="${LOGGED_USER == null}">
 			<hr class="sidebar-divider">
 
 			<!-- Heading -->
-
-			<div class="sidebar-heading">
-				Site Access
-			</div>
-
 			<!-- Nav Item - Pages Collapse Menu -->
 
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-					<i class="fas fa-fw fa-folder"></i>
-					<span>Access Pages</span>
-				</a>
-				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Login Screens:</h6>
-
-						<a class="collapse-item" href="${baseUrl}login">Login</a>
-
-						<a class="collapse-item" href="${baseUrl}register">Register</a>
-
-							<%--<div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="${baseUrl}user/404">404 Page</a>
-                            <a class="collapse-item" href="${baseUrl}error">Error Page</a>
-                            <a class="collapse-item" href="${baseUrl}user/blank">Blank Page</a>--%>
-					</div>
-				</div>
-			</li>
 		</c:if>
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 
 		<!-- Heading -->
 		<c:if test="${LOGGED_USER != null}">
-			<div class="sidebar-heading">
+			<div class="sidebar-heading" style="font-size: 20px; color:#EE964B;">
 
 					${LOGGED_USER}
 			</div>
@@ -108,24 +73,18 @@
 			<!-- Nav Item - Tables -->
 
 
-
-			<%--<li class="nav-item">
-                <a class="nav-link" href="${baseUrl}user/recipedetails">
-                    <i class="fas fa-fw fa-bullseye"></i>
-                    <span>Recipe Details</span></a>
-            </li>--%>
-
 			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/addrecipetomealplan">
-					<i class="fas fa-fw fa-apple-alt" style="color: #EE964B"></i>
-					<span>Add to Meal Plan</span></a>
+				<a class="nav-link" href="${baseUrl}">
+					<i class="fas fa-fw fa-home" style="color:#a5cfab;"></i>
+					<span>Home</span></a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/addmealplanname">
-					<i class="fas fa-fw fa-bacon" style="color: #EE964B"></i>
-					<span>Create New Meal Plan</span></a>
+				<a class="nav-link" href="${baseUrl}user/viewallrecipes">
+					<i class="fas fa-fw fa-cookie-bite" style="color: #EE964B"></i>
+					<span>All Recipes</span></a>
 			</li>
+
 			<li class="nav-item">
 				<a class="nav-link" href="${baseUrl}user/viewmealplans">
 					<i class="fas fa-fw fa-fish" style="color: #EE964B"></i>
@@ -138,70 +97,11 @@
 					<span>My Recipes</span></a>
 			</li>
 
-			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/viewallrecipes">
-					<i class="fas fa-fw fa-cookie-bite" style="color: #EE964B"></i>
-					<span>All Recipes</span></a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/addrecipe">
-					<i class="fas fa-fw fa-carrot" style="color: #EE964B"></i>
-					<span>Add Recipe</span></a>
-			</li>
-
-
-			<li class="nav-item">
-				<a class="nav-link" href="${baseUrl}user/addingredient">
-					<i class="fas fa-fw fa-cheese" style="color: #EE964B"></i>
-					<span>Add Ingredient</span></a>
-			</li>
 
 		</c:if>
-		<%--<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/basic/table">
-				<i class="fas fa-fw fa-table"></i>
-				<span>Basic Table</span></a>
-		</li>
-
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/rest/table">
-				<i class="fas fa-fw fa-table"></i>
-				<span>REST Table</span></a>
-		</li>
-
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/cards">
-				<i class="fas fa-fw fa-sd-card"></i>
-				<span>Cards</span></a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/buttons">
-				<i class="fas fa-fw fa-bullseye"></i>
-				<span>Buttons</span></a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/accordion">
-				<i class="fas fa-fw fa-bullseye"></i>
-				<span>Accordion</span></a>
-		</li>--%>
 
 		<!-- Divider -->
-		<hr class="sidebar-divider">
 
-		<!-- Heading -->
-
-
-		<!-- Nav Item - Charts -->
-		<%--<li class="nav-item">
-			<a class="nav-link" href="${baseUrl}user/charts">
-				<i class="fas fa-fw fa-chart-area"></i>
-				<span>Charts</span></a>
-		</li>
-
-		<!-- Divider -->
-		<hr class="sidebar-divider d-none d-md-block">
---%>
 		<!-- Sidebar Toggler (Sidebar) -->
 		<div class="text-center d-none d-md-inline">
 			<button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -242,58 +142,7 @@
 					</div>
 				</form>
 
-				<!-- Topbar Navbar -->
-				<ul class="navbar-nav ml-auto">
 
-					<!-- Nav Item - Alerts -->
-					<%--<li class="nav-item dropdown no-arrow mx-1">
-						<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<c:url var="alertImageUrl" value="/img/alert.png" />
-							<img src="${alertImageUrl}" />
-							<!-- Counter - Alerts -->
-							<span class="badge badge-danger badge-counter">3+</span>
-						</a>
-						<!-- Dropdown - Alerts -->
-						&lt;%&ndash;<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-							<h6 class="dropdown-header">
-								Alerts Center
-							</h6>
-							<a class="dropdown-item d-flex align-items-center" href="#">
-								<div class="mr-3">
-									<div class="icon-circle bg-primary">
-										<i class="fas fa-file-alt text-white"></i>
-									</div>
-								</div>
-								<div>
-									<div class="small text-gray-500">August 12, 2020</div>
-									<span class="font-weight-bold">A new monthly report is ready to download!</span>
-								</div>
-							</a>
-							<a class="dropdown-item d-flex align-items-center" href="#">
-								<div class="mr-3">
-									<div class="icon-circle bg-success">
-										<i class="fas fa-donate text-white"></i>
-									</div>
-								</div>
-								<div>
-									<div class="small text-gray-500">July 30, 2020</div>
-									$290.29 has been deposited into your account!
-								</div>
-							</a>
-							<a class="dropdown-item d-flex align-items-center" href="#">
-								<div class="mr-3">
-									<div class="icon-circle bg-warning">
-										<i class="fas fa-exclamation-triangle text-white"></i>
-									</div>
-								</div>
-								<div>
-									<div class="small text-gray-500">July 30, 2020</div>
-									Spending Alert: We've noticed unusually high spending for your account.
-								</div>
-							</a>
-							<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-						</div>&ndash;%&gt;
-					</li>--%>
 
 					<div class="topbar-divider d-none d-sm-block"></div>
 
