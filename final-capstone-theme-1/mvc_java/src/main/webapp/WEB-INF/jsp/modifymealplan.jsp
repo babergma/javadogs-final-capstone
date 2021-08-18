@@ -37,7 +37,7 @@
       <thead></thead>
       <tbody>
 <c:url var="formActionUrl" value="/user/submitDeleteRecipeFromMealPlan"/>
-<form action="${formActionUrl}" method="POST">
+<form action="${formActionUrl}" method="GET">
 
       <c:forEach items="${mealPlan.recipeList}" var="recipe">
         <tr>
@@ -46,9 +46,13 @@
 
 
 
-
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a>
           </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
@@ -73,8 +77,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -95,8 +104,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -122,8 +136,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -143,9 +162,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a></td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -166,8 +189,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -193,9 +221,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a></td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -216,8 +248,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a></td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -237,9 +274,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -266,8 +307,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a></td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -312,8 +358,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -361,9 +412,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a></td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -384,8 +439,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -412,8 +472,13 @@
 
 
 
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -434,9 +499,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -456,9 +525,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -484,9 +557,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -507,9 +584,13 @@
 
 
 
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 
@@ -528,10 +609,13 @@
 
 
 
-
-
-            <button class="btn btn-danger btn-sm" type="submit" name="delete" value="${recipe.recipeId}"><i class="fas fa-trash"></i></button>
-          </td>
+              <c:url var = "priceRangeURL" value="/user/submitDeleteRecipeFromMealPlan">
+                  <c:param name="thisRecipeId" value="${recipe.recipeId}"/>
+                  <c:param name="thisDayOfWeekId" value="${recipe.dayOfWeek.getValue()}"/>
+                  <c:param name="thisTimeOfDayId" value="${recipe.timeOfDay.timeOfDayId}"/>
+                  <c:param name="mealPlanId" value="${mealPlan.mealPlanId}" />
+              </c:url>
+              <a href="${priceRangeURL}"><i class="fas fa-trash"></i></a> </td>
           <td><h4>${recipe.recipeName}</h4></td>
           </tr>
 

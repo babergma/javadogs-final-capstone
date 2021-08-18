@@ -12,11 +12,12 @@ public interface MealPlanDao {
     public List<Ingredient> getAllIngredientsByMealPlan(MealPlan mealPlan);
     public MealPlan addRecipeListToMealPlan(MealPlan mealPlan, List<Recipe> recipeList);
     void updateMealPlan(MealPlan mealPlan);
-    public void deleteSingleRecipeFromMealPlan(Long mealPlan_id, Long recipe_id);
     public void updateMealPlanByRecipe(MealPlan mealPlan, Recipe recipe);
     public MealPlan getMealPlanByMealPlanId(Long id);
     public void addRecipeListToMealPLan(MealPlan mealPlan, List<Recipe> recipeList);
     public void addRecipeToMealPlan(MealPlan mealPlan, Recipe recipe);
     public MealPlan saveMealPlan(MealPlan mealPlan);
     public MealPlan addAuthorToMealPlan(MealPlan mealPlan, Long user_id);
+
+    void deleteSingleRecipeFromMealPlan(Long mealPlanId, Long thisRecipeID, Long thisDayOfWeekId, Long thisDayOfWeekId1);
 }

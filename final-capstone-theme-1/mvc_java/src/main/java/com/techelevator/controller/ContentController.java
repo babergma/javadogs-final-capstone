@@ -48,7 +48,7 @@ public class ContentController {
     @RequestMapping(path = "/viewrecipe", method = RequestMethod.GET)
     public String displayViewRecipe(HttpSession session,
                                     ModelMap modelMap) {
-        User user = (User)session.getAttribute(AuthorizationFilter.LOGGED_USER);
+        User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         List<Recipe> recipeList = recipeDao.getAllRecipesByUserId(user.getId());
         modelMap.put("recipeList", recipeList);
         return "viewrecipe";
@@ -75,7 +75,7 @@ public class ContentController {
 
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
     public String displayAddRecipe(ModelMap modelHolder) {
-        if(! modelHolder.containsKey("newRecipe")) {
+        if (!modelHolder.containsKey("newRecipe")) {
             modelHolder.put("newRecipe", new Recipe());
         }
         modelHolder.put("ingredient", new Ingredient());
@@ -117,7 +117,7 @@ public class ContentController {
             currentRecipe = recipeDao.getRecipeByRecipeId(id);
             modelHolder.put("currentRecipe", currentRecipe);
         } else {
-            currentRecipe= (Recipe) modelHolder.getAttribute("currentRecipe");
+            currentRecipe = (Recipe) modelHolder.getAttribute("currentRecipe");
         }
         modelHolder.put("ingredient", new Ingredient());
 
@@ -178,7 +178,7 @@ public class ContentController {
 
 
     @RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
-    public String submitRecipe( @Valid @ModelAttribute("newRecipe") Recipe recipe,
+    public String submitRecipe(@Valid @ModelAttribute("newRecipe") Recipe recipe,
                                BindingResult result,
                                ModelMap modelMap,
                                RedirectAttributes redirectAttributes,
@@ -251,6 +251,9 @@ public class ContentController {
                                              BindingResult result,
                                              HttpSession session,
                                              ModelMap modelMap) {
+        if (!modelMap.containsKey("newRecipe")) {
+            modelMap.put("newRecipe", new Recipe());
+        }
         User user = (User) session.getAttribute("LOGGED_USER");
         modelMap.put("recipeList", recipeDao.getAllRecipesByUserId(user.getId()));
         modelMap.put("mealPlanList", mealPlanDao.getAllMealPlansByUserId(user.getId()));
@@ -297,11 +300,11 @@ public class ContentController {
     }
 
     @RequestMapping(path = "/modifymealplan", method = RequestMethod.GET)
-    public String displayModifyMealPlan(@RequestParam (required = false) Long id,
+    public String displayModifyMealPlan(@RequestParam(required = false) Long id,
                                         ModelMap modelMap,
                                         RedirectAttributes redirectAttributes) {
         MealPlan mealPlan;
-        if(id != null) {
+        if (id != null) {
             mealPlan = mealPlanDao.getMealPlanByMealPlanId(id);
             redirectAttributes.addFlashAttribute("mealPlan", mealPlan);
             modelMap.addAttribute("mealPlan", mealPlan);
@@ -309,20 +312,19 @@ public class ContentController {
         return "modifymealplan";
     }
 
-    @RequestMapping(path = "/submitDeleteRecipeFromMealPlan", method = RequestMethod.POST)
+    @RequestMapping(path = "/submitDeleteRecipeFromMealPlan", method = RequestMethod.GET)
     public String submitEditRecipe(
-            @RequestParam(required = false) Long delete,
+            @RequestParam(required = true) Long thisRecipeId,
+            @RequestParam(required = true) Long thisDayOfWeekId,
+            @RequestParam(required = true) Long thisTimeOfDayId,
             @RequestParam Long mealPlanId,
             RedirectAttributes redirectAttributes) {
-        if (delete != null) {
-            mealPlanDao.deleteSingleRecipeFromMealPlan(mealPlanId, delete);
-//                    deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
-            MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(mealPlanId);
-            redirectAttributes.addFlashAttribute("mealPlan", mealPlan);
-            return "redirect:/user/modifymealplan";
-        }
-        return "error";
+        mealPlanDao.deleteSingleRecipeFromMealPlan(mealPlanId, thisRecipeId, thisTimeOfDayId, thisDayOfWeekId);
+        MealPlan mealPlan = mealPlanDao.getMealPlanByMealPlanId(mealPlanId);
+        redirectAttributes.addFlashAttribute("mealPlan", mealPlan);
+        return "redirect:/user/modifymealplan";
     }
+
 
 
     @RequestMapping(path = "/search", method = RequestMethod.GET)

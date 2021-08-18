@@ -193,11 +193,13 @@ public class JDBCMealPlanDAO implements MealPlanDao {
         jdbcTemplate.update(sql, mealPlan.getMealPlanName());
     }
 
-    @Override
-    public void deleteSingleRecipeFromMealPlan(Long mealPlan_id, Long recipe_id) {
+
+
+
+    public void deleteSingleRecipeFromMealPlan(Long mealPlanId, Long thisRecipeID, Long thisTimeOfDayId, Long thisDayOfWeekId) {
         String sql = "DELETE FROM recipe_mealplan " +
-                " WHERE mealplan_id = ? AND recipe_id = ?";
-        jdbcTemplate.update(sql, mealPlan_id, recipe_id);
+                " WHERE mealplan_id = ? AND recipe_id = ? AND timeofday = ? AND dayofweek = ?";
+        jdbcTemplate.update(sql, mealPlanId, thisRecipeID, thisTimeOfDayId, thisDayOfWeekId);
     }
 
     @Override
