@@ -93,11 +93,13 @@
                 </form:form>
                 <div class="form-group col-lg-12">
                     Ingredient not there?
-                    <button type="button" class="btn btn-outline-danger" id="newIngredient"><a href="addingredient">Add new
+                    <button type="button" class="btn btn-outline" id="newIngredient"><a class="btn btn-danger" href="addingredient">Add new
                         ingredient</a></button>
                 </div>
                 <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
                 <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
+                +                        <form:hidden path="recipeId" value="${recipe.recipeId}"/>
+                    ${recipe.recipeId}
                 <div class="form-group col-md-12 alert alert-info" role="alert">
                     <div class="container">
 

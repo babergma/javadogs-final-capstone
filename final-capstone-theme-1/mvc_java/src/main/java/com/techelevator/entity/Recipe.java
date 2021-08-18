@@ -1,5 +1,7 @@
 package com.techelevator.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
@@ -7,11 +9,14 @@ import java.util.Objects;
 public class Recipe {
     private Long recipeId;
     private Long authorID;
+
+    @NotBlank(message = "Recipe name is required!")
     private String recipeName;
     private int cookTime;
     private int servingSize;
     private int calories;
     private String pictureUrl="placeholder.png";
+    @NotBlank(message = "CookingInstruction Required")
     private String cookingInstruction;
     private boolean visible;
     private List<Ingredient> ingredientList;

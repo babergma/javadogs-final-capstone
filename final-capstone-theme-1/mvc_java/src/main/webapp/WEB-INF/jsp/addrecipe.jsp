@@ -39,7 +39,7 @@
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <c:forEach items="${displayIngredients}" var="displayIngredient">
                                                     <form:option
-                                                            value="${displayIngredient.ingredientName}" cssStyle="background-color: #858796"><td> <button class="btn btn-danger me-md-2" type="button"><i class="fas fa-trash-alt"></i></button></td>${displayIngredient.ingredientName}</form:option>
+                                                            value="${displayIngredient.ingredientName}" cssStyle="background-color: #858796"><td> <button class="btn me-md-2" type="button"><i class="fas fa-trash-alt"></i></button></td>${displayIngredient.ingredientName}</form:option>
                                                 </c:forEach>
                                             </div>
                                         </form:select>
@@ -77,7 +77,7 @@
 
                             <div class="form-group col-lg-12">
                                 Ingredient not there?
-                                <button type="button" class="btn btn-outline-danger" id="newIngredient"><a href="addingredient"> Add new
+                                <button type="button" class="btn btn-outline" id="newIngredient"><a class="btn btn-danger" href="addingredient"> Add new
                                     ingredient</a>
                                 </button>
                             </div>
@@ -114,8 +114,11 @@
                     <c:url var="submitFormActionUrl" value="/user/submitRecipe"/>
                     <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
                     <div class="form-group">
+                        <label for="recipeName">RecipeName</label>
+
                         <form:label path="recipeName" value="Name"/>
                         <form:input path="recipeName" type="text" cssClass="form-control" placeholder="Cajun Shrimp"/>
+                        <form:errors path="recipeName" cssClass="error" element="p" >error</form:errors>
                     </div>
                     <div class="form-row ">
                         <div class="form-group col-md-4 col-auto">
@@ -151,6 +154,7 @@
                         <h4 for="cookingInstruction">Instructions</h4>
                         <form:textarea id="cookingInstruction" path="cookingInstruction" cssClass="form-control"
                                        rows="5"/>
+                        <form:errors path="cookingInstruction"/>
                     </div>
                     <div class="form-group col-md-12">
                         <div class="form-check">

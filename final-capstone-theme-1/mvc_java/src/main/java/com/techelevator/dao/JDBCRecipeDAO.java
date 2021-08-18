@@ -27,7 +27,7 @@ public class JDBCRecipeDAO implements RecipeDao {
     @Override
     @Transactional
     public Recipe saveRecipe(Recipe recipe) {
-
+        System.out.println(recipe.getRecipeId());
         String sql = "INSERT INTO recipe(author_id, recipeName, cooktime, servingsize" +
                 ", calories, pictureurl, cookinginstruction, visible)" +
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING recipe_id";
@@ -160,6 +160,7 @@ public class JDBCRecipeDAO implements RecipeDao {
 
     @Transactional
     public Recipe updateRecipeCategories(Recipe recipe){
+
         String sqlRemoveExistingCategories = "DELETE FROM recipe_category " +
                 "WHERE recipe_id = ?";
         jdbcTemplate.update(sqlRemoveExistingCategories, recipe.getRecipeId());

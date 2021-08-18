@@ -5,6 +5,7 @@ import com.techelevator.dao.MealPlanDao;
 import com.techelevator.dao.RecipeDao;
 import com.techelevator.entity.TimeOfDay;
 import com.techelevator.entity.*;
+import com.techelevator.security.AuthorizationFilter;
 import com.techelevator.util.EmployeeDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ import java.util.List;
 
 
 @Controller
-@SessionAttributes({"ingredientList", "recipe", "ingredient", "newIngredientList"})
+@SessionAttributes({"ingredientList", "ingredient", "newIngredientList"})
 @RequestMapping(path = "/user")
 public class ContentController {
 
@@ -75,7 +76,9 @@ public class ContentController {
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
     public String displayAddRecipe(ModelMap modelHolder,
                                    HttpSession session) {
-        modelHolder.put("recipe", new Recipe());
+        if(! modelHolder.containsKey("recipe")) {
+            modelHolder.put("recipe", new Recipe());
+        }
         modelHolder.put("ingredient", new Ingredient());
         if (!modelHolder.containsKey("newIngredientList")) {
             List<Ingredient> ingredientList = new ArrayList<>();
@@ -118,13 +121,11 @@ public class ContentController {
         }
         modelHolder.put("ingredient", new Ingredient());
 
-
         List<Ingredient> ingredientList = recipeDao.getAllIngredientsByRecipeId(recipe.getRecipeId());
         modelHolder.addAttribute("ingredientList", ingredientList);
 
         modelHolder.put("measurements", Measurement.getAllMeasurements());
         modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
-        modelHolder.put("categories", Category.getAllCategories());
         return "editrecipe";
     }
 
@@ -154,7 +155,7 @@ public class ContentController {
     public String submitEditRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
                                    BindingResult result,
                                    ModelMap modelMap,
-                                   HttpSession session, SessionStatus status,
+                                   HttpSession session,
                                    @RequestParam(required = false) Long delete) {
         if (result.hasErrors()) {
             return "error";
@@ -163,6 +164,7 @@ public class ContentController {
             recipeDao.deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
             return "redirect:/user/viewrecipe";
         }
+        System.out.println(recipe.getRecipeId() + "HERE IS MY RECIPE");
         User user = (User) session.getAttribute("LOGGED_USER");
         recipe.setAuthorID(user.getId());
         List<Ingredient> ingredientList = (List<Ingredient>) modelMap.getAttribute("ingredientList");
@@ -173,14 +175,18 @@ public class ContentController {
 
 
     @RequestMapping(path = "/submitRecipe", method = RequestMethod.POST)
-    public String submitRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
+    public String submitRecipe( @Valid @ModelAttribute("recipe") Recipe recipe,
                                BindingResult result,
                                ModelMap modelMap,
-                               HttpSession session, SessionStatus status) {
+                               RedirectAttributes redirectAttributes,
+                               HttpSession session) {
         if (result.hasErrors()) {
-            return "addrecipe";
+            System.out.println("error in form");
+            redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "recipe", result);
+            redirectAttributes.addFlashAttribute("recipe", recipe);
+            return "redirect:/user/addrecipe";
         }
-        User user = (User) session.getAttribute("LOGGED_USER");
+        User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         recipe.setAuthorID(user.getId());
         List<Ingredient> ingredientList = (List<Ingredient>) modelMap.getAttribute("newIngredientList");
         recipeDao.addIngredientListToRecipe(recipe, ingredientList);
