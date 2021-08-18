@@ -25,7 +25,7 @@ import java.util.List;
 
 
 @Controller
-@SessionAttributes({"ingredientList",  "newIngredientList"})
+@SessionAttributes({"ingredientList", "ingredient", "newIngredientList"})
 @RequestMapping(path = "/user")
 public class ContentController {
 
@@ -48,7 +48,7 @@ public class ContentController {
     @RequestMapping(path = "/viewrecipe", method = RequestMethod.GET)
     public String displayViewRecipe(HttpSession session,
                                     ModelMap modelMap) {
-        User user = (User) session.getAttribute("LOGGED_USER");
+        User user = (User)session.getAttribute(AuthorizationFilter.LOGGED_USER);
         List<Recipe> recipeList = recipeDao.getAllRecipesByUserId(user.getId());
         modelMap.put("recipeList", recipeList);
         return "viewrecipe";
@@ -74,8 +74,7 @@ public class ContentController {
     }
 
     @RequestMapping(path = "/addrecipe", method = RequestMethod.GET)
-    public String displayAddRecipe(ModelMap modelHolder,
-                                   HttpSession session) {
+    public String displayAddRecipe(ModelMap modelHolder) {
         if(! modelHolder.containsKey("recipe")) {
             modelHolder.put("recipe", new Recipe());
         }
@@ -94,16 +93,18 @@ public class ContentController {
     public String addIngredientToIngredientList(@Valid @ModelAttribute("ingredient") Ingredient ingredient,
                                                 BindingResult result,
                                                 ModelMap modelHolder,
-                                                HttpSession session
+                                                HttpSession session,
+                                                RedirectAttributes redirectAttributes
     ) {
         if (result.hasErrors()) {
             return "addrecipe";
         }
-        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("newIngredientList");
 
+        List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.get("newIngredientList");
         User user = (User) session.getAttribute("LOGGED_USER");
         ingredient.setIngredientId(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientId());
         ingredientList.add(ingredient);
+        redirectAttributes.addFlashAttribute("ingredientList", ingredientList);
         return "redirect:addrecipe";
     }
 
@@ -147,21 +148,25 @@ public class ContentController {
         recipeDao.updateRecipeByRecipeId(recipe, ingredient);
 
 
-        return "redirect:editrecipe";
+        return "redirect:user/editrecipe";
     }
+
 
     @RequestMapping(path = "/submitEditRecipe", method = RequestMethod.POST)
     public String submitEditRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
                                    BindingResult result,
                                    ModelMap modelMap,
                                    HttpSession session,
-                                   @RequestParam(required = false) Long delete) {
+                                   @RequestParam(required = false) Long delete,
+                                   RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "error";
         }
         if (delete != null) {
+
             recipeDao.deleteSingleIngredientFromRecipe(recipe.getRecipeId(), delete);
-            return "redirect:/user/viewrecipe";
+            redirectAttributes.addFlashAttribute("recipe", recipe);
+            return "redirect:/user/editrecipe";
         }
         System.out.println(recipe.getRecipeId() + "HERE IS MY RECIPE");
         User user = (User) session.getAttribute("LOGGED_USER");
