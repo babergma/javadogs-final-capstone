@@ -25,7 +25,7 @@ import java.util.List;
 
 
 @Controller
-@SessionAttributes({"ingredientList", "ingredient", "newIngredientList"})
+@SessionAttributes({"ingredientList",  "newIngredientList"})
 @RequestMapping(path = "/user")
 public class ContentController {
 
@@ -100,8 +100,7 @@ public class ContentController {
             return "addrecipe";
         }
         List<Ingredient> ingredientList = (List<Ingredient>) modelHolder.getAttribute("newIngredientList");
-        modelHolder.put("measurements", Measurement.getAllMeasurements());
-        modelHolder.put("displayIngredients", ingredientDAO.getAllIngredients());
+
         User user = (User) session.getAttribute("LOGGED_USER");
         ingredient.setIngredientId(ingredientDAO.searchForIngredient(ingredient.getIngredientName()).getIngredientId());
         ingredientList.add(ingredient);
