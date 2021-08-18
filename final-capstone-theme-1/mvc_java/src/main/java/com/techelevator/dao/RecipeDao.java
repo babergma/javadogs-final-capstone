@@ -17,13 +17,14 @@ public interface RecipeDao {
 
     public Recipe addIngredientListToRecipe(Recipe recipe, List<Ingredient> ingredients);
 
-    public void deleteRecipeByRecipeID(Long recipe_id);
 
+    public void deleteRecipeByRecipeID(Long recipe_id);
+    public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id);
+    public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id, Long measurementId);
     public void updateRecipeByRecipeId(Recipe recipe, List<Ingredient> ingredients);
     public void updateRecipeByRecipeId(Recipe recipe, Ingredient ingredient);
 
     void updateRecipe(Recipe recipe);
     public List<Recipe> searchForRecipeByFilter(String searchText, String filterBy);
 
-    public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id);
 }

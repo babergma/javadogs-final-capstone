@@ -20,7 +20,7 @@
                 <div class="card-header py-3">
                     <div class="position-relative overflow-hidden p-3 p-xs-5 m-xs-3 text-center bg-light">
                         <div class="col-md-5 p-xs-5 mx-auto my-5">
-                            <h3 class="m-0 font-weight-bold text-primary ">${recipe.recipeName}</h3>
+                            <h3 class="m-0 font-weight-bold text-primary ">${currentRecipe.recipeName}</h3>
                             <p class="lead fw-normal">Summary of recipe story or whatever</p>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Input an image</label>
@@ -97,8 +97,8 @@
                         ingredient</a></button>
                 </div>
                 <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
-                <form:form modelAttribute="recipe" action="${submitFormActionUrl}" method="POST">
-                                       <form:hidden path="recipeId" value="${recipe.recipeId}"/>
+                <form:form modelAttribute="currentRecipe" action="${submitFormActionUrl}" method="POST">
+                                       <form:hidden path="recipeId" value="${currentRecipe.recipeId}"/>
 
                 <div class="form-group col-md-12 alert alert-info" role="alert">
                     <div class="container">

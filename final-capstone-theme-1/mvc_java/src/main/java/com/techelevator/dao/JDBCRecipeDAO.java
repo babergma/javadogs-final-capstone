@@ -265,6 +265,12 @@ public class JDBCRecipeDAO implements RecipeDao {
         jdbcTemplate.update(sql, recipe_id, ingredient_id);
     }
 
+    @Transactional
+    public void deleteSingleIngredientFromRecipe(Long recipe_id, Long ingredient_id, Long measurementId) {
+        String sql = "DELETE FROM ingredient_recipe WHERE recipe_id = ? AND ingredient_id = ? AND ingredient_recipe.measurementamount = ? AND ingredient_recipe.measurementtype_id = ?";
+        jdbcTemplate.update(sql, recipe_id, ingredient_id, measurementId);
+    }
+
     @Override
     public List<Recipe> searchForRecipeByFilter(String searchText, String filterBy){
         List<Recipe> recipeList = new ArrayList<>();
