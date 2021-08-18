@@ -25,8 +25,11 @@
                         <div class="row">
                             <div class="col-lg-9">
                                 <h1>Grocery List
-                                    <a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print<i class="fas fa-edit" style="color: white;"></i></button></a>
-                                </a></h1>
+                                    <a href="javascript:print()">
+                                        <button type="submit" class="btn" style="background-color: #EE964B; color: white; float: right;">Print <i class="fas fa-edit" style="color: white"></i>
+                                        </button>
+                                    </a>
+                                </h1>
                             </div>
 
 
@@ -51,7 +54,6 @@
 
 
     <div class="container">
-
         <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
         <table class="table caption-top">
             <thead>
@@ -61,11 +63,11 @@
             </thead>
             <tbody>
             <tbody>
-        <c:forEach items="${ingredientList}" var="ingredient">
+                <c:forEach items="${ingredientList}" var="ingredient">
             <tr>
                 <td>${ingredient.ingredientName}</td>
             </tr>
-        </c:forEach>
+                </c:forEach>
             </tbody>
         </table>
 
