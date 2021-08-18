@@ -60,7 +60,7 @@ VALUES ('Vegetarian Spaghetti', 30, 4, 350, 'Boil lightly salted water. Once wat
                 Remove from oven and let rest until cool enough to touch. Gently remove bread from the pan and let cool on a rack.', true, 1, 'mango-bread.jpg'),
         ('Kibble', 2, 1, 1000, 'Fill dinner bowl to the brim with kibble. Patiently wait until human sets it on the ground and says: EAT!', false, 2, 'kibble.jpg'),
         ('PB&J Roll up', 5, 1, 450, 'Spread peanut butter across one side of a tortilla. Once evenly spread, add the grape jelly and spread evenly. Now roll the tortilla like you would a yoga mat. Enjoy!', true, 1, 'pbjroll.jpg'),
-        ('Mirowave-dilla', 2, 1, 670, 'Take one tortilla and sprinkly generously shreded cheese (can substitute for cheese slices). Place second tortilla ontop of the cheese and microwave on highh for 45 seconds. Let stant for 2 minutes, then enjoy!', true, 1, 'Microwavedilla.jpg');
+        ('Mirowave-dilla', 2, 1, 670, 'Take one tortilla and sprinkly generously shreded cheese (can substitute for cheese slices). Place second tortilla ontop of the cheese and microwave on highh for 45 seconds. Let stant for 2 minutes, then enjoy!', true, 1, 'microwavedilla.jpg');
 
 INSERT INTO ingredient(ingredientname)
 VALUES ('salt'),
