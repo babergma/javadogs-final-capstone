@@ -6,7 +6,6 @@ import com.techelevator.dao.RecipeDao;
 import com.techelevator.entity.TimeOfDay;
 import com.techelevator.entity.*;
 import com.techelevator.security.AuthorizationFilter;
-import com.techelevator.util.EmployeeDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -219,31 +218,6 @@ public class ContentController {
         return "blank";
     }
 
-    @RequestMapping(path = "/404", method = RequestMethod.GET)
-    public String displayBadPage() {
-
-        return "404";
-    }
-
-    @RequestMapping(path = "/basic/table", method = RequestMethod.GET)
-    public String displayBasicTable() {
-
-        return "basicTableExample";
-    }
-
-    @RequestMapping(path = "/rest/table", method = RequestMethod.GET)
-    public String displayRestTable() {
-
-        return "restTableExample";
-    }
-
-    @RequestMapping(path = "/buttons", method = RequestMethod.GET)
-    public String displayButtons() {
-
-        return "buttons";
-    }
-
-
     @RequestMapping(path = "/addrecipetomealplan", method = RequestMethod.GET)
     public String displayAddRecipeToMealPlan(
                                              HttpSession session,
@@ -358,25 +332,6 @@ public class ContentController {
 
         return "redirect:/user/viewmealplans";
     }
-
-    @RequestMapping(path = "/cards", method = RequestMethod.GET)
-    public String displayCards() {
-
-        return "cards";
-    }
-
-    @RequestMapping(path = "/charts", method = RequestMethod.GET)
-    public String displayCharts() {
-
-        return "charts";
-    }
-
-    @RequestMapping(path = "/accordion", method = RequestMethod.GET)
-    public String displayAccordion(ModelMap modelMap) {
-        modelMap.put("employees", EmployeeDataTable.getInstance().getData());
-        return "accordionExample";
-    }
-
 
     @RequestMapping(path = "/viewallrecipes", method = RequestMethod.GET)
     public String displayAllRecipes(ModelMap modelMap) {
