@@ -125,6 +125,7 @@
 				</button>
 
 				<!-- Topbar Search -->
+				<c:if test="${LOGGED_USER != null}">
 				<form  method="GET" action="${baseUrl}user/search" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 					<div class="input-group">
 						<input type="text" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for recipe by..." aria-label="Search" aria-describedby="basic-addon2">
@@ -141,6 +142,27 @@
 						</div>
 					</div>
 				</form>
+				</c:if>
+
+
+				<c:if test="${LOGGED_USER == null}">
+					<form  method="GET" action="${baseUrl}publicsearchresults" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+						<div class="input-group">
+							<input type="text" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for recipe by..." aria-label="Search" aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="btn" style="background-color: #a5cfab; color: white;" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+								<div>
+									<select class="form-control" id="filterBy" name="filterBy">
+										<option value="ingredient">Ingredient</option>
+										<option value="category">Category</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</form>
+				</c:if>
 
 
 

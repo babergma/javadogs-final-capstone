@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -60,5 +62,14 @@ public class HomeController {
 		return "publicrecipedetails";
 	}
 
+
+	@RequestMapping(path = "/publicsearchresults", method = RequestMethod.GET)
+	public String displaySearchResults(@RequestParam(required = false) String searchText,
+									   @RequestParam(required = false) String filterBy,
+									   ModelMap modelMap) {
+		List<Recipe> searchedRecipes = new ArrayList(new HashSet(recipeDao.searchForRecipeByFilter(searchText, filterBy)));
+		modelMap.put("searchedRecipes", searchedRecipes);
+		return "publicsearchresults";
+	}
 
 }
