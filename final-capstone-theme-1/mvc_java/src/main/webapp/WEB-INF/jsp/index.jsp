@@ -89,19 +89,19 @@
                     <ul style="list-style: none;">
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
-                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B"
+                            <a class="btn  btn-lg" style="background-color:#EE964B; color: white"
                                href="${baseUrl}user/viewmealplans" role="button">My Meal Plans</a>
                         </p></li>
                         <br>
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
-                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B"
+                            <a class="btn  btn-lg" style="background-color:#EE964B; color: white"
                                href="${baseUrl}user/viewrecipe" role="button">My Recipes</a>
                         </p></li>
                         <br>
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
-                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a class="btn  btn-lg" style="background-color:#EE964B; color: white" href="#" data-toggle="modal" data-target="#logoutModal">
                                 Logout
                             </a>
                         </p></li>

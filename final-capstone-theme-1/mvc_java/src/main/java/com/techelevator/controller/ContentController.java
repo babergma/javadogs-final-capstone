@@ -248,7 +248,7 @@ public class ContentController {
     public String displayAddRecipeToMealPlan(
                                              HttpSession session,
                                              ModelMap modelMap) {
-        User user = (User) session.getAttribute("LOGGED_USER");
+        User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         modelMap.put("recipeList", recipeDao.getAllRecipesByUserId(user.getId()));
         modelMap.put("mealPlanList", mealPlanDao.getAllMealPlansByUserId(user.getId()));
         modelMap.put("timeOfdays", TimeOfDay.getAllTimeOfDay());
@@ -271,7 +271,7 @@ public class ContentController {
         recipe.setTimeOfDay(timeOfDay);
 
         mealPlanDao.addRecipeToMealPlan(mealPlan, recipe);
-        User user = (User) session.getAttribute("LOGGED_USER");
+        User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         return "redirect:/user/viewmealplans";
     }
 
@@ -279,7 +279,7 @@ public class ContentController {
     @RequestMapping(path = "/viewmealplans", method = RequestMethod.GET)
     public String displayViewMealPlans(HttpSession session,
                                        ModelMap modelMap) {
-        User user = (User) session.getAttribute("LOGGED_USER");
+        User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         List<MealPlan> mealPlanList = mealPlanDao.getAllMealPlansByUserId(user.getId());
         modelMap.put("mealPlanList", mealPlanList);
         return "viewmealplans";
@@ -350,7 +350,7 @@ public class ContentController {
     @RequestMapping(path = "/addmealplanname", method = RequestMethod.POST)
     public String submitAddMealPlanNAme(HttpSession session,
                                         @RequestParam String mealPlanName) {
-        User user = (User) session.getAttribute("LOGGED_USER");
+        User user = (User) session.getAttribute(AuthorizationFilter.LOGGED_USER);
         MealPlan mealPlan = new MealPlan();
         mealPlan.setMealPlanName(mealPlanName);
         mealPlan = mealPlanDao.saveMealPlan(mealPlan);

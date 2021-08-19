@@ -34,6 +34,7 @@
         <div class="card-body">
             <c:url var="formActionUrl" value="/user/editRecipeIngredients"/>
             <form:form modelAttribute="ingredient" action="${formActionUrl}" method="POST">
+            <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
             <h4>Ingredients</h4>
             <div class="form-row">
 
@@ -96,7 +97,7 @@
                 <c:url var="submitFormActionUrl" value="/user/submitEditRecipe"/>
                 <form:form modelAttribute="currentRecipe" action="${submitFormActionUrl}" method="POST">
                                        <form:hidden path="recipeId" value="${currentRecipe.recipeId}"/>
-
+                <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
                 <div class="form-group col-md-12 alert alert-info" role="alert">
                     <div class="container">
 
