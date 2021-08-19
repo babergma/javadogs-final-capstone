@@ -66,7 +66,7 @@
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
                             <a class="btn  btn-lg" style="background-color:#EE964B; color: white;"
-                               href="${baseUrl}user/viewallrecipes" role="button">Start Browsing All Recipes</a>
+                               href="${baseUrl}publicviewallrecipes" role="button">Start Browsing All Recipes</a>
                         </p></li>
                     </ul>
                 </td>
