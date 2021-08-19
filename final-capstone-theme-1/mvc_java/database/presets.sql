@@ -114,7 +114,17 @@ VALUES ('salt'),
         ('ground turkey'),
         ('hamburger bun'),
         ('red leaf lettuce'),
-        ('cranberry sauce');
+        ('cranberry sauce'), 
+        
+        ('unsweetened baking chocolate'),
+        ('butter'),
+        ('egg whites'),
+        ('strong brewed coffee'),
+        ('potato starch'),
+        ('matzo cake meal'),
+        ('cocoa powder'),
+        ('semi sweet chocolate chips');
+        
        
 INSERT INTO ingredient_recipe(ingredient_id, recipe_id, measurementamount, measurementtype_id)
 VALUES(1, 1, 1, 3),

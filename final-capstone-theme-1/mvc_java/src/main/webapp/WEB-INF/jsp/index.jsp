@@ -7,7 +7,7 @@
 
 <header>
 
-    <h1 style="text-align:center; color:#a5cfab; background-color: #5a5c69;"> Welcome to Prep Thyme!</h1>
+    <h1 class="p-3" style="text-align:center; color:#a5cfab; background-color: #5a5c69;"> Welcome to Prep Thyme!</h1>
     <br>
     <br>
     <h3 style="text-align:center">Your one stop shop for all things meal planning. Prep Thyme makes meal planning,
@@ -53,19 +53,19 @@
                     <ul style="list-style: none;">
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
-                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B"
+                            <a class="btn  btn-lg" style="background-color:#EE964B; color: white;"
                                href="${baseUrl}login" role="button">Login</a>
                         </p></li>
                         <br>
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
-                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B"
+                            <a class="btn btn-lg" style="background-color:#EE964B; color: white;"
                                href="${baseUrl}register" role="button">Create Account</a>
                         </p></li>
                         <br>
                         <li><p>
                             <i style="color:#a5cfab" class="fab fa-pagelines fa-3x"></i>&nbsp;
-                            <a class="btn btn-primary btn-lg" style="background-color:#EE964B"
+                            <a class="btn  btn-lg" style="background-color:#EE964B; color: white;"
                                href="${baseUrl}user/viewallrecipes" role="button">Start Browsing All Recipes</a>
                         </p></li>
                     </ul>
