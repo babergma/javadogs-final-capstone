@@ -25,9 +25,10 @@
       <div class="row">
         <c:forEach items="${mealPlanList}" var="mealPlan">
           <div class="col-md-4">
+            <div class="card border-success mb-3" style="max-width: 30rem;">
             <div class="card mb-4 shadow-sm">
               <div class="card-body">
-                <p class="card-text">${mealPlan.mealPlanName}</p>
+                <p class="card-text" style = "font-size: 18px; color:#EE964B;"><b>${mealPlan.mealPlanName}</b></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <c:url var="viewMealPlanDetail" value="/user/mealplandetails">
@@ -39,9 +40,11 @@
                     </c:url>
                     <button type="button" class="btn btn-sm btn-outline-secondary"><a href="${editMealPlanDetail}">Edit</a></button>
                   </div>
+                  <p class="card-text"><small class="text-muted">12 Recipes</small></p>
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </c:forEach>
       </div>

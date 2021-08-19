@@ -151,10 +151,11 @@ public class JDBCRecipeDAO implements RecipeDao {
                 " servingsize = ?," +
                 " calories = ?," +
                 " cookinginstruction = ?," +
-                " visible = ?" +
+                " visible = ?," +
+                " pictureurl = ?" +
                 " WHERE recipe_id = ?";
         jdbcTemplate.update(sqlUpdateRecipe, recipe.getRecipeName(), recipe.getCookTime(), recipe.getServingSize(),
-                recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getRecipeId());
+                recipe.getCalories(), recipe.getCookingInstruction(), recipe.isVisible(), recipe.getPictureUrl(), recipe.getRecipeId());
         updateRecipeCategories(recipe);
     }
 
