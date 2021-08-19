@@ -32,15 +32,15 @@
 <p class="lead fw-normal">
 
 <span>
-<a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print<i class="fas fa-print" style="color: white;"></i></button></a>
+<a href="javascript:print()">    <button type="submit" class="btn btn-warning ">Print <i class="fas fa-print" style="color: white;"></i></button></a>
 </span>
 
 <span>
-<a href="${baseUrl}login">    <button type="submit" class="btn btn-success ">Login<i class="fas fa-user-plus" style="color: white;"></i></button></a>
+<a href="${baseUrl}login">    <button type="submit" class="btn btn-success ">Login <i class="fas fa-user-plus" style="color: white;"></i></button></a>
 </span>
 
 <span>
-<a href="${baseUrl}register">    <button type="submit" class="btn btn-dark ">Register<i class="fas fa-edit" style="color: white;"></i></button></a>
+<a href="${baseUrl}register">    <button type="submit" class="btn btn-dark ">Register <i class="fas fa-edit" style="color: white;"></i></button></a>
 </span>
 <span>
 <a href="${baseUrl}publicviewallrecipes">    <button type="submit" class="btn btn-info ">Back to All recipes
