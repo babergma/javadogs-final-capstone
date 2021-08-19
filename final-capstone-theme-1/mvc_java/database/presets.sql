@@ -60,7 +60,13 @@ VALUES ('Vegetarian Spaghetti', 30, 4, 350, 'Boil lightly salted water. Once wat
                 Remove from oven and let rest until cool enough to touch. Gently remove bread from the pan and let cool on a rack.', true, 1, 'mango-bread.jpg'),
         ('Kibble', 2, 1, 1000, 'Fill dinner bowl to the brim with kibble. Patiently wait until human sets it on the ground and says: EAT!', false, 2, 'kibble.jpg'),
         ('PB&J Roll up', 5, 1, 450, 'Spread peanut butter across one side of a tortilla. Once evenly spread, add the grape jelly and spread evenly. Now roll the tortilla like you would a yoga mat. Enjoy!', true, 1, 'pbjroll.jpg'),
-        ('Mirowave-dilla', 2, 1, 670, 'Take one tortilla and sprinkly generously shreded cheese (can substitute for cheese slices). Place second tortilla ontop of the cheese and microwave on highh for 45 seconds. Let stant for 2 minutes, then enjoy!', true, 1, 'microwavedilla.jpg');
+        ('Mirowave-dilla', 2, 1, 670, 'Take one tortilla and sprinkly generously shreded cheese (can substitute for cheese slices). Place second tortilla ontop of the cheese and microwave on highh for 45 seconds. Let stant for 2 minutes, then enjoy!', true, 1, 'microwavedilla.jpg'),
+        ('Kosher Broiled Turkey Burgers with Cranberry Sauce', 20, 4, 402, 'Set oven rack about 6 inches from the heat source and preheat the ovens broiler. Stir stuffing mix, soy milk, sage, and salt together in a bowl; 
+                add turkey and stir until thoroughly combined. Divide turkey mixture into 4 equal portions and shape into 1/2-inch thick patties. Place patties on a broiler pan. Cook turkey burgers in the preheated broiler 
+                until no longer pink in the center and juices run clear, about 6 minutes per side. An instant-read thermometer inserted into the center should read at least 165 degrees F (74 degrees C). Toast hamburger buns
+                 in a toaster. Arrange lettuce leaves on bottom halves of hamburger buns. Place turkey patties and cranberry sauce on top of lettuce and place top half of bun on top.', true, 1, 'turkeyburger.jpg');
+
+
 
 INSERT INTO ingredient(ingredientname)
 VALUES ('salt'),
@@ -101,7 +107,14 @@ VALUES ('salt'),
         ('tortilla'),
         ('peanut butter'),
         ('grape jelly'),
-        ('shreded cheese');
+        ('shreded cheese'),
+        ('stuffing mix'),
+        ('soy milk'),
+        ('chopped sage'),
+        ('ground turkey'),
+        ('hamburger bun'),
+        ('red leaf lettuce'),
+        ('cranberry sauce');
        
 INSERT INTO ingredient_recipe(ingredient_id, recipe_id, measurementamount, measurementtype_id)
 VALUES(1, 1, 1, 3),
@@ -148,7 +161,15 @@ VALUES(1, 1, 1, 3),
         (37, 6, 2, 2),
         (38, 6, 2, 2),
         (36, 7, 2, 6), 
-        (39, 7, 1, 1);
+        (39, 7, 1, 1),
+        (40, 8, 1, 1),
+        (41, 8, 2, 2),
+        (42, 8, 1, 2),
+        (43, 8, 1, 7),
+        (44, 8, 2, 6),
+        (45, 8, 4, 6),
+        (46, 8, 1, 1),
+        (1, 8, 1, 3);
      
 INSERT INTO dayofweek(dayname)
 VALUES ('Monday'),   
@@ -262,7 +283,10 @@ VALUES (1, 1),
         (6, 6), 
         (6, 8),
         (7, 1), 
-        (7, 8);
+        (7, 8),
+        (8, 2), 
+        (8, 4), 
+        (8, 7);
         
 END TRANSACTION;
 
